@@ -16,23 +16,23 @@ Welcome to the community-maintained documentation for building plugins for [Unra
 
 New to plugin development? Start here:
 
-1. [Introduction to Plugins](docs/introduction.md) - What are plugins and how do they work?
-2. [Your First Plugin](docs/getting-started.md) - Step-by-step tutorial
-3. [PLG File Reference](docs/plg-file.md) - The plugin installer format
-4. [Page Files](docs/page-files.md) - Creating web UI pages
+1. [Introduction to Plugins]({% link docs/introduction.md %}) - What are plugins and how do they work?
+2. [Your First Plugin]({% link docs/getting-started.md %}) - Step-by-step tutorial
+3. [PLG File Reference]({% link docs/plg-file.md %}) - The plugin installer format
+4. [Page Files]({% link docs/page-files.md %}) - Creating web UI pages
 
 ## Documentation Sections
 
 ### Core Concepts
-- [Introduction](docs/introduction.md) - Plugin system overview
-- [File System Layout](docs/filesystem.md) - Where files go and why
-- [PLG File Reference](docs/plg-file.md) - Plugin installer XML format
-- [Page Files](docs/page-files.md) - Web UI development
-- [Event System](docs/events.md) - Responding to system events
+- [Introduction]({% link docs/introduction.md %}) - Plugin system overview
+- [File System Layout]({% link docs/filesystem.md %}) - Where files go and why
+- [PLG File Reference]({% link docs/plg-file.md %}) - Plugin installer XML format
+- [Page Files]({% link docs/page-files.md %}) - Web UI development
+- [Event System]({% link docs/events.md %}) - Responding to system events
 
 ### Reference
-- [Plugin Command](docs/plugin-command.md) - CLI tool usage
-- [Example Plugins](docs/examples.md) - Learn from real plugins
+- [Plugin Command]({% link docs/plugin-command.md %}) - CLI tool usage
+- [Example Plugins]({% link docs/examples.md %}) - Learn from real plugins
 
 ## Why This Documentation?
 
