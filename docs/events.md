@@ -96,6 +96,9 @@ flowchart LR
 
 ## Creating Event Handlers
 
+{: .note }
+> See the [DocTest validation plugin event handlers](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/source/emhttp/event/) for working examples of all 16 documented events.
+
 ### Directory Structure
 
 ```

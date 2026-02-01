@@ -292,6 +292,29 @@ Refresh the browser to see changes. Remember to copy changes back to your source
 - Check package URL is accessible
 - Look at install output for errors
 
+### "Bad Interpreter" Error
+
+If you see errors like `/bin/bash^M: bad interpreter`, your files have Windows line endings (CRLF). Fix with:
+
+```bash
+# Convert all scripts to Unix line endings
+find . -type f \( -name "*.sh" -o -name "*.page" \) -exec sed -i 's/\r$//' {} \;
+```
+
+{: .warning }
+> **Windows developers**: Always convert line endings before packaging! Add line ending conversion to your build script. See [Debugging Techniques](advanced/debugging-techniques.md#windows-line-endings-crlf-vs-lf) for details.
+
+### Form Layout Issues
+
+If form fields are misaligned, check that you're using the Dynamix markdown syntax with `: ` (colon-space at line start):
+
+```markdown
+_(Label)_:
+: <input type="text" name="field">
+```
+
+**Not** raw `<dl><dt><dd>` HTML inside `markdown="1"` forms. See [Page Files Troubleshooting](page-files.md#content-shifted-or-layout-issues) for details.
+
 ## Next Steps
 
 Now that you have a working plugin:

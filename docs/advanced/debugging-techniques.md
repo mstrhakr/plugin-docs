@@ -173,6 +173,33 @@ bash -n /path/to/script.sh
 
 ## Common Issues
 
+### Windows Line Endings (CRLF vs LF)
+
+{: .warning }
+> Scripts developed on Windows will have CRLF line endings (`\r\n`) which cause "bad interpreter" errors on Unraid's Linux system.
+
+**Symptom:**
+```
+bash: /usr/local/emhttp/plugins/myplugin/event/started: /bin/bash^M: bad interpreter: No such file or directory
+```
+
+**Fix during build:**
+```bash
+# Convert all scripts to Unix line endings
+find build/ -type f \( -name "*.sh" -o -name "*.page" \) -exec sed -i 's/\r$//' {} \;
+find build/usr/local/emhttp/plugins/myplugin/event -type f -exec sed -i 's/\r$//' {} \;
+```
+
+**Fix on server:**
+```bash
+cd /usr/local/emhttp/plugins/myplugin/event
+sed -i 's/\r$//' *
+chmod 755 *
+```
+
+{: .note }
+> See the [validation plugin build script](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/build.sh) for a working example that handles line ending conversion automatically.
+
 ### Permission Problems
 
 ```bash

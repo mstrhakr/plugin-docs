@@ -511,6 +511,7 @@ $containers = $DockerClient->getDockerContainers();
 1. Check Menu attribute matches a valid section
 2. Verify Cond evaluation returns true
 3. Check for PHP syntax errors: `php -l yourfile.page`
+4. Check for Windows line endings (CRLF) - see [Debugging Techniques](advanced/debugging-techniques.md#windows-line-endings-crlf-vs-lf)
 
 ### Form Not Saving
 
@@ -523,6 +524,30 @@ $containers = $DockerClient->getDockerContainers();
 1. Use `autov()` for cache busting
 2. Check file paths are correct
 3. Verify files exist in the package
+
+### Content Shifted or Layout Issues
+
+{: .warning }
+> Do not use raw `<dl><dt><dd>` HTML inside `markdown="1"` forms. The Dynamix markdown processor expects the colon syntax.
+
+**Wrong (causes layout shift):**
+```html
+<dl>
+<dt>My Label:</dt>
+<dd><input type="text" name="field"></dd>
+</dl>
+```
+
+**Correct:**
+```markdown
+_(My Label)_:
+: <input type="text" name="field">
+```
+
+The `: ` (colon-space at start of line) creates proper Dynamix field alignment. For read-only display sections outside forms, use standard HTML tables or `<pre>` blocks.
+
+{: .note }
+> See the [DocTest validation plugin](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example of proper form structure.
 
 ## Next Steps
 

@@ -9,6 +9,8 @@ nav_order: 4
 
 {: .note }
 > ✅ **Validated against Unraid 7.2.3** - All properties verified against `/var/local/emhttp/var.ini` on live systems.
+>
+> See the [DocTest validation plugin](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example that displays `$var` array values.
 
 ## Overview
 
@@ -73,7 +75,7 @@ This file is continuously updated by the Unraid system to reflect current state.
 | `mdResync` | string | Resync position (if active) | Block number |
 | `mdResyncSize` | string | Total resync size | Block count |
 | `mdResyncAction` | string | Resync action type | `"check"`, `"rebuild"`, `"sync"` |
-| `mdNumStripes` | string | Number of stripes | `"1280"` |
+| `md_num_stripes` | string | Number of stripes | `"1280"` |
 | `mdNumDisks` | string | Number of array disks | `"4"` |
 | `mdNumDisabled` | string | Number of disabled disks | `"0"` |
 | `mdNumMissing` | string | Number of missing disks | `"0"` |

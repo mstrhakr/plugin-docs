@@ -11,9 +11,9 @@
 |----------|--------|--------|-------|
 | Event System | 16 | 0 | All 16 documented events validated |
 | File Paths | 19 | 1 | Docker socket may not exist if Docker disabled |
-| $var Array | 31 | 1 | `mdNumStripes` uses different key name |
+| $var Array | 32 | 0 | All properties validated (mdNumStripes → md_num_stripes fixed) |
 | PHP Functions | 7 | 0 | All functions found |
-| **Total** | **73** | **2** | 97.3% pass rate |
+| **Total** | **74** | **1** | 98.7% pass rate |
 
 ## Event System Validation
 

@@ -154,6 +154,21 @@ This documentation will guide you through:
 4. **[Packaging](packaging.md)** - Building distribution packages
 5. **[Best Practices](best-practices.md)** - Tips from experienced developers
 
+## Working Example: DocTest Validation Plugin
+
+This repository includes a complete, working validation plugin that demonstrates all documented features. You can:
+
+- **[View the source code](https://github.com/mstrhakr/unraid-plugin-docs/tree/main/validation/plugin)** - See how a real plugin is structured
+- **[Install it on your server](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/README.md)** - Test documented features live
+- **[Check validation results](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/results/)** - See what we've verified against Unraid
+
+The DocTest plugin validates:
+- All 16 documented event handlers
+- `parse_plugin_cfg()` and `mk_option()` functions
+- `$var` array properties
+- Page file rendering and form handling
+- Notification system integration
+
 ## Next Steps
 
 Ready to build your first plugin? Continue to [Your First Plugin](getting-started.md) for a hands-on tutorial.

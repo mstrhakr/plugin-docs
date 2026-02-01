@@ -59,6 +59,9 @@ myplugin-1.0.0.txz
 
 ### Creating the TXZ Package
 
+{: .note }
+> See the [DocTest validation plugin build script](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/build.sh) for a complete working example.
+
 ```bash
 #!/bin/bash
 # pkg_build.sh - Build a Slackware package
@@ -75,16 +78,25 @@ mkdir -p "$BUILD_DIR"
 # Copy source files preserving structure
 cp -R "$SOURCE_DIR"/* "$BUILD_DIR/"
 
+# CRITICAL: Convert Windows line endings to Unix (CRLF → LF)
+# Without this, scripts will fail with "bad interpreter" errors
+find "$BUILD_DIR" -type f \( -name "*.sh" -o -name "*.page" -o -name "*.cfg" \) -exec sed -i 's/\r$//' {} \;
+find "$BUILD_DIR" -path "*/event/*" -type f -exec sed -i 's/\r$//' {} \;
+
 # Set correct permissions
 find "$BUILD_DIR" -type d -exec chmod 755 {} \;
 find "$BUILD_DIR" -type f -exec chmod 644 {} \;
 find "$BUILD_DIR" -name "*.sh" -exec chmod 755 {} \;
+find "$BUILD_DIR" -path "*/event/*" -type f -exec chmod 755 {} \;
 find "$BUILD_DIR/etc/rc.d" -type f -exec chmod 755 {} \;
 
 # Create the package
 cd "$BUILD_DIR"
 makepkg -l y -c n "../${PLUGIN_NAME}-${VERSION}.txz"
 ```
+
+{: .warning }
+> **Windows developers**: Always convert line endings before packaging! Scripts with CRLF line endings will fail with `/bin/bash^M: bad interpreter`. See [Debugging Techniques](advanced/debugging-techniques.md#windows-line-endings-crlf-vs-lf) for more details.
 
 > **Note**: If `makepkg` isn't available (you're building on a non-Slackware system), you can use tar directly:
 > ```bash
