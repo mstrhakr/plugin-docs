@@ -151,7 +151,8 @@ Unraid supports both SHA256 and MD5 for file verification:
 </FILE>
 ```
 
-Generate hashes with:
+Generate hashes with these commands. SHA256 is preferred for security, but MD5 is still supported for compatibility with older plugins:
+
 ```bash
 sha256sum file.txz   # SHA256 (recommended)
 md5sum file.txz      # MD5 (legacy)

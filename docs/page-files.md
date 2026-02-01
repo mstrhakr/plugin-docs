@@ -199,7 +199,7 @@ include '/usr/local/emhttp/plugins/myplugin/php/main.php';
 
 ### Nested Under Another Menu
 
-Adding a tab to an existing menu (like Docker):
+Add your page as a tab under an existing menu section like Docker or VMs. The number after the colon controls tab order—lower numbers appear first.
 
 ```php
 Menu="Docker:2"
@@ -221,6 +221,8 @@ Unraid uses a markdown-like syntax for form fields. This is **not standard Markd
 > ![Dynamix form](../assets/images/screenshots/settings-page-example.png)
 
 ### Basic Field Structure
+
+Dynamix uses a custom markdown-like syntax for form layouts. The `_(text)_` wrapper marks strings for translation. A colon after the label and colon-space before the input are required for proper rendering. The `inline_help` blockquote creates expandable help text.
 
 ```markdown
 _(Label Text)_:
@@ -356,6 +358,8 @@ function runAction() {
 The `autov()` function adds version query strings for cache busting.
 
 ### Including Unraid's Built-in Libraries
+
+Unraid bundles jQuery plugins and CSS for common UI patterns like switch buttons. Include these from `/webGui/` paths. The `autov()` function appends version strings for cache busting when files update.
 
 ```php
 ---

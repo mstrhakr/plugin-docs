@@ -160,6 +160,8 @@ $formatted = my_number($value);
 
 ### Common Path Functions
 
+These are common path patterns used in plugin development. The plugin directory in RAM contains your active code, while the config directory on the USB flash stores persistent settings. The `isOnArray()` helper checks if a path points to array-managed storage.
+
 ```php
 <?
 // Get plugin directory

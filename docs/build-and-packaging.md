@@ -29,7 +29,7 @@ The TXZ package is a standard Slackware package that gets installed via `upgrade
 
 ## Package Structure (TXZ)
 
-A Slackware `.txz` package is essentially a tar archive compressed with xz. The internal structure must mirror the target filesystem:
+A Slackware `.txz` package is essentially a tar archive compressed with xz. The internal structure must mirror the target filesystem. Files under `usr/local/emhttp/plugins/` become your plugin's web UI and scripts, while `etc/rc.d/` holds service control scripts.
 
 ```
 myplugin-1.0.0.txz

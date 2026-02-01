@@ -23,6 +23,8 @@ Effective debugging is essential for plugin development. This guide covers loggi
 
 ### Using logger (syslog)
 
+The `logger` command writes messages to the system log (`/var/log/syslog`). Use the `-t` flag to tag messages with your plugin name for easy filtering. Priority levels like `local7.error` affect how messages are categorized.
+
 ```bash
 #!/bin/bash
 # Log to syslog
@@ -153,6 +155,8 @@ $.ajax({
 
 ### Test PHP Scripts
 
+Run PHP scripts directly from the command line to see output and errors without going through the web interface. Use `-l` (lint) mode to check for syntax errors without executing the code.
+
 ```bash
 # Run PHP directly
 php /usr/local/emhttp/plugins/yourplugin/test.php
@@ -162,6 +166,8 @@ php -l /usr/local/emhttp/plugins/yourplugin/file.php
 ```
 
 ### Test Bash Scripts
+
+Debug bash scripts with the `-x` flag to print each command before execution (trace mode). Use `-n` to check syntax without running the script—useful for catching errors before deployment.
 
 ```bash
 # Run with debug output

@@ -22,6 +22,8 @@ Here's an example of Unraid's input field styling:
 
 ## Basic Form Structure
 
+The simplest form structure includes a CSRF token for security, one or more input fields wrapped in `<dl>` elements, and a submit button. The form posts to `/update.php` which handles configuration file updates.
+
 ```html
 <form method="POST" action="/update.php">
     <input type="hidden" name="csrf_token" value="<?=$var['csrf_token']?>">
@@ -79,6 +81,8 @@ Unraid uses `<dl>`, `<dt>`, `<dd>` elements for form layout:
 ```
 
 ## Text Input
+
+Standard text inputs with various configurations. Use `placeholder` for hint text, `size` to control display width, and `maxlength` to limit input. The `readonly` attribute displays values that users shouldn't edit.
 
 ```html
 <dl>
@@ -175,6 +179,8 @@ input[type="checkbox"] {
 
 ## Dropdown Select
 
+Dropdown selects let users choose from predefined options. Use a ternary expression to add the `selected` attribute to the option matching the current configuration value.
+
 ```html
 <dl>
     <dt>Choose Option:</dt>
@@ -189,6 +195,8 @@ input[type="checkbox"] {
 ```
 
 ### Dynamic Select with PHP
+
+Populate dropdown options dynamically by reading Unraid's state files. This example reads the shares configuration and generates an option for each user share, pre-selecting the currently saved value.
 
 ```php
 <dl>
@@ -324,6 +332,8 @@ function openFileTree() {
 
 ## Textarea
 
+Use textareas for multi-line input like descriptions, scripts, or configuration blocks. Set `rows` for visible height and `cols` for width. For code or scripts, apply a monospace font for better readability.
+
 ```html
 <dl>
     <dt>Description:</dt>
@@ -342,6 +352,8 @@ function openFileTree() {
 ```
 
 ## Password Input
+
+Password fields mask input by default. For API keys or tokens that users may need to verify, add a show/hide toggle using Font Awesome's eye icon. The toggle function switches the input type between `password` and `text`.
 
 ```html
 <dl>
@@ -369,6 +381,8 @@ function togglePassword(id) {
 ```
 
 ## Checkbox
+
+Checkboxes work for boolean options or multiple selections. For a single checkbox, the value is only submitted if checked. For multiple related checkboxes, use array notation (`name[]`) to receive all selected values as an array in PHP.
 
 ```html
 <dl>
@@ -403,6 +417,8 @@ function togglePassword(id) {
 
 ## Radio Buttons
 
+Radio buttons allow selecting exactly one option from a group. All radios in a group share the same `name` attribute. Style with inline display and margins for a horizontal layout.
+
 ```html
 <dl>
     <dt>Mode:</dt>
@@ -427,6 +443,8 @@ function togglePassword(id) {
 ```
 
 ## Number Input
+
+Number inputs provide spinner controls and validation for numeric values. Use `min` and `max` to constrain the range, and `step` to control increment size. Browsers prevent invalid values from being submitted.
 
 ```html
 <dl>

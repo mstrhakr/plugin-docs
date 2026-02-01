@@ -26,6 +26,8 @@ Unraid uses specific Docker labels to integrate containers with the WebUI. Conta
 
 ### Usage in Docker Compose
 
+Add Unraid labels to your compose file's `labels` section. The `[IP]` and `[PORT:xxxx]` placeholders are replaced by Unraid with the actual container IP and mapped port when displaying the WebUI link.
+
 ```yaml
 services:
   myapp:
@@ -38,6 +40,8 @@ services:
 ```
 
 ### Reading Labels in PHP
+
+Retrieve container labels using `docker inspect` and decode the JSON output. Labels are stored in the container's Config section. Use null coalescing (`??`) to provide fallback values when labels aren't present.
 
 ```php
 <?php

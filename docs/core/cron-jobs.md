@@ -27,6 +27,8 @@ Cron files should be installed to `/etc/cron.d/` since this directory is in RAM 
 
 ### Via PLG File
 
+Install cron jobs directly from your PLG file using a `<FILE>` element. Note the XML entity encoding: `&gt;` for `>` and `&amp;` for `&`. The job runs as root and redirects output to prevent cron email spam.
+
 ```xml
 <FILE Name="/etc/cron.d/yourplugin">
 <INLINE>
@@ -37,6 +39,8 @@ Cron files should be installed to `/etc/cron.d/` since this directory is in RAM 
 ```
 
 ### Via rc.d Script
+
+For dynamic schedules or conditional cron jobs, create/remove the cron file from an rc.d script. This allows enabling/disabling scheduled tasks based on plugin settings without modifying the PLG file.
 
 ```bash
 #!/bin/bash

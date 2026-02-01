@@ -15,6 +15,8 @@ Plugins store their configuration in `.cfg` files located in `/boot/config/plugi
 
 ### Configuration Directory Structure
 
+Organize your plugin's persistent files in a dedicated directory on the USB flash drive. The main config file should match your plugin name, with additional files for separate concerns like schedules or user-specific settings.
+
 ```
 /boot/config/plugins/yourplugin/
 ├── yourplugin.cfg      # Main settings file (convention)
@@ -33,7 +35,7 @@ The primary configuration file should match your plugin name:
 
 ## Configuration File Format
 
-Configuration files use a simple `key="value"` format:
+Configuration files use a simple `key="value"` format compatible with both Bash `source` and PHP's `parse_ini_file()`. Always quote values, even simple ones, for consistency and to handle special characters properly.
 
 ```ini
 # /boot/config/plugins/yourplugin/yourplugin.cfg

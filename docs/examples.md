@@ -78,7 +78,8 @@ Advanced device management plugin.
 
 ### Simple Settings Plugin
 
-Look at `dynamix.system.temp` for:
+Look at `dynamix.system.temp` for a clean example of a settings page. The structure separates the UI page file, default configuration values, and helper functions into distinct files.
+
 ```
 ├── TempSettings.page      # Settings form
 ├── default.cfg            # Default values
@@ -95,7 +96,8 @@ Look at `dynamix.system.stats` for:
 
 ### Docker Integration
 
-Look at `compose.manager` for:
+Look at `compose.manager` for Docker container management patterns. The `event/` directory handles array lifecycle events, `php/exec.php` provides AJAX endpoints for the UI, and shell scripts handle the actual Docker commands.
+
 ```
 ├── event/
 │   ├── started            # Autostart stacks
@@ -117,6 +119,8 @@ Look at `compose.manager/patches/` for:
 
 ### Reading Plugin Config
 
+This pattern shows how to load plugin settings and access Unraid's display preferences. The `parse_plugin_cfg()` function reads your plugin's `.cfg` file, while `$display` contains user preferences like temperature units.
+
 From `dynamix.system.temp`:
 ```php
 $plugin = 'dynamix.system.temp';
@@ -125,6 +129,8 @@ $unit = $display['unit'];  // System temperature unit
 ```
 
 ### AJAX Endpoint
+
+A common pattern for handling multiple AJAX actions in a single PHP file. Use a switch statement on the `action` parameter to route requests to appropriate handler functions. Return JSON or HTML based on what your JavaScript expects.
 
 From `compose.manager/php/exec.php`:
 ```php
@@ -147,6 +153,8 @@ switch($action) {
 
 ### Event Handler
 
+Event scripts run when system events occur (like array start). This example iterates through project directories and starts any with an `autostart` marker file. Source configuration files first to get paths and settings.
+
 From `compose.manager/event/started`:
 ```bash
 #!/bin/bash
@@ -162,6 +170,8 @@ done
 ```
 
 ### Package Build Script
+
+Build scripts create the `.txz` package that gets installed. The pattern creates a temporary directory mimicking the final filesystem structure, copies files with proper permissions, then uses Slackware's `makepkg` to create the archive.
 
 From `compose.manager/pkg_build.sh`:
 ```bash

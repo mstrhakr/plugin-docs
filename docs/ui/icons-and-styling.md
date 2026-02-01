@@ -21,7 +21,7 @@ Unraid uses Font Awesome icons and has built-in CSS classes for consistent styli
 
 ## Font Awesome Icons
 
-Unraid includes Font Awesome. Use icons with the `<i>` tag:
+Unraid includes Font Awesome 4.x. Use icons with the `<i>` tag and the `fa` prefix followed by the icon name. These icons work throughout your plugin UI for buttons, status indicators, and menu items.
 
 ```html
 <i class="fa fa-cog"></i> Settings
@@ -38,7 +38,7 @@ Unraid includes Font Awesome. Use icons with the `<i>` tag:
 
 ## Page Icons
 
-In your `.page` file header, specify an icon:
+In your `.page` file header, specify an icon using the `Icon` attribute. Use the icon name without the `fa-` prefix—Unraid adds it automatically. The icon appears next to your plugin's name in the menu.
 
 ```
 Menu="Settings"
@@ -71,6 +71,8 @@ TODO: Document status indicator classes
 
 ## Button Classes
 
+Unraid styles standard HTML buttons automatically. For `<input type="button">` and `<input type="submit">` elements, no additional classes are needed. The framework applies consistent styling that matches the Unraid theme.
+
 ```html
 <!-- Standard button -->
 <input type="button" value="Apply">
@@ -100,6 +102,8 @@ TODO: Document available CSS color variables for theming
 ```
 
 ## Table Styling
+
+Apply the `unraid` class to tables for consistent styling with alternating row colors, proper borders, and theme-compatible colors. Use standard `<thead>` and `<tbody>` structure for proper header styling.
 
 ```html
 <table class="unraid">

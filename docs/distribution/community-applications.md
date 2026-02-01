@@ -39,7 +39,7 @@ To get your plugin listed in Community Applications, you need:
 
 ## CA XML Template
 
-Create a template XML file for your plugin:
+The template file describes your plugin to Community Applications. It contains display information (name, description, icon), installation URL (direct link to your PLG file), and categorization for the app browser. Host this file in your repository or submit it to the CA templates repo.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

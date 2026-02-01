@@ -160,17 +160,23 @@ plugin update myplugin.plg
 
 ### List Installed Plugins
 
+The `/var/log/plugins/` directory contains symlinks to all installed plugins. Listing this directory shows you what's currently installed on the system.
+
 ```bash
 ls -la /var/log/plugins/
 ```
 
 ### Check Plugin Version
 
+Query the installed version of any plugin by passing its PLG file path to `plugin version`. This reads the version attribute from the PLG file's XML header.
+
 ```bash
 plugin version /var/log/plugins/myplugin.plg
 ```
 
 ### Reinstall a Plugin
+
+To reinstall a plugin cleanly, first remove it (which moves the PLG to `plugins-removed/`), then install from that backup location. This is useful for troubleshooting or resetting a plugin to its default state.
 
 ```bash
 # Remove first
@@ -182,7 +188,7 @@ plugin install /boot/config/plugins-removed/myplugin.plg
 
 ### Debug Installation
 
-Watch the output carefully when installing:
+Capture both stdout and stderr during installation for troubleshooting. The `tee` command displays output in real-time while also saving it to a log file for later review.
 
 ```bash
 plugin install myplugin.plg 2>&1 | tee /tmp/install.log

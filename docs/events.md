@@ -101,6 +101,8 @@ flowchart LR
 
 ### Directory Structure
 
+Place event handler scripts in your plugin's `event/` directory. You can use either a single executable file named after the event, or a directory containing multiple numbered scripts that run in alphabetical order.
+
 ```
 /usr/local/emhttp/plugins/myplugin/
 └── event/
@@ -224,7 +226,7 @@ done
 
 ### Handling Multiple Scripts
 
-If you need multiple scripts for one event, use a directory:
+If you need multiple scripts for one event, use a directory. Prefix script names with numbers to control execution order—scripts run in alphabetical order, so `01-load-config.sh` runs before `02-start-services.sh`.
 
 ```
 event/

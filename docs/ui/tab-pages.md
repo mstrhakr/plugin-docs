@@ -25,7 +25,7 @@ Here's how Unraid's tab interface looks in the Plugins page:
 
 ## Basic Tab Structure
 
-TODO: Document the exact tab structure used in Unraid
+Tabs consist of clickable tab headers and corresponding content panels. Use `data-tab` attributes to link headers with their content. Only one tab's content is visible at a time—JavaScript handles showing/hiding based on which tab is clicked.
 
 ```php
 <?
@@ -57,7 +57,7 @@ TODO: Document the exact tab structure used in Unraid
 
 ## JavaScript for Tabs
 
-TODO: Document the built-in tab JavaScript or provide implementation
+This jQuery code handles tab switching. When a tab is clicked, it adds the `active` class to highlight it, hides all content panels, then shows only the panel matching the clicked tab's `data-tab` value. The first tab is activated automatically on page load.
 
 ```javascript
 $(function() {
@@ -81,7 +81,7 @@ $(function() {
 
 ## Page Header with Tabs
 
-In your `.page` file, you may be able to define tabs in the header:
+Some Unraid page types support a `Tab` header attribute that enables the built-in tabbed interface. This integrates with Unraid's native tab styling rather than requiring custom tab implementation.
 
 ```
 Menu="Settings"
