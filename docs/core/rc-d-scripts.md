@@ -19,6 +19,8 @@ rc.d scripts manage services in Unraid. They handle starting, stopping, and rest
 
 ## Script Location
 
+rc.d scripts are installed to the standard Linux location for service control scripts. Since this directory is in RAM, your PLG file must install the script on each boot.
+
 ```
 /etc/rc.d/rc.yourplugin
 ```
@@ -26,6 +28,8 @@ rc.d scripts manage services in Unraid. They handle starting, stopping, and rest
 This location is in RAM, so scripts must be installed via your PLG file.
 
 ## Basic Structure
+
+A standard rc.d script implements `start`, `stop`, `restart`, and `status` commands using a case statement. The script tracks service state with a PID file. This pattern matches Linux conventions and integrates with Unraid's service management.
 
 ```bash
 #!/bin/bash

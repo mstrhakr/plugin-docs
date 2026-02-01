@@ -65,6 +65,8 @@ The plugin system shows success messages like this:
 
 ### PHP Example
 
+When calling the notify script from PHP, use `escapeshellarg()` on all parameters to prevent shell injection and handle special characters in your messages safely.
+
 ```php
 <?
 // Send a notification from PHP
@@ -82,6 +84,8 @@ exec("/usr/local/emhttp/webGui/scripts/notify " .
 ```
 
 ### Bash Script Example
+
+In shell scripts, use backslash line continuation for readability. Each option on its own line makes the command easier to modify and debug.
 
 ```bash
 #!/bin/bash
@@ -192,6 +196,8 @@ Users configure notification agents in Settings → Notification Settings. Your 
 | Slack | Requires webhook URL |
 
 ### Notification Agent Settings
+
+Users configure which notification agents receive messages at Settings → Notification Settings. Each agent (email, Pushover, Discord, etc.) can be enabled per importance level. The configuration files in `/boot/config/plugins/dynamix/` store these preferences.
 
 Notification agents are configured in `/boot/config/plugins/dynamix/notifications/`:
 

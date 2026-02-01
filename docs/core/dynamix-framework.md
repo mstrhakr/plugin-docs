@@ -194,7 +194,7 @@ $isMobile = isset($_SESSION['mobile']) && $_SESSION['mobile'];
 
 ### Reading Unraid Settings
 
-System settings are available via state files:
+System settings are available via state files in `/var/local/emhttp/`. These INI files are updated by emhttp and contain current system state. Use `parse_ini_file()` with `true` as the second parameter to parse sections into nested arrays.
 
 ```php
 <?
@@ -243,6 +243,8 @@ $csrfToken = $var['csrf_token'];
 
 ### Standard Plugin Paths
 
+These are the conventional paths used in Unraid plugin development. The emhttp directory in RAM contains active plugin files, while the config directory on the USB flash stores persistent data that survives reboots.
+
 ```php
 <?
 // Your plugin's emhttp directory (RAM)
@@ -260,6 +262,8 @@ $includesDir = "/usr/local/emhttp/webGui/include";
 ```
 
 ### Including Dynamix Helpers
+
+Unraid provides helper libraries for common tasks. Include these files to access utility functions for translation, formatting, and system interaction. The Helpers.php file contains frequently used functions.
 
 ```php
 <?

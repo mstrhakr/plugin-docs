@@ -18,6 +18,8 @@ The `$var` array contains system state and configuration variables. It's one of 
 
 ## Accessing $var
 
+In `.page` files, `$var` is typically pre-loaded by Unraid's framework. In standalone PHP scripts or AJAX handlers, load it manually from the INI file. Always use the `global` keyword when accessing it inside functions.
+
 ```php
 <?
 // In page files, $var is usually pre-loaded

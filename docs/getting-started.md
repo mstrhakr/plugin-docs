@@ -45,7 +45,7 @@ Before writing code, decide on:
 
 ## Step 2: Create the Package Structure
 
-Create this directory structure:
+Create this directory structure. The `source/` folder mirrors the final filesystem layout—files under `usr/local/emhttp/plugins/` will be installed to that exact location on Unraid. The PLG file and build script stay at the root level.
 
 ```
 hello.world/
