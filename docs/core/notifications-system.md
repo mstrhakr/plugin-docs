@@ -30,7 +30,7 @@ The notification system is accessed via the `notify` script:
 ## Complete Notification Options
 
 | Option | Required | Description | Example |
-|--------|----------|-------------|---------|
+|--------|----------|-------------|---------||
 | `-e` | Yes | Event name (category/source) | `-e "My Plugin"` |
 | `-s` | Yes | Subject line (title) | `-s "Task Complete"` |
 | `-d` | No | Short description | `-d "Backup finished"` |
@@ -48,6 +48,11 @@ The notification system is accessed via the `notify` script:
 | `normal` | ℹ️ Blue info | Informational messages, successful completions |
 | `warning` | ⚠️ Yellow warning | Issues requiring attention, non-critical problems |
 | `alert` | 🚨 Red alert | Critical errors, failures, security issues |
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The Unraid notification panel showing examples of normal (blue), warning (yellow), and alert (red) notifications*
+>
+> ![Notification importance levels](../../assets/images/screenshots/notification-levels.png)
 
 ## Basic Examples
 

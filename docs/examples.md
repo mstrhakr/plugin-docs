@@ -8,6 +8,11 @@ nav_order: 8
 
 Learning from existing plugins is one of the best ways to understand Unraid plugin development. Here are some well-structured plugins to study.
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *A collage or grid showing screenshots of popular Unraid plugins (Compose Manager, User Scripts, CA, etc.) that developers can learn from*
+>
+> ![Example plugins](../assets/images/screenshots/example-plugins-collage.png)
+
 ## Recommended for Learning
 
 ### Dynamix Plugins (by @bonienl)

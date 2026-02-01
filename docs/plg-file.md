@@ -93,6 +93,11 @@ The `<PLUGIN>` tag supports these attributes:
 | `min` | Minimum Unraid version required (e.g., `"6.9.0"`). |
 | `max` | Maximum Unraid version supported. |
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The Unraid Plugin Manager showing a plugin's details panel with version, author, support link, and changelog visible*
+>
+> ![Plugin details in manager](../assets/images/screenshots/plugin-manager-details.png)
+
 ## CHANGES Section
 
 The `<CHANGES>` element contains your changelog in Markdown format:
@@ -109,6 +114,11 @@ The `<CHANGES>` element contains your changelog in Markdown format:
 ```
 
 This is displayed in the Plugin Manager when viewing plugin details.
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The changelog/changes section displayed in the Unraid Plugin Manager when you click on a plugin's version history or info*
+>
+> ![Plugin changelog display](../assets/images/screenshots/plugin-changelog-display.png)
 
 ## FILE Elements
 

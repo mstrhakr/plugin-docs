@@ -2,6 +2,7 @@
 layout: default
 title: Event System
 nav_order: 5
+mermaid: true
 ---
 
 # Event System
@@ -49,6 +50,40 @@ Plugins are processed alphabetically by plugin name.
 | `unmounting_disks` | Disks about to unmount | Final disk access |
 | `stopping_array` | Disks unmounted, array stopping | Last chance before stopped |
 | `stopped` | Array fully stopped | Post-stop cleanup |
+
+```mermaid
+flowchart LR
+    subgraph Startup["Array Start Sequence"]
+        direction TB
+        S1[driver_loaded] --> S2[starting]
+        S2 --> S3[array_started]
+        S3 --> S4[disks_mounted]
+        S4 --> S5[svcs_restarted]
+        S5 --> S6[docker_started]
+        S6 --> S7[libvirt_started]
+        S7 --> S8[started]
+    end
+    
+    subgraph Shutdown["Array Stop Sequence"]
+        direction TB
+        P1[stopping] --> P2[stopping_libvirt]
+        P2 --> P3[stopping_docker]
+        P3 --> P4[stopping_svcs]
+        P4 --> P5[unmounting_disks]
+        P5 --> P6[stopping_array]
+        P6 --> P7[stopped]
+    end
+    
+    Startup -.->|🔄 Reboot/Stop| Shutdown
+    
+    style S8 fill:#4caf50,color:#fff
+    style P7 fill:#f44336,color:#fff
+```
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Syslog output showing event script execution during array start - displaying the sequence of events and plugin responses*
+>
+> ![Event execution in syslog](../assets/images/screenshots/event-syslog-output.png)
 
 ### Other Events
 

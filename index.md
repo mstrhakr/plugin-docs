@@ -9,6 +9,11 @@ permalink: /
 
 Welcome to the community-maintained documentation for building plugins for [Unraid OS](https://unraid.net/).
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The Unraid web interface showing the Plugins page with installed plugins and the Community Applications icon*
+>
+> ![Unraid plugins page](assets/images/screenshots/unraid-plugins-overview.png)
+
 {: .warning }
 > This is unofficial documentation maintained by the community. While we strive for accuracy, please verify critical information against official sources and existing plugins.
 

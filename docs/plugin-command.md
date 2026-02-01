@@ -8,6 +8,11 @@ nav_order: 7
 
 The `plugin` command is the CLI tool for managing Unraid plugins. It handles installation, updates, removal, and status checks.
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Terminal showing the plugin command help output or a plugin installation in progress*
+>
+> ![Plugin command help](../assets/images/screenshots/plugin-command-help.png)
+
 ## Basic Usage
 
 ```bash
@@ -36,6 +41,11 @@ plugin install /path/to/myplugin.plg forced
 2. Processes all `<FILE>` elements with `install` method
 3. Copies PLG to `/boot/config/plugins/`
 4. Creates symlink in `/var/log/plugins/`
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Terminal output showing a successful plugin installation with download progress and confirmation message*
+>
+> ![Plugin install output](../assets/images/screenshots/plugin-install-output.png)
 
 ### remove
 

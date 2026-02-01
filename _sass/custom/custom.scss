@@ -1,0 +1,65 @@
+// Custom styles for Unraid Plugin Documentation
+
+// Image placeholder styling
+.placeholder-image {
+  border: 2px dashed #6c757d;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  
+  p {
+    margin: 0;
+    color: #adb5bd;
+  }
+  
+  img {
+    display: block;
+    margin: 1rem auto 0;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    opacity: 0.3;
+    filter: grayscale(100%);
+  }
+  
+  // Style for when image doesn't exist yet
+  img[src*="placeholder"],
+  img:not([src]),
+  img[src=""] {
+    display: none;
+  }
+}
+
+// Make the camera emoji stand out
+.placeholder-image strong {
+  color: #ffc107;
+}
+
+// Mermaid diagram improvements
+.mermaid {
+  background: transparent !important;
+  margin: 1.5rem 0;
+  
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// Better code block styling
+pre {
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+// Improve table readability
+table {
+  th {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}

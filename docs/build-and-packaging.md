@@ -2,11 +2,17 @@
 layout: default
 title: Build and Packaging
 nav_order: 9
+mermaid: true
 ---
 
 # Build and Packaging
 
 This guide covers advanced build and packaging practices for Unraid plugins, including CI/CD pipelines, versioning strategies, and distribution best practices. The concepts here are derived from how LimeTech and the community build professional-grade plugins.
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *GitHub Actions workflow running for a plugin, showing the build and release steps*
+>
+> ![GitHub Actions build](../assets/images/screenshots/github-actions-build.png)
 
 ## Build Artifacts Overview
 

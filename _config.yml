@@ -22,6 +22,10 @@ footer_content: "Unofficial community documentation. Not affiliated with Lime Te
 # Color scheme
 color_scheme: dark
 
+# Mermaid diagrams
+mermaid:
+  version: "10.6.0"
+
 # Logo
 logo: "/assets/images/logo.png"
 

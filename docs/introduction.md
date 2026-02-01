@@ -2,12 +2,7 @@
 layout: default
 title: Introduction
 nav_order: 1
----
-
----
-layout: default
-title: Introduction
-nav_order: 1
+mermaid: true
 ---
 
 # Introduction to Unraid Plugins
@@ -22,6 +17,11 @@ An Unraid plugin is an extension that adds functionality to your Unraid server. 
 - Respond to system events (array start/stop, Docker events, etc.)
 - Integrate with Docker and VM management
 - Provide settings pages for configuration
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The Unraid Plugins page showing installed plugins with version numbers, update status, and action buttons*
+>
+> ![Plugins page overview](../assets/images/screenshots/plugins-page-overview.png)
 
 ## How Plugins Work
 
@@ -48,6 +48,11 @@ Before creating a plugin, consider whether your use case is better suited to a D
 | Very lightweight additions | Application doesn't need system access |
 
 Many developers use a combination: a plugin that manages Docker containers (like the Compose Manager plugin).
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Side-by-side comparison showing a plugin settings page vs a Docker container management view*
+>
+> ![Plugin vs Docker comparison](../assets/images/screenshots/plugin-vs-docker-comparison.png)
 
 ## Anatomy of a Plugin
 
@@ -123,34 +128,19 @@ Understanding where files live is crucial:
 
 When `plugin install myplugin.plg` runs:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  1. Parse myplugin.plg                                      │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  2. Process each <FILE> element                             │
-│     - Download files from URLs                              │
-│     - Verify MD5 checksums                                  │
-│     - Extract packages with upgradepkg                      │
-│     - Run inline scripts                                    │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  3. Copy .plg to /boot/config/plugins/                      │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  4. Create symlink in /var/log/plugins/                     │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  5. Plugin is now active!                                   │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["1️⃣ Parse myplugin.plg"] --> B["2️⃣ Process each FILE element"]
+    B --> B1["Download files from URLs"]
+    B --> B2["Verify MD5/SHA256 checksums"]
+    B --> B3["Extract packages with upgradepkg"]
+    B --> B4["Run inline scripts"]
+    B1 & B2 & B3 & B4 --> C["3️⃣ Copy .plg to /boot/config/plugins/"]
+    C --> D["4️⃣ Create symlink in /var/log/plugins/"]
+    D --> E["5️⃣ Plugin is now active! ✅"]
+    
+    style A fill:#4a9eff,color:#fff
+    style E fill:#4caf50,color:#fff
 ```
 
 ## What You'll Learn

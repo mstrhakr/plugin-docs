@@ -2,6 +2,7 @@
 layout: default
 title: File System Layout
 nav_order: 6
+mermaid: true
 ---
 
 # File System Layout
@@ -16,31 +17,37 @@ Unraid boots from a USB flash drive into RAM. This means:
 - **The USB flash drive is the only persistent storage during boot**
 - **Plugins must be reinstalled on every boot**
 
+```mermaid
+flowchart TB
+    subgraph USB["USB Flash Drive /boot"]
+        subgraph Persistent["Persistent - survives reboot"]
+            P1["/boot/config/plugins/myplugin/"]
+            P2["myplugin.cfg (user settings)"]
+            P3["myplugin-package.txz (cached)"]
+        end
+    end
+    
+    USB -->|"Installed on boot"| RAM
+    
+    subgraph RAM["RAM Disk"]
+        subgraph Volatile["Volatile - rebuilt each boot"]
+            R1["/usr/local/emhttp/plugins/myplugin/"]
+            R2["myplugin.page (web UI)"]
+            R3["scripts/ (shell scripts)"]
+            R4["php/ (PHP code)"]
+        end
+    end
+    
+    style USB fill:#4a9eff,color:#fff
+    style RAM fill:#ff9800,color:#fff
+    style Persistent fill:#4caf50,color:#fff
+    style Volatile fill:#f44336,color:#fff
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  USB Flash Drive (/boot)                                        │
-│  ┌───────────────────────────────────────────────────────────┐  │
-│  │  Persistent - survives reboot                             │  │
-│  │  /boot/config/plugins/myplugin/                           │  │
-│  │    ├── myplugin.cfg          (user settings)              │  │
-│  │    └── myplugin-package.txz  (cached package)             │  │
-│  └───────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                    Installed on boot
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  RAM Disk                                                       │
-│  ┌───────────────────────────────────────────────────────────┐  │
-│  │  Volatile - rebuilt each boot                             │  │
-│  │  /usr/local/emhttp/plugins/myplugin/                      │  │
-│  │    ├── myplugin.page         (web UI)                     │  │
-│  │    ├── scripts/              (shell scripts)              │  │
-│  │    └── php/                  (PHP code)                   │  │
-│  └───────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
-```
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Unraid terminal or file manager showing the /boot/config/plugins/ directory structure with several installed plugins*
+>
+> ![Boot config plugins directory](../assets/images/screenshots/boot-config-plugins-dir.png)
 
 ## Key Directories
 
@@ -71,6 +78,11 @@ This is where plugin files are stored on the boot device:
 - Large data files (limited USB space)
 - Frequently written files (USB wear)
 - Log files
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *File listing of /boot/config/plugins/ showing multiple plugin folders with .plg files and subdirectories*
+>
+> ![USB plugins directory](../assets/images/screenshots/usb-plugins-directory.png)
 
 ### /usr/local/emhttp/plugins/
 
@@ -107,6 +119,11 @@ This is where active plugin files live:
 - Event handlers
 - Static assets (JS, CSS, images)
 - Default configuration
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *File listing of /usr/local/emhttp/plugins/[plugin]/ showing the typical plugin structure with .page files, scripts, and php directories*
+>
+> ![Emhttp plugins directory](../assets/images/screenshots/emhttp-plugins-directory.png)
 
 ### /var/log/plugins/
 

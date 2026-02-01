@@ -11,6 +11,11 @@ nav_order: 1
 
 Community Applications (CA) is the primary plugin/container discovery platform for Unraid. Getting your plugin listed in CA makes it easily discoverable and installable by Unraid users.
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The Community Applications interface showing the plugin browser with categories, search, and plugin cards*
+>
+> ![CA plugin browser](../../assets/images/screenshots/ca-plugin-browser.png)
+
 ## How CA Works
 
 1. CA maintains a repository of application templates
@@ -92,6 +97,11 @@ Multiple categories can be combined: `Tools:System:Status:`
 - **Size**: 256x256 pixels (minimum)
 - **Style**: Clear, recognizable at small sizes
 - **Hosting**: GitHub raw URL or other reliable CDN
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Examples of good plugin icons as they appear in the CA interface - showing proper sizing and visibility*
+>
+> ![Plugin icon examples](../../assets/images/screenshots/ca-plugin-icons.png)
 
 ```
 https://raw.githubusercontent.com/username/repo/main/images/icon.png

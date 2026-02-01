@@ -11,6 +11,11 @@ nav_order: 1
 
 Unraid uses consistent form styling throughout its web interface. Following these patterns ensures your plugin integrates seamlessly with the Unraid look and feel.
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *An Unraid settings page showing the standard form layout with labels, inputs, and buttons styled correctly*
+>
+> ![Form controls overview](../../assets/images/screenshots/form-controls-overview.png)
+
 ## Basic Form Structure
 
 ```html
@@ -159,6 +164,11 @@ input[type="checkbox"] {
 </style>
 ```
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Side-by-side showing the standard Yes/No dropdown toggle and the CSS-based toggle switch in Unraid*
+>
+> ![Toggle switch styles](../../assets/images/screenshots/toggle-switch-styles.png)
+
 ## Dropdown Select
 
 ```html
@@ -196,6 +206,11 @@ input[type="checkbox"] {
 ## Share Selector
 
 For selecting Unraid shares:
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *A dropdown showing Unraid shares populated from shares.ini with typical share names*
+>
+> ![Share selector dropdown](../../assets/images/screenshots/share-selector-dropdown.png)
 
 ```php
 <?
@@ -297,6 +312,11 @@ function openFileTree() {
 }
 </script>
 ```
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The Unraid file tree picker expanded, showing the folder hierarchy under /mnt/user/*
+>
+> ![File tree picker](../../assets/images/screenshots/file-tree-picker.png)
 
 ## Textarea
 

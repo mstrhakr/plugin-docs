@@ -2,6 +2,7 @@
 layout: default
 title: Getting Started
 nav_order: 2
+mermaid: true
 ---
 
 # Getting Started: Your First Plugin
@@ -14,6 +15,11 @@ A minimal plugin that:
 - Adds a page to the Unraid Settings menu
 - Shows a simple message
 - Has a configurable setting
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The completed Hello World plugin settings page in the Unraid UI, showing the message input field and Apply/Done buttons*
+>
+> ![Hello World plugin result](../assets/images/screenshots/hello-world-complete.png)
 
 ## Prerequisites
 
@@ -83,6 +89,11 @@ Enter a custom message to display.
 : <input type="submit" name="#apply" value="_(Apply)_" disabled><input type="button" value="_(Done)_" onclick="done()">
 </form>
 ```
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *How this .page file renders in the Unraid Settings menu - showing the form layout, input field styling, and inline help block expanded*
+>
+> ![Page file rendered](../assets/images/screenshots/page-file-rendered.png)
 
 ## Step 4: Create Default Configuration
 
@@ -234,6 +245,11 @@ Note the MD5 output and update your PLG file.
 3. Check for errors in the console output
 4. Navigate to Settings → Hello World
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *The Unraid Settings sidebar showing the "Hello World" entry with its globe icon, and the terminal output from a successful plugin installation*
+>
+> ![Plugin installed](../assets/images/screenshots/plugin-install-success.png)
+
 ### Test Changes Without Reinstalling
 
 Edit files directly on the server:
@@ -250,6 +266,11 @@ Refresh the browser to see changes. Remember to copy changes back to your source
 3. Create a release with the `.txz` package
 4. Update the PLG file URLs
 5. Share your plugin!
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *GitHub releases page showing a plugin release with the .txz and .plg files attached as assets*
+>
+> ![GitHub release](../assets/images/screenshots/github-release-example.png)
 
 ## Common Issues
 

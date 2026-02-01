@@ -14,6 +14,11 @@ nav_order: 4
 
 Effective debugging is essential for plugin development. This guide covers logging, error handling, and tools for troubleshooting Unraid plugins.
 
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Browser DevTools open on an Unraid plugin page, showing the Console and Network tabs for debugging*
+>
+> ![Browser DevTools](../../assets/images/screenshots/browser-devtools.png)
+
 ## Logging
 
 ### Using logger (syslog)
@@ -59,6 +64,11 @@ tail -f /var/log/yourplugin.log
 # View all recent logs
 dmesg | tail -50
 ```
+
+{: .placeholder-image }
+> 📷 **Screenshot needed:** *Terminal showing syslog output with plugin log messages highlighted*
+>
+> ![Syslog output](../../assets/images/screenshots/syslog-plugin-output.png)
 
 ## PHP Error Handling
 
