@@ -481,7 +481,7 @@ $(document).on('keydown', function(e) {
 
 ### Namespaced Event Handlers
 
-Avoid event collisions with Unraid's built-in handlers by using namespaced events:
+Unraid's web UI attaches many global event handlers. If you add handlers without namespacing, they can conflict with existing handlers or accumulate on repeated page visits (SPA-style navigation). jQuery's event namespacing (e.g., `keydown.myplugin`) lets you target specific handlers for removal and prevents conflicts with other code.
 
 ```javascript
 // BAD - may conflict or accumulate handlers
@@ -507,7 +507,7 @@ $(document).off('keydown.myplugin');
 
 ### Focus Trapping for Modals
 
-Keep keyboard focus inside modal dialogs for accessibility:
+For accessibility and usability, keyboard focus should stay inside a modal dialog while it's open. Without focus trapping, pressing Tab can move focus to elements behind the modal overlay, confusing users. This pattern intercepts Tab key presses and wraps focus from the last focusable element back to the first (and vice versa with Shift+Tab).
 
 ```javascript
 $(document).on('keydown.mymodal', function(e) {
@@ -535,7 +535,7 @@ $(document).on('keydown.mymodal', function(e) {
 
 ### Namespace Your Timers
 
-Avoid collision with Unraid's global `timers` object:
+Unraid's core JavaScript uses a global `timers` object to manage intervals and timeouts. If your plugin declares `var timers = {}`, you'll overwrite Unraid's object and break functionality like auto-refresh and status polling. Always use a plugin-specific name like `myPluginTimers` to avoid this collision.
 
 ```javascript
 // BAD - conflicts with Unraid's global timers
@@ -556,7 +556,9 @@ $(window).on('beforeunload', function() {
 
 ### Async Loading for Expensive Operations
 
-Don't block page render with slow operations (like Docker commands):
+Operations like listing Docker containers or checking update status can take several seconds. If you run these synchronously during page load, the user sees a blank or frozen page. Instead, render the page shell immediately with a placeholder, then fetch expensive data via AJAX.
+
+The delayed spinner pattern (500ms timeout) ensures quick operations don't flash a spinner unnecessarily, while slow operations show appropriate feedback:
 
 ```javascript
 // Show spinner with delay to avoid flash on fast loads
@@ -584,7 +586,7 @@ $(loadList);  // Load on document ready
 
 ### XSS Prevention
 
-Never insert user content or error messages directly into HTML:
+Cross-site scripting (XSS) vulnerabilities occur when user-controlled content is inserted into the DOM as HTML. Attackers can inject `<script>` tags or event handlers. jQuery's `.html()` method interprets content as HTML, while `.text()` safely escapes special characters. When you need to display error messages, usernames, or any external data, always use safe insertion methods:
 
 ```javascript
 // BAD - XSS vulnerability
