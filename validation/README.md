@@ -130,8 +130,12 @@ The plugin is automatically built and released via GitHub Actions.
    - Triggers build validation
    - Artifacts are uploaded but no release created
 
-2. **Release**: Create and push a version tag
-   ```bash
+2. **Release**: Use the release script (recommended) or manual tags
+   ```powershell
+   # Windows - use the release script
+   .\release.ps1
+   
+   # Or manually create tags
    git tag v2026.02.01
    git push origin v2026.02.01
    ```
@@ -154,6 +158,44 @@ See [`.github/workflows/plugin-release.yml`](../.github/workflows/plugin-release
 We use date-based versioning (`YYYY.MM.DD`) following LimeTech's convention:
 - `2026.02.01` - First release on Feb 1, 2026
 - `2026.02.01a` - Patch release same day (append letter)
+- `2026.02.01b` - Second patch same day, etc.
+
+### Release Script
+
+The [`release.ps1`](../release.ps1) script automates tag creation with intelligent versioning:
+
+```powershell
+# Preview what would happen (recommended first time)
+.\release.ps1 -DryRun
+
+# Create and push a release (prompts for confirmation)
+.\release.ps1
+
+# Skip all prompts (for automation/CI)
+.\release.ps1 -Force
+```
+
+**Features:**
+- Auto-generates date-based version tags (`v2026.02.01`)
+- Automatically adds suffix for multiple daily releases (`a`, `b`, `c`...)
+- Warns about uncommitted changes or wrong branch
+- Checks if local is behind remote
+- Shows links to Actions and Release pages
+
+**Example workflow:**
+```powershell
+# Morning release
+.\release.ps1
+# Creates: v2026.02.01
+
+# Afternoon hotfix
+.\release.ps1  
+# Creates: v2026.02.01a
+
+# Evening fix
+.\release.ps1
+# Creates: v2026.02.01b
+```
 
 ### Build Process
 

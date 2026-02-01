@@ -267,6 +267,34 @@ esac
 {: .note }
 > See the [DocTest plugin CI/CD workflow](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/.github/workflows/plugin-release.yml) for a complete working example used by this documentation project.
 
+### Release Automation Script
+
+For Windows development environments, a PowerShell script can automate the release process:
+
+```powershell
+# Preview what would happen
+.\release.ps1 -DryRun
+
+# Create and push a release
+.\release.ps1
+
+# Skip prompts (for CI/automation)
+.\release.ps1 -Force
+```
+
+The [release.ps1 script](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/release.ps1) handles:
+- **Date-based versioning** - Automatically generates `vYYYY.MM.DD` tags
+- **Multiple daily releases** - Appends suffix letters (`a`, `b`, `c`...) for same-day releases
+- **Safety checks** - Warns about uncommitted changes, wrong branch, or being behind remote
+- **CI/CD integration** - Pushes tag which triggers GitHub Actions workflow
+
+Example workflow:
+```powershell
+.\release.ps1   # Creates v2026.02.01
+.\release.ps1   # Creates v2026.02.01a (same day)
+.\release.ps1   # Creates v2026.02.01b (same day)
+```
+
 ### Multi-Stage Build Pipeline
 
 ```yaml
