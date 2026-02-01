@@ -1,3 +1,9 @@
+---
+layout: default
+title: Event System
+nav_order: 5
+---
+
 # Event System
 
 Unraid plugins can respond to system events by placing executable scripts in their `event/` directory. This allows plugins to perform actions when the array starts, Docker launches, or the system is shutting down.

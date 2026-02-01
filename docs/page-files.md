@@ -1,3 +1,9 @@
+---
+layout: default
+title: Page Files Reference
+nav_order: 4
+---
+
 # Page Files Reference
 
 Page files (`.page`) are how plugins add pages to the Unraid web UI. They combine metadata headers with PHP/HTML/JavaScript content to create settings pages, tools, and dashboards.

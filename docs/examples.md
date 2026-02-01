@@ -1,3 +1,9 @@
+---
+layout: default
+title: Example Plugins
+nav_order: 8
+---
+
 # Example Plugins
 
 Learning from existing plugins is one of the best ways to understand Unraid plugin development. Here are some well-structured plugins to study.

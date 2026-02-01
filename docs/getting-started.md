@@ -1,3 +1,9 @@
+---
+layout: default
+title: Getting Started
+nav_order: 2
+---
+
 # Getting Started: Your First Plugin
 
 This tutorial walks you through creating a simple "Hello World" Unraid plugin from scratch.

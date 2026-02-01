@@ -37,19 +37,6 @@ aux_links_new_tab: true
 # Navigation
 nav_sort: case_insensitive
 
-# Collections
-collections:
-  docs:
-    permalink: "/:collection/:path/"
-    output: true
-
-# Just the docs settings
-just_the_docs:
-  collections:
-    docs:
-      name: Documentation
-      nav_fold: true
-
 # Plugins
 plugins:
   - jekyll-seo-tag
@@ -57,13 +44,9 @@ plugins:
 
 # Exclude from processing
 exclude:
-  - "*.md"
   - node_modules/
   - vendor/
   - .git/
   - Gemfile
   - Gemfile.lock
-
-include:
-  - README.md
-  - docs/
+  - CONTRIBUTING.md

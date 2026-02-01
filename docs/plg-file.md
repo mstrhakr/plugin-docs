@@ -1,3 +1,9 @@
+---
+layout: default
+title: PLG File Reference
+nav_order: 3
+---
+
 # PLG File Reference
 
 The `.plg` file is the heart of every Unraid plugin. It's an XML document that tells the plugin system how to install, update, and remove your plugin.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: Plugin Command Reference
+nav_order: 7
+---
+
 # Plugin Command Reference
 
 The `plugin` command is the CLI tool for managing Unraid plugins. It handles installation, updates, removal, and status checks.

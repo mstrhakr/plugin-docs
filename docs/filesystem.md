@@ -1,3 +1,9 @@
+---
+layout: default
+title: File System Layout
+nav_order: 6
+---
+
 # File System Layout
 
 Understanding where files are stored and why is crucial for Unraid plugin development. Unraid runs from RAM, which creates unique challenges and opportunities.

@@ -1,3 +1,15 @@
+---
+layout: default
+title: Introduction
+nav_order: 1
+---
+
+---
+layout: default
+title: Introduction
+nav_order: 1
+---
+
 # Introduction to Unraid Plugins
 
 ## What is an Unraid Plugin?
