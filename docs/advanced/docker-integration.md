@@ -192,6 +192,155 @@ exec("docker rmi myimage:latest 2>&1", $output, $retval);
 ?>
 ```
 
+## Update Checking
+
+Unraid's Docker Manager provides a built-in system for checking if container images have updates available. This works by comparing the local image digest (SHA256 hash) with the remote registry's current digest for the same tag.
+
+### How Unraid Update Checking Works
+
+1. **Local digest**: Extracted from the image's `RepoDigests` field via `docker inspect`
+2. **Remote digest**: Fetched from the container registry's API (Docker Hub, GHCR, etc.)
+3. **Comparison**: If digests differ, an update is available
+
+```php
+<?php
+require_once("/usr/local/emhttp/plugins/dynamix.docker.manager/include/DockerClient.php");
+
+$DockerUpdate = new DockerUpdate();
+$image = "library/nginx:latest";
+
+// Force a fresh check (fetches from registry)
+$DockerUpdate->reloadUpdateStatus($image);
+
+// Get the status: true = up-to-date, false = update available, null = unknown
+$status = $DockerUpdate->getUpdateStatus($image);
+
+if ($status === null) {
+    echo "Could not check for updates";
+} elseif ($status === true) {
+    echo "Image is up-to-date";
+} else {
+    echo "Update available!";
+}
+?>
+```
+
+### Update Status Storage
+
+Unraid stores update check results in a JSON file to avoid repeated registry queries:
+
+```
+/var/lib/docker/unraid-update-status.json
+```
+
+Structure:
+```json
+{
+  "library/nginx:latest": {
+    "local": "sha256:abc123...",
+    "remote": "sha256:def456...",
+    "status": "false"
+  }
+}
+```
+
+### Reading SHA Values
+
+To display SHA digests in your UI (like showing which version will be updated):
+
+```php
+<?php
+$dockerManPaths = [
+    'update-status' => "/var/lib/docker/unraid-update-status.json"
+];
+
+$updateStatusData = DockerUtil::loadJSON($dockerManPaths['update-status']);
+$image = "library/nginx:latest";
+
+if (isset($updateStatusData[$image])) {
+    $localSha = $updateStatusData[$image]['local'] ?? '';
+    $remoteSha = $updateStatusData[$image]['remote'] ?? '';
+    
+    // Shorten for display (first 12 chars after "sha256:")
+    if ($localSha && strpos($localSha, 'sha256:') === 0) {
+        $localSha = substr($localSha, 7, 12);
+    }
+    if ($remoteSha && strpos($remoteSha, 'sha256:') === 0) {
+        $remoteSha = substr($remoteSha, 7, 12);
+    }
+    
+    echo "Local: $localSha → Remote: $remoteSha";
+}
+?>
+```
+
+### Handling Pinned Images (SHA256 Digests)
+
+Some users pin images to specific versions using SHA256 digests in their compose files:
+
+```yaml
+services:
+  redis:
+    image: redis:6.2-alpine@sha256:abc123def456...
+```
+
+These pinned images should **not** be checked for updates because:
+- The user explicitly wants that exact version
+- Registry checks return the latest tag digest, not the pinned digest
+- Comparing would always show a false "update available"
+
+Detect and handle pinned images:
+
+```php
+<?php
+/**
+ * Check if an image is pinned with a SHA256 digest.
+ * Returns array with image/digest info if pinned, false otherwise.
+ */
+function isImagePinned($image) {
+    // Strip docker.io/ prefix first
+    if (strpos($image, 'docker.io/') === 0) {
+        $image = substr($image, 10);
+    }
+    
+    // Check for @sha256: digest suffix
+    if (($digestPos = strpos($image, '@sha256:')) !== false) {
+        $baseImage = substr($image, 0, $digestPos);
+        $digest = substr($image, $digestPos + 1);
+        return [
+            'image' => $baseImage,
+            'digest' => $digest,
+            'shortDigest' => substr($digest, 7, 12)  // First 12 chars
+        ];
+    }
+    
+    return false;
+}
+
+// Usage
+$image = "docker.io/redis:6.2-alpine@sha256:abc123def456...";
+$pinned = isImagePinned($image);
+
+if ($pinned) {
+    // Show "pinned to abc123def456" instead of checking updates
+    echo "Pinned to: " . $pinned['shortDigest'];
+} else {
+    // Normal update check
+    $DockerUpdate->reloadUpdateStatus($image);
+}
+?>
+```
+
+### Common Update Check Issues
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Always shows "update available" after pull | Cached local SHA is stale | Clear `local` field before `reloadUpdateStatus()` |
+| Image not found in status file | Image name format mismatch | Use `DockerUtil::ensureImageTag()` to normalize |
+| Pinned image shows "not checked" | `@sha256:` suffix confuses the check | Detect pinned images and skip update check |
+| Official images not matching | Missing `library/` prefix | `ensureImageTag()` adds it automatically |
+```
+
 ## Unraid Docker Integration
 
 ### Reading Docker Configuration
@@ -408,6 +557,10 @@ function normalizeImageForUpdateCheck($image) {
     return DockerUtil::ensureImageTag($image);
 }
 ?>
+```
+
+{: .note }
+> Before normalizing, check if the image is pinned using `isImagePinned()` (see [Update Checking](#handling-pinned-images-sha256-digests)). Pinned images should display their pinned status rather than being checked for updates.
 ```
 
 ### General Guidelines
