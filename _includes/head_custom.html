@@ -1,0 +1,36 @@
+<style>
+/* Fix SVG sizing - SVGs need explicit dimensions via inline styles */
+/* Footer logo sizing */
+.site-footer img,
+div[style*="border-top"] img {
+  height: 24px !important;
+  width: auto !important;
+  max-height: 24px !important;
+  display: inline-block;
+}
+
+/* Smaller for Copilot logo */
+div[style*="border-top"] img[alt="GitHub Copilot"] {
+  height: 20px !important;
+  max-height: 20px !important;
+}
+
+/* Add GitHub icon to View on GitHub aux link */
+.aux-nav .aux-nav-list-item:first-child a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.aux-nav .aux-nav-list-item:first-child a::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  vertical-align: middle;
+  background-image: url('{{ "/assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" | relative_url }}');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+</style>

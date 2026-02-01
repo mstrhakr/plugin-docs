@@ -155,6 +155,38 @@ $unraid-orange-dark: #ac0800;
 // GitHub Branding Styles
 // ============================================
 
+// Fix SVG sizing globally - SVGs need explicit dimensions
+img[src*=".svg"] {
+  max-width: 100%;
+  height: auto;
+}
+
+// GitHub icon in aux nav "View on GitHub" link
+.aux-nav .aux-nav-list-item:first-child a {
+  display: inline-flex;
+  align-items: center;
+  
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    background-image: url('/unraid-plugin-docs/assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+// Footer SVG sizing
+.site-footer img[src*=".svg"],
+.footer-custom img[src*=".svg"] {
+  height: 24px;
+  width: auto;
+  max-height: 24px;
+}
+
 // GitHub logo in headers - auto invert for light mode
 .github-logo {
   height: 32px;
