@@ -7,6 +7,7 @@
 <!ENTITY pluginURL   "https://raw.githubusercontent.com/mstrhakr/unraid-plugin-docs/main/validation/doctest.plg">
 <!ENTITY pluginLOC   "/boot/config/plugins/&name;">
 <!ENTITY emhttpLOC   "/usr/local/emhttp/plugins/&name;">
+<!ENTITY gitURL      "https://github.com/mstrhakr/unraid-plugin-docs">
 <!ENTITY txzName     "doctest-2026.02.01.txz">
 <!ENTITY txzURL      "https://github.com/mstrhakr/unraid-plugin-docs/releases/download/v2026.02.01/doctest-2026.02.01.txz">
 <!ENTITY txzSHA256   "961ef8250303d3da11aa546308d82553518494b6819039ac4129e8c0ea24de8a">

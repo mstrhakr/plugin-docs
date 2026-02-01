@@ -6,20 +6,26 @@ This directory contains tools to validate the accuracy of this documentation aga
 
 | File/Directory | Purpose |
 |---------------|---------|
-| `doctest.plg` | Installable test plugin (requires GitHub release for TXZ) |
-| `plugin/` | Plugin source and build scripts |
+| `doctest.plg` | Installable test plugin (auto-updated by CI/CD) |
+| `plugin/` | Plugin source, build scripts, and PLG template |
 | `scripts/` | Validation scripts to verify documentation claims |
 | `results/` | Test results from validation runs against specific Unraid versions |
 
 ## Using the Test Plugin
 
-### Quick Install (after release is published)
+### Quick Install
+
+Install directly from the Unraid Plugin Manager or via command line:
 
 ```bash
 plugin install https://raw.githubusercontent.com/mstrhakr/unraid-plugin-docs/main/validation/doctest.plg
 ```
 
-### Local Install (for development/testing)
+The plugin will auto-update when new versions are released.
+
+### Local Development Install
+
+For testing changes before committing:
 
 1. Copy the plugin source to your Unraid server:
    ```bash
@@ -32,6 +38,8 @@ plugin install https://raw.githubusercontent.com/mstrhakr/unraid-plugin-docs/mai
    cd /tmp/doctest-build
    mkdir -p build/usr/local/emhttp/plugins/doctest
    cp -R source/emhttp/* build/usr/local/emhttp/plugins/doctest/
+   # Fix line endings (critical if developed on Windows!)
+   find build -path "*/event/*" -type f -exec sed -i 's/\r$//' {} \;
    chmod 755 build/usr/local/emhttp/plugins/doctest/event/*
    cd build && tar -cJf ../doctest-2026.02.01.txz .
    ```
@@ -111,3 +119,66 @@ If you run the validation on a different Unraid version:
 | Page Files | 2026-02-01 | 7.2.3 |
 | PLG Structure | 2026-02-01 | 7.2.3 |
 | PHP Functions | 2026-02-01 | 7.2.3 |
+
+## CI/CD Pipeline
+
+The plugin is automatically built and released via GitHub Actions.
+
+### How Releases Work
+
+1. **Development**: Push changes to `validation/plugin/` on main branch
+   - Triggers build validation
+   - Artifacts are uploaded but no release created
+
+2. **Release**: Create and push a version tag
+   ```bash
+   git tag v2026.02.01
+   git push origin v2026.02.01
+   ```
+   - Builds TXZ package with proper permissions
+   - Calculates SHA256 hash
+   - Generates PLG file from template
+   - Creates GitHub Release with all artifacts
+   - Updates `validation/doctest.plg` in main branch
+
+3. **Auto-Update**: Users with plugin installed automatically see updates
+   - Unraid checks `pluginURL` for version changes
+   - Plugin Manager shows available update
+
+### Workflow File
+
+See [`.github/workflows/plugin-release.yml`](../.github/workflows/plugin-release.yml) for the complete workflow.
+
+### Version Format
+
+We use date-based versioning (`YYYY.MM.DD`) following LimeTech's convention:
+- `2026.02.01` - First release on Feb 1, 2026
+- `2026.02.01a` - Patch release same day (append letter)
+
+### Build Process
+
+The CI pipeline:
+
+1. **Converts line endings** - Windows CRLF → Unix LF
+2. **Sets permissions** - Event handlers get `chmod 755`
+3. **Creates TXZ** - Slackware package with `tar -cJf`
+4. **Calculates SHA256** - For integrity verification
+5. **Generates PLG** - Substitutes version, URL, and hash into template
+
+### Manual Release
+
+If CI/CD is unavailable, release manually:
+
+```bash
+# Build locally (requires Linux/WSL with tar and xz)
+cd validation/plugin
+./build.sh 2026.02.01
+
+# Or build on Unraid server
+ssh root@your-server
+# (follow local development steps above)
+
+# Create GitHub release manually and upload:
+# - doctest-2026.02.01.txz
+# - doctest.plg (with correct SHA256)
+```

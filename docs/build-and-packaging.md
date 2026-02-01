@@ -264,6 +264,9 @@ esac
 
 <img src="../assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="40" align="right">
 
+{: .note }
+> See the [DocTest plugin CI/CD workflow](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/.github/workflows/plugin-release.yml) for a complete working example used by this documentation project.
+
 ### Multi-Stage Build Pipeline
 
 ```yaml

@@ -1,0 +1,181 @@
+# .github/workflows/plugin-release.yml
+# CI/CD pipeline for the DocTest validation plugin
+# 
+# This workflow demonstrates best practices for Unraid plugin releases:
+# - Builds TXZ package with proper line endings
+# - Calculates SHA256 for integrity verification  
+# - Generates PLG file from template with correct URLs
+# - Creates GitHub releases with all artifacts
+#
+# Triggers:
+# - Push to main (validation only, no release)
+# - Manual workflow_dispatch (for testing)
+# - New tag matching v* pattern (creates release)
+
+name: Build & Release Plugin
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'validation/plugin/**'
+      - '.github/workflows/plugin-release.yml'
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build (e.g., 2026.02.01)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+env:
+  PLUGIN_NAME: doctest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.VERSION }}
+      sha256: ${{ steps.package.outputs.SHA256 }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/v* ]]; then
+            # Release tag - extract version from tag (remove 'v' prefix)
+            VERSION="${GITHUB_REF#refs/tags/v}"
+          elif [[ -n "${{ github.event.inputs.version }}" ]]; then
+            # Manual input
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            # Default: date-based version
+            VERSION="$(date +%Y.%m.%d)"
+          fi
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Building version: ${VERSION}"
+
+      - name: Build TXZ package
+        id: package
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          cd validation/plugin
+          
+          # Create build directory structure
+          rm -rf build dist
+          mkdir -p build/usr/local/emhttp/plugins/${{ env.PLUGIN_NAME }}
+          mkdir -p dist
+          
+          # Copy source files
+          cp -R source/emhttp/* build/usr/local/emhttp/plugins/${{ env.PLUGIN_NAME }}/
+          
+          # CRITICAL: Convert Windows line endings to Unix (CRLF → LF)
+          find build -type f \( -name "*.sh" -o -name "*.page" -o -name "*.cfg" \) -exec sed -i 's/\r$//' {} \;
+          find build -path "*/event/*" -type f -exec sed -i 's/\r$//' {} \;
+          
+          # Set permissions
+          find build -type d -exec chmod 755 {} \;
+          find build -type f -exec chmod 644 {} \;
+          find build -path "*/event/*" -type f -exec chmod 755 {} \;
+          
+          # Create TXZ package
+          cd build
+          tar -cJf "../dist/${{ env.PLUGIN_NAME }}-${VERSION}.txz" .
+          cd ..
+          
+          # Calculate SHA256
+          SHA256=$(sha256sum "dist/${{ env.PLUGIN_NAME }}-${VERSION}.txz" | cut -d' ' -f1)
+          echo "SHA256=${SHA256}" >> $GITHUB_OUTPUT
+          echo "Package SHA256: ${SHA256}"
+
+      - name: Generate PLG file
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          SHA256="${{ steps.package.outputs.SHA256 }}"
+          
+          cd validation/plugin
+          
+          # Generate PLG from template with substitutions
+          sed -e "s|<!ENTITY version.*|<!ENTITY version     \"${VERSION}\">|" \
+              -e "s|<!ENTITY txzName.*|<!ENTITY txzName     \"${{ env.PLUGIN_NAME }}-${VERSION}.txz\">|" \
+              -e "s|<!ENTITY txzURL.*|<!ENTITY txzURL      \"https://github.com/${{ github.repository }}/releases/download/v${VERSION}/${{ env.PLUGIN_NAME }}-${VERSION}.txz\">|" \
+              -e "s|<!ENTITY txzSHA256.*|<!ENTITY txzSHA256   \"${SHA256}\">|" \
+              doctest.plg.template > dist/${{ env.PLUGIN_NAME }}.plg
+          
+          echo "Generated PLG file:"
+          head -20 dist/${{ env.PLUGIN_NAME }}.plg
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-package
+          path: |
+            validation/plugin/dist/*.txz
+            validation/plugin/dist/*.plg
+          retention-days: 30
+
+  # Only run release job on tag push
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: plugin-package
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "DocTest Plugin v${{ needs.build.outputs.version }}"
+          body: |
+            ## DocTest Validation Plugin v${{ needs.build.outputs.version }}
+            
+            This plugin validates features documented at [unraid-plugin-docs](https://mstrhakr.github.io/unraid-plugin-docs/).
+            
+            ### Installation
+            
+            **Via Plugin Manager:**
+            ```
+            https://raw.githubusercontent.com/${{ github.repository }}/main/validation/doctest.plg
+            ```
+            
+            **Or install directly:**
+            ```bash
+            plugin install https://raw.githubusercontent.com/${{ github.repository }}/main/validation/doctest.plg
+            ```
+            
+            ### What's Validated
+            - All 16 documented event handlers
+            - `parse_plugin_cfg()` and `mk_option()` functions
+            - `$var` array properties
+            - Page file rendering and form handling
+            - Notification system integration
+            
+            ### Package Details
+            - **SHA256:** `${{ needs.build.outputs.sha256 }}`
+          files: |
+            dist/*.txz
+            dist/*.plg
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update main branch PLG
+        run: |
+          # This step would update the PLG in the main branch
+          # For now, we'll document that this should be done manually
+          # or via a separate workflow that commits the updated PLG
+          echo "Release created. Remember to update validation/doctest.plg in main branch."
