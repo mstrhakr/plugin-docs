@@ -7,9 +7,6 @@ nav_order: 2
 
 # JavaScript Patterns
 
-{: .warning }
-> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
-
 ## Overview
 
 Unraid's web UI relies heavily on jQuery for DOM manipulation and AJAX. This page documents common patterns for interactivity in plugins.
@@ -465,6 +462,8 @@ location.reload(true);
 
 ## Keyboard Shortcuts
 
+### Basic Shortcuts
+
 ```javascript
 $(document).on('keydown', function(e) {
     // Ctrl+S to save
@@ -480,7 +479,133 @@ $(document).on('keydown', function(e) {
 });
 ```
 
+### Namespaced Event Handlers
+
+Avoid event collisions with Unraid's built-in handlers by using namespaced events:
+
+```javascript
+// BAD - may conflict or accumulate handlers
+$(document).on('keydown', function(e) { ... });
+
+// GOOD - namespaced event, easy to remove
+$(document).off('keydown.myplugin').on('keydown.myplugin', function(e) {
+    if ($('#my-modal').hasClass('active')) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+            e.preventDefault();
+            saveCurrentTab();
+        }
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            closeModal();
+        }
+    }
+});
+
+// Remove handler when done
+$(document).off('keydown.myplugin');
+```
+
+### Focus Trapping for Modals
+
+Keep keyboard focus inside modal dialogs for accessibility:
+
+```javascript
+$(document).on('keydown.mymodal', function(e) {
+    if (e.key === 'Tab') {
+        var $modal = $('#my-modal');
+        var $focusable = $modal.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').filter(':visible:not(:disabled)');
+        if ($focusable.length === 0) return;
+        
+        var first = $focusable[0];
+        var last = $focusable[$focusable.length - 1];
+        
+        // Trap focus inside modal
+        if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        } else if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        }
+    }
+});
+```
+
 ## Best Practices
+
+### Namespace Your Timers
+
+Avoid collision with Unraid's global `timers` object:
+
+```javascript
+// BAD - conflicts with Unraid's global timers
+var timers = {};
+timers.refresh = setInterval(...);
+
+// GOOD - plugin-specific namespace
+var myPluginTimers = {};
+myPluginTimers.refresh = setInterval(...);
+myPluginTimers.load = setTimeout(...);
+
+// Clean up on page unload
+$(window).on('beforeunload', function() {
+    clearInterval(myPluginTimers.refresh);
+    clearTimeout(myPluginTimers.load);
+});
+```
+
+### Async Loading for Expensive Operations
+
+Don't block page render with slow operations (like Docker commands):
+
+```javascript
+// Show spinner with delay to avoid flash on fast loads
+var myPluginTimers = {};
+
+function loadList() {
+    myPluginTimers.load = setTimeout(function(){
+        $('div.spinner.fixed').show('slow');
+    }, 500);
+    
+    $.get('/plugins/myplugin/php/list.php', function(data) {
+        clearTimeout(myPluginTimers.load);
+        $('#list-container').html(data);
+        initializeUI();  // Set up event handlers on new content
+        $('div.spinner.fixed').hide('slow');
+    }).fail(function() {
+        clearTimeout(myPluginTimers.load);
+        $('div.spinner.fixed').hide('slow');
+        $('#list-container').html('<p style="color:red">Failed to load. Please refresh.</p>');
+    });
+}
+
+$(loadList);  // Load on document ready
+```
+
+### XSS Prevention
+
+Never insert user content or error messages directly into HTML:
+
+```javascript
+// BAD - XSS vulnerability
+$('#error-display').html(errorMessage);
+$('#name').html(userName);
+
+// GOOD - safe text insertion
+$('#error-display').text(errorMessage);
+
+// GOOD - using createTextNode for complex cases
+var textNode = document.createTextNode(errorMessage);
+$('#error-display').empty().append(textNode);
+
+// GOOD - escape HTML entities if you need to insert HTML structure
+function escapeHtml(text) {
+    return $('<div>').text(text).html();
+}
+$('#container').html('<span class="error">' + escapeHtml(errorMessage) + '</span>');
+```
+
+### General Guidelines
 
 1. **Always include CSRF token** in POST requests
 2. **Use proper error handling** - show user-friendly messages
