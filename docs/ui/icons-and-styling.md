@@ -15,9 +15,9 @@ nav_order: 3
 Unraid uses Font Awesome icons and has built-in CSS classes for consistent styling across the UI.
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid sidebar showing various plugin icons, demonstrating the icon style and sizing*
+> 📷 **Screenshot needed:** *Unraid sidebar showing menu sections*
 >
-> ![Icons in sidebar](../../assets/images/screenshots/sidebar-icons.png)
+> ![Sidebar icons](../../assets/images/screenshots/sidebar-menu.png)
 
 ## Font Awesome Icons
 
@@ -58,11 +58,6 @@ Common icons for plugin pages:
 
 TODO: Document status indicator classes
 
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *Examples of Unraid's status indicators showing online (green), offline (red), and warning (yellow) states*
->
-> ![Status indicators](../../assets/images/screenshots/status-indicators.png)
-
 ```html
 <!-- Online/running status -->
 <span class="status online">Running</span>
@@ -91,7 +86,7 @@ TODO: Document status indicator classes
 TODO: Document available CSS color variables for theming
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *Same plugin page shown in both light and dark themes, demonstrating theme-aware styling*
+> 📷 **Screenshot needed:** *Plugin page in light vs dark theme*
 >
 > ![Theme comparison](../../assets/images/screenshots/theme-comparison.png)
 

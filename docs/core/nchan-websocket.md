@@ -39,9 +39,9 @@ flowchart TB
 ```
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *Browser DevTools Network tab showing a WebSocket or EventSource connection to an Unraid nchan channel*
+> 📷 **Screenshot needed:** *DevTools Network tab showing WebSocket connection*
 >
-> ![nchan connection in DevTools](../../assets/images/screenshots/nchan-devtools.png)
+> ![DevTools network](../../assets/images/screenshots/devtools-network.png)
 
 ## Subscribing to Channels (Client-Side)
 

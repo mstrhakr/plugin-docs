@@ -4,11 +4,9 @@ This folder contains screenshots used throughout the Unraid Plugin Development d
 
 ## Contributing Screenshots
 
-When adding screenshots, please follow these guidelines:
-
 ### File Naming
-- Use **kebab-case** (lowercase with hyphens): `plugin-manager-details.png`
-- Use descriptive names that match the list below
+- Use **kebab-case** (lowercase with hyphens)
+- Name based on **content**, not where it's used
 - Always use `.png` format
 
 ### Image Quality
@@ -17,164 +15,124 @@ When adding screenshots, please follow these guidelines:
 - **Theme**: Use dark theme for consistency (unless demonstrating themes)
 - Remove any personal information before uploading
 
-### Tips
-- Use a clean Unraid installation or VM
-- Crop to focus on relevant UI elements
-- Add annotations (arrows, boxes) sparingly if needed
-
 ---
 
 ## Required Screenshots
 
-Check off items as you add them. The filename must match exactly for the documentation to display it correctly.
+Screenshots are organized by content type. Each can be reused across multiple documentation pages.
 
-### Homepage
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `unraid-plugins-overview.png` | The Unraid web interface showing the Plugins page with installed plugins and the Community Applications icon |
+### Unraid Plugin Pages
 
-### Introduction (`docs/introduction.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `plugins-page-overview.png` | The Unraid Plugins page showing installed plugins with version numbers, update status, and action buttons |
-| ⬜ | `plugin-vs-docker-comparison.png` | Side-by-side comparison showing a plugin settings page vs a Docker container management view |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ✅ | `plugins-installed.png` | Installed Plugins tab showing plugin list with names, descriptions, authors, versions, status | Homepage, Introduction |
+| ⬜ | `plugins-details.png` | Plugin details/info panel showing version, author, support link, changelog | PLG File Reference |
+| ⬜ | `plugins-installing.png` | Terminal or UI showing plugin installation in progress with download/extraction | Getting Started, Plugin Command |
 
-### Getting Started (`docs/getting-started.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `hello-world-complete.png` | The completed Hello World plugin settings page in the Unraid UI, showing the message input field and Apply/Done buttons |
-| ⬜ | `page-file-rendered.png` | How a .page file renders in the Unraid Settings menu - showing the form layout, input field styling, and inline help block expanded |
-| ⬜ | `plugin-install-success.png` | The Unraid Settings sidebar showing a plugin entry with its icon, AND/OR terminal output from a successful plugin installation |
-| ⬜ | `github-release-example.png` | GitHub releases page showing a plugin release with the .txz and .plg files attached as assets |
+### Settings & Forms
 
-### PLG File Reference (`docs/plg-file.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `plugin-manager-details.png` | The Unraid Plugin Manager showing a plugin's details panel with version, author, support link, and changelog visible |
-| ⬜ | `plugin-changelog-display.png` | The changelog/changes section displayed in the Unraid Plugin Manager when you click on a plugin's version history |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `settings-page-example.png` | A typical plugin settings page with Dynamix form styling (labels, inputs, help text, buttons) | Getting Started, Page Files, Form Controls |
+| ⬜ | `settings-display.png` | Unraid Display Settings page (date format, temp scale, theme options) | Dynamix Framework |
+| ⬜ | `form-toggle.png` | Yes/No dropdown toggle and/or CSS toggle switch | Form Controls |
+| ⬜ | `form-file-picker.png` | File tree picker expanded showing /mnt/user/ hierarchy | Form Controls |
+| ⬜ | `form-share-dropdown.png` | Share selector dropdown populated with share names | Form Controls |
 
-### Page Files Reference (`docs/page-files.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `page-file-anatomy.png` | Annotated screenshot showing how a .page file's header attributes map to the rendered UI (icon, title, menu placement) |
-| ⬜ | `menu-sections-overview.png` | The Unraid sidebar showing different menu sections (Main, Settings, Tools, Utilities) with plugin entries highlighted |
-| ⬜ | `standard-settings-page.png` | A standard settings page rendered in Unraid showing the Dynamix form styling with labels, inputs, inline help, and buttons |
-| ⬜ | `utility-page-example.png` | A utility page in Unraid showing a custom tool interface with action buttons and output display area |
-| ⬜ | `header-xmenu-example.png` | The Unraid header bar showing an xmenu item (like Docker or VMs) with the dropdown or page it opens |
-| ⬜ | `dynamix-markdown-form.png` | A form showing the Dynamix markdown syntax rendered - labels on the left, inputs on the right, with inline help |
+### Menu & Navigation
 
-### File System Layout (`docs/filesystem.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `boot-config-plugins-dir.png` | Unraid terminal or file manager showing the /boot/config/plugins/ directory structure with several installed plugins |
-| ⬜ | `usb-plugins-directory.png` | File listing of /boot/config/plugins/ showing multiple plugin folders with .plg files and subdirectories |
-| ⬜ | `emhttp-plugins-directory.png` | File listing of /usr/local/emhttp/plugins/[plugin]/ showing the typical plugin structure (.page files, scripts/, php/) |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `sidebar-menu.png` | Unraid sidebar showing menu sections (Main, Settings, Tools, Utilities) with plugin entries | Page Files, Icons & Styling |
+| ⬜ | `header-menu.png` | Header bar showing xmenu items (Docker, VMs, or custom plugin) | Page Files |
+| ⬜ | `tabs-interface.png` | A plugin with multiple tabs (General, Advanced, About) | Tab Pages |
 
-### Event System (`docs/events.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `event-syslog-output.png` | Syslog output showing event script execution during array start - displaying the sequence of events and plugin responses |
+### Dashboard
 
-### Plugin Command Reference (`docs/plugin-command.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `plugin-command-help.png` | Terminal showing the plugin command help output or a plugin installation in progress |
-| ⬜ | `plugin-install-output.png` | Terminal output showing a successful plugin installation with download progress and confirmation message |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `dashboard-tiles.png` | Dashboard showing plugin tiles (status, metrics, action buttons) | Dashboard Tiles |
 
-### Notifications System (`docs/core/notifications-system.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `notification-levels.png` | The Unraid notification panel showing examples of normal (blue), warning (yellow), and alert (red) notifications |
+### Notifications
 
-### Dynamix Framework (`docs/core/dynamix-framework.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `dynamix-display-settings.png` | The Unraid Display Settings page showing the various preferences that populate $Dynamix (date format, temperature scale, theme) |
-| ⬜ | `theme-variations.png` | A plugin page shown in multiple Unraid themes (black, white, azure) demonstrating theme-aware styling |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `notifications-panel.png` | Notification panel showing normal (blue), warning (yellow), alert (red) examples | Notifications System |
 
-### nchan/WebSocket Integration (`docs/core/nchan-websocket.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `nchan-devtools.png` | Browser DevTools Network tab showing a WebSocket or EventSource connection to an Unraid nchan channel |
+### Terminal / Command Line
 
-### Form Controls (`docs/ui/form-controls.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `form-controls-overview.png` | An Unraid settings page showing the standard form layout with labels, inputs, and buttons styled correctly |
-| ⬜ | `toggle-switch-styles.png` | Side-by-side showing the standard Yes/No dropdown toggle and the CSS-based toggle switch in Unraid |
-| ⬜ | `share-selector-dropdown.png` | A dropdown showing Unraid shares populated from shares.ini with typical share names |
-| ⬜ | `file-tree-picker.png` | The Unraid file tree picker expanded, showing the folder hierarchy under /mnt/user/ |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `terminal-plugin-help.png` | Output of `plugin` command showing help/usage | Plugin Command |
+| ⬜ | `terminal-syslog.png` | Syslog output with plugin messages (logger output, event execution) | Events, Debugging |
+| ⬜ | `terminal-boot-plugins.png` | File listing of /boot/config/plugins/ directory | File System |
+| ⬜ | `terminal-emhttp-plugins.png` | File listing of /usr/local/emhttp/plugins/[plugin]/ structure | File System |
 
-### Icons and Styling (`docs/ui/icons-and-styling.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `sidebar-icons.png` | The Unraid sidebar showing various plugin icons, demonstrating the icon style and sizing |
-| ⬜ | `status-indicators.png` | Examples of Unraid's status indicators showing online (green), offline (red), and warning (yellow) states |
-| ⬜ | `theme-comparison.png` | Same plugin page shown in both light and dark themes, demonstrating theme-aware styling |
+### Browser DevTools
 
-### Tab Pages (`docs/ui/tab-pages.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `tabbed-interface.png` | An Unraid plugin with multiple tabs visible (e.g., General, Advanced, About), showing the tab styling and content area |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `devtools-network.png` | DevTools Network tab showing WebSocket/EventSource connection or AJAX requests | nchan/WebSocket, Debugging |
 
-### Dashboard Tiles (`docs/ui/dashboard-tiles.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `dashboard-tiles-overview.png` | The Unraid dashboard showing various plugin tiles - including status tiles, metric displays, and action buttons |
-| ⬜ | `tile-types-examples.png` | Examples of different tile types: a status tile showing service running/stopped, a metric tile, and an action tile with a button |
+### Themes
 
-### Community Applications (`docs/distribution/community-applications.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `ca-plugin-browser.png` | The Community Applications interface showing the plugin browser with categories, search, and plugin cards |
-| ⬜ | `ca-plugin-icons.png` | Examples of good plugin icons as they appear in the CA interface - showing proper sizing and visibility |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `theme-comparison.png` | Same plugin page in light vs dark theme (side-by-side or collage) | Icons & Styling, Dynamix Framework |
 
-### Debugging Techniques (`docs/advanced/debugging-techniques.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `browser-devtools.png` | Browser DevTools open on an Unraid plugin page, showing the Console and Network tabs for debugging |
-| ⬜ | `syslog-plugin-output.png` | Terminal showing syslog output with plugin log messages highlighted |
+### External / GitHub
 
-### Build and Packaging (`docs/build-and-packaging.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `github-actions-build.png` | GitHub Actions workflow running for a plugin, showing the build and release steps |
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `github-release.png` | GitHub releases page with .txz and .plg files as assets | Getting Started, Build & Packaging |
+| ⬜ | `github-actions.png` | GitHub Actions workflow running (build/release steps) | Build & Packaging |
 
-### Example Plugins (`docs/examples.md`)
-| Status | Filename | Description |
-|:------:|----------|-------------|
-| ⬜ | `example-plugins-collage.png` | A collage or grid showing screenshots of popular Unraid plugins (Compose Manager, User Scripts, CA, etc.) |
+### Community Applications
+
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `ca-browser.png` | CA plugin browser showing categories, search, plugin cards | Community Applications |
+| ⬜ | `ca-plugin-icons.png` | Plugin icons as displayed in CA (showing good icon examples) | Community Applications |
+
+### Example Plugins
+
+| Status | Filename | Description | Used In |
+|:------:|----------|-------------|---------|
+| ⬜ | `example-plugins.png` | Collage/grid of popular plugin UIs (Compose Manager, User Scripts, etc.) | Examples |
 
 ---
 
 ## Summary
 
-| Section | Count |
-|---------|:-----:|
-| Homepage | 1 |
-| Introduction | 2 |
-| Getting Started | 4 |
-| PLG File Reference | 2 |
-| Page Files Reference | 6 |
-| File System Layout | 3 |
-| Event System | 1 |
-| Plugin Command | 2 |
-| Notifications System | 1 |
-| Dynamix Framework | 2 |
-| nchan/WebSocket | 1 |
-| Form Controls | 4 |
-| Icons and Styling | 3 |
-| Tab Pages | 1 |
-| Dashboard Tiles | 2 |
+| Category | Count |
+|----------|:-----:|
+| Unraid Plugin Pages | 3 |
+| Settings & Forms | 5 |
+| Menu & Navigation | 3 |
+| Dashboard | 1 |
+| Notifications | 1 |
+| Terminal / CLI | 4 |
+| Browser DevTools | 1 |
+| Themes | 1 |
+| External / GitHub | 2 |
 | Community Applications | 2 |
-| Debugging Techniques | 2 |
-| Build and Packaging | 1 |
 | Example Plugins | 1 |
-| **TOTAL** | **41** |
+| **TOTAL** | **24** |
 
 ---
 
-## How to Update This List
+## How Screenshots Are Used
+
+The same screenshot can appear in multiple documentation pages. For example:
+- `settings-page-example.png` → Getting Started, Page Files, Form Controls
+- `terminal-syslog.png` → Events, Debugging
+- `plugins-installed.png` → Homepage, Introduction
+
+This reduces the total number of screenshots needed from 41 to **24**.
+
+---
+
+## Updating the Checklist
 
 When you add a screenshot:
 1. Change `⬜` to `✅` in the Status column
@@ -183,4 +141,4 @@ When you add a screenshot:
 
 ## Questions?
 
-Open an issue on the [GitHub repository](https://github.com/mstrhakr/unraid-plugin-docs/issues) if you need clarification on any screenshot.
+Open an issue on the [GitHub repository](https://github.com/mstrhakr/unraid-plugin-docs/issues) if you need clarification.

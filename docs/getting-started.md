@@ -17,9 +17,9 @@ A minimal plugin that:
 - Has a configurable setting
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The completed Hello World plugin settings page in the Unraid UI, showing the message input field and Apply/Done buttons*
+> 📷 **Screenshot needed:** *A plugin settings page showing form styling*
 >
-> ![Hello World plugin result](../assets/images/screenshots/hello-world-complete.png)
+> ![Plugin settings page](../assets/images/screenshots/settings-page-example.png)
 
 ## Prerequisites
 
@@ -89,11 +89,6 @@ Enter a custom message to display.
 : <input type="submit" name="#apply" value="_(Apply)_" disabled><input type="button" value="_(Done)_" onclick="done()">
 </form>
 ```
-
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *How this .page file renders in the Unraid Settings menu - showing the form layout, input field styling, and inline help block expanded*
->
-> ![Page file rendered](../assets/images/screenshots/page-file-rendered.png)
 
 ## Step 4: Create Default Configuration
 
@@ -246,9 +241,9 @@ Note the MD5 output and update your PLG file.
 4. Navigate to Settings → Hello World
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid Settings sidebar showing the "Hello World" entry with its globe icon, and the terminal output from a successful plugin installation*
+> 📷 **Screenshot needed:** *Plugin installation in progress or success message*
 >
-> ![Plugin installed](../assets/images/screenshots/plugin-install-success.png)
+> ![Plugin installation](../assets/images/screenshots/plugins-install-complete.png)
 
 ### Test Changes Without Reinstalling
 
@@ -268,9 +263,9 @@ Refresh the browser to see changes. Remember to copy changes back to your source
 5. Share your plugin!
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *GitHub releases page showing a plugin release with the .txz and .plg files attached as assets*
+> 📷 **Screenshot needed:** *GitHub releases page with plugin assets*
 >
-> ![GitHub release](../assets/images/screenshots/github-release-example.png)
+> ![GitHub release](../assets/images/screenshots/github-release.png)
 
 ## Common Issues
 

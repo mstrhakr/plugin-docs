@@ -25,9 +25,9 @@ echo "Hello from My Plugin!";
 ```
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *Annotated screenshot showing how a .page file's header attributes map to the rendered UI - showing the icon, title, and menu placement*
+> 📷 **Screenshot needed:** *A plugin settings page showing form styling*
 >
-> ![Page file anatomy](../assets/images/screenshots/page-file-anatomy.png)
+> ![Page file rendered](../assets/images/screenshots/settings-page-example.png)
 
 ## Header Attributes
 
@@ -41,9 +41,9 @@ The header defines where and how your page appears in the Unraid menu.
 | `Type` | `menu`, `xmenu`, `php` | Page type (see below) |
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid sidebar showing different menu sections (Main, Settings, Tools, Utilities) with plugin entries highlighted*
+> 📷 **Screenshot needed:** *Unraid sidebar showing menu sections*
 >
-> ![Menu sections](../assets/images/screenshots/menu-sections-overview.png)
+> ![Menu sections](../assets/images/screenshots/sidebar-menu.png)
 
 #### Menu Types Explained
 
@@ -140,9 +140,9 @@ _(Setting Two)_:
 ```
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *A standard settings page rendered in Unraid showing the Dynamix form styling with labels, inputs, inline help, and Default/Apply/Done buttons*
+> 📷 **Screenshot needed:** *A plugin settings page showing form styling*
 >
-> ![Standard settings page](../assets/images/screenshots/standard-settings-page.png)
+> ![Standard settings page](../assets/images/screenshots/settings-page-example.png)
 
 ### Utility Page (No Form)
 
@@ -171,11 +171,6 @@ function doSomething() {
 </script>
 ```
 
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *A utility page in Unraid showing a custom tool interface with action buttons and output display area*
->
-> ![Utility page example](../assets/images/screenshots/utility-page-example.png)
-
 ### Header Menu Item (xmenu)
 
 For top-level pages in the header bar:
@@ -195,9 +190,9 @@ include '/usr/local/emhttp/plugins/myplugin/php/main.php';
 ```
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid header bar showing an xmenu item (like Docker or VMs) with the dropdown or page it opens*
+> 📷 **Screenshot needed:** *Header bar showing xmenu items*
 >
-> ![Header menu xmenu](../assets/images/screenshots/header-xmenu-example.png)
+> ![Header menu](../assets/images/screenshots/header-menu.png)
 
 ### Nested Under Another Menu
 
@@ -218,9 +213,9 @@ Type="php"
 Unraid uses a markdown-like syntax for form fields. This is **not standard Markdown** - it's a custom format.
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *A form showing the Dynamix markdown syntax rendered - labels on the left, inputs on the right, with inline help expanded*
+> 📷 **Screenshot needed:** *A plugin settings page showing form styling*
 >
-> ![Dynamix markdown form](../assets/images/screenshots/dynamix-markdown-form.png)
+> ![Dynamix form](../assets/images/screenshots/settings-page-example.png)
 
 ### Basic Field Structure
 

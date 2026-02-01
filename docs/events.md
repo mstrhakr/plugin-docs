@@ -81,9 +81,9 @@ flowchart LR
 ```
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *Syslog output showing event script execution during array start - displaying the sequence of events and plugin responses*
+> 📷 **Screenshot needed:** *Syslog output showing event/plugin messages*
 >
-> ![Event execution in syslog](../assets/images/screenshots/event-syslog-output.png)
+> ![Event syslog](../assets/images/screenshots/terminal-syslog.png)
 
 ### Other Events
 

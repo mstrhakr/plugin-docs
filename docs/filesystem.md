@@ -45,9 +45,9 @@ flowchart TB
 ```
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *Unraid terminal or file manager showing the /boot/config/plugins/ directory structure with several installed plugins*
+> 📷 **Screenshot needed:** *File listing of /boot/config/plugins/ directory*
 >
-> ![Boot config plugins directory](../assets/images/screenshots/boot-config-plugins-dir.png)
+> ![Boot plugins directory](../assets/images/screenshots/terminal-boot-plugins.png)
 
 ## Key Directories
 
@@ -80,9 +80,9 @@ This is where plugin files are stored on the boot device:
 - Log files
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *File listing of /boot/config/plugins/ showing multiple plugin folders with .plg files and subdirectories*
+> 📷 **Screenshot needed:** *File listing of /boot/config/plugins/ directory*
 >
-> ![USB plugins directory](../assets/images/screenshots/usb-plugins-directory.png)
+> ![USB plugins directory](../assets/images/screenshots/terminal-boot-plugins.png)
 
 ### /usr/local/emhttp/plugins/
 
@@ -121,9 +121,9 @@ This is where active plugin files live:
 - Default configuration
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *File listing of /usr/local/emhttp/plugins/[plugin]/ showing the typical plugin structure with .page files, scripts, and php directories*
+> 📷 **Screenshot needed:** *File listing of /usr/local/emhttp/plugins/ structure*
 >
-> ![Emhttp plugins directory](../assets/images/screenshots/emhttp-plugins-directory.png)
+> ![Emhttp plugins directory](../assets/images/screenshots/terminal-emhttp-plugins.png)
 
 ### /var/log/plugins/
 

@@ -16,9 +16,9 @@ The Dynamix Framework is the core PHP framework that powers the Unraid web inter
 The `$Dynamix` array contains essential configuration and state information about the user's display preferences and system settings.
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid Display Settings page showing the various preferences that populate $Dynamix (date format, temperature scale, theme)*
+> 📷 **Screenshot needed:** *Unraid Display Settings page*
 >
-> ![Dynamix display settings](../../assets/images/screenshots/dynamix-display-settings.png)
+> ![Display settings](../../assets/images/screenshots/settings-display.png)
 
 ```php
 <?
@@ -83,9 +83,9 @@ $formattedNumber = number_format($value, 2, $decimal, $thousands);
 ### Detecting Current Theme
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *A plugin page shown in multiple Unraid themes (black, white, azure) demonstrating theme-aware styling*
+> 📷 **Screenshot needed:** *Plugin page in light vs dark theme*
 >
-> ![Theme variations](../../assets/images/screenshots/theme-variations.png)
+> ![Theme comparison](../../assets/images/screenshots/theme-comparison.png)
 
 ```php
 <?

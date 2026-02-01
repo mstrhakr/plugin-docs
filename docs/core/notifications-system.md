@@ -50,9 +50,9 @@ The notification system is accessed via the `notify` script:
 | `alert` | 🚨 Red alert | Critical errors, failures, security issues |
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid notification panel showing examples of normal (blue), warning (yellow), and alert (red) notifications*
+> 📷 **Screenshot needed:** *Notification panel showing different importance levels*
 >
-> ![Notification importance levels](../../assets/images/screenshots/notification-levels.png)
+> ![Notifications](../assets/images/screenshots/notifications-panel.png)
 
 ## Basic Examples
 

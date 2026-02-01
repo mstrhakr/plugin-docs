@@ -19,9 +19,9 @@ An Unraid plugin is an extension that adds functionality to your Unraid server. 
 - Provide settings pages for configuration
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid Plugins page showing installed plugins with version numbers, update status, and action buttons*
+> 📷 **Screenshot needed:** *The Unraid Plugins page showing installed plugins*
 >
-> ![Plugins page overview](../assets/images/screenshots/plugins-page-overview.png)
+> ![Plugins page overview](../assets/images/screenshots/plugins-installed.png)
 
 ## How Plugins Work
 
@@ -48,11 +48,6 @@ Before creating a plugin, consider whether your use case is better suited to a D
 | Very lightweight additions | Application doesn't need system access |
 
 Many developers use a combination: a plugin that manages Docker containers (like the Compose Manager plugin).
-
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *Side-by-side comparison showing a plugin settings page vs a Docker container management view*
->
-> ![Plugin vs Docker comparison](../assets/images/screenshots/plugin-vs-docker-comparison.png)
 
 ## Anatomy of a Plugin
 

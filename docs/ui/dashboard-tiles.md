@@ -15,9 +15,9 @@ nav_order: 5
 Plugins can add custom tiles to the Unraid dashboard to display status information, quick actions, or key metrics at a glance.
 
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *The Unraid dashboard showing various plugin tiles - including status tiles, metric displays, and action buttons*
+> 📷 **Screenshot needed:** *Dashboard showing plugin tiles*
 >
-> ![Dashboard overview](../../assets/images/screenshots/dashboard-tiles-overview.png)
+> ![Dashboard tiles](../../assets/images/screenshots/dashboard-tiles.png)
 
 ## Dashboard Tile Basics
 
@@ -59,11 +59,6 @@ $status = getPluginStatus();
 ## Tile Types
 
 TODO: Document different tile types available
-
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *Examples of different tile types: a status tile showing service running/stopped, a metric tile with a number, and an action tile with a button*
->
-> ![Tile type examples](../../assets/images/screenshots/tile-types-examples.png)
 
 ### Status Tile
 
