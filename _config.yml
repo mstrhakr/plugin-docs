@@ -1,0 +1,69 @@
+theme: just-the-docs
+title: Unraid Plugin Development
+description: Community-maintained documentation for building Unraid plugins
+url: https://dcflachs.github.io
+baseurl: /unraid-plugin-docs
+
+# Enable search
+search_enabled: true
+search.rel_url: true
+search.button: true
+
+# Heading anchor links
+heading_anchors: true
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Footer content
+footer_content: "Unofficial community documentation. Not affiliated with Lime Technology."
+
+# Color scheme
+color_scheme: dark
+
+# Logo
+logo: "/assets/images/logo.png"
+
+# Aux links (top right)
+aux_links:
+  "View on GitHub":
+    - "https://github.com/dcflachs/unraid-plugin-docs"
+  "Unraid Forums":
+    - "https://forums.unraid.net/"
+
+aux_links_new_tab: true
+
+# Navigation
+nav_sort: case_insensitive
+
+# Collections
+collections:
+  docs:
+    permalink: "/:collection/:path/"
+    output: true
+
+# Just the docs settings
+just_the_docs:
+  collections:
+    docs:
+      name: Documentation
+      nav_fold: true
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - "*.md"
+  - node_modules/
+  - vendor/
+  - .git/
+  - Gemfile
+  - Gemfile.lock
+
+include:
+  - README.md
+  - docs/
