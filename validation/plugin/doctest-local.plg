@@ -1,0 +1,80 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name        "doctest">
+<!ENTITY author      "unraid-plugin-docs">
+<!ENTITY version     "2026.02.01">
+<!ENTITY launch      "Settings/DocTest">
+<!ENTITY pluginLOC   "/boot/config/plugins/&name;">
+<!ENTITY emhttpLOC   "/usr/local/emhttp/plugins/&name;">
+<!ENTITY txzName     "doctest-2026.02.01.txz">
+]>
+
+<PLUGIN  name="&name;"
+         author="&author;"
+         version="&version;"
+         launch="&launch;"
+         icon="flask"
+         min="6.9.0"
+         support="https://github.com/mstrhakr/unraid-plugin-docs"
+         project="https://github.com/mstrhakr/unraid-plugin-docs"
+         readme="https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/README.md"
+>
+
+<CHANGES>
+### 2026.02.01
+- Initial release
+- Validates: events, page files, config parsing, $var array, notifications
+</CHANGES>
+
+<!-- Create plugin directory on flash -->
+<FILE Run="/bin/bash">
+<INLINE>
+mkdir -p &pluginLOC;
+</INLINE>
+</FILE>
+
+<!-- Copy pre-built package from /tmp (for local testing) -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Check if package exists in /tmp
+if [ -f "/tmp/doctest-build/&txzName;" ]; then
+    cp "/tmp/doctest-build/&txzName;" "&pluginLOC;/"
+    echo "Copied package from /tmp/doctest-build/"
+else
+    echo "ERROR: Package not found at /tmp/doctest-build/&txzName;"
+    echo "Please build the package first or use the online version"
+    exit 1
+fi
+
+# Install the package
+upgradepkg --install-new &pluginLOC;/&txzName;
+
+# Initialize event log
+echo "=== DocTest Event Log ===" > /var/log/doctest-events.log
+echo "Plugin installed: $(date '+%Y-%m-%d %H:%M:%S')" >> /var/log/doctest-events.log
+echo "Unraid version: $(cat /etc/unraid-version | grep version | cut -d'"' -f2)" >> /var/log/doctest-events.log
+echo "---" >> /var/log/doctest-events.log
+
+logger -t "doctest" "DocTest validation plugin installed"
+echo "DocTest validation plugin installed. Go to Settings → DocTest Validation"
+</INLINE>
+</FILE>
+
+<!-- Removal script -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove the package
+removepkg &name;
+
+# Remove plugin files
+rm -rf &emhttpLOC;
+rm -rf &pluginLOC;
+rm -f /var/log/doctest-events.log
+rm -f /tmp/doctest_poll_logged
+
+logger -t "doctest" "DocTest validation plugin removed"
+echo "DocTest validation plugin removed"
+</INLINE>
+</FILE>
+
+</PLUGIN>

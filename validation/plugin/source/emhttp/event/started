@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "$(date '+%Y-%m-%d %H:%M:%S') - EVENT: started (arg: $1)" >> /var/log/doctest-events.log
+logger -t "doctest" "Array started - event system validated"

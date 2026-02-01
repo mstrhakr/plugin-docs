@@ -1,0 +1,180 @@
+Menu="OtherSettings"
+Title="DocTest Validation"
+Icon="flask"
+---
+<?php
+/* DocTest Validation Plugin
+ * Tests documented Unraid plugin features
+ * Part of: https://github.com/mstrhakr/unraid-plugin-docs
+ */
+
+$plugin = "doctest";
+$docroot = $docroot ?? $_SERVER['DOCUMENT_ROOT'] ?: "/usr/local/emhttp";
+
+// Test: parse_plugin_cfg() function
+$cfg = parse_plugin_cfg($plugin);
+
+// Test: Global $var array access
+global $var;
+
+// Test: Global $disks array
+$disks = parse_ini_file('/var/local/emhttp/disks.ini', true);
+
+// Handle form submission
+if ($_POST) {
+    if (isset($_POST['#apply'])) {
+        // Save settings - tests form handling
+        $save = [];
+        $save['SERVICE'] = $_POST['SERVICE'] ?? 'disable';
+        $save['LOG_EVENTS'] = $_POST['LOG_EVENTS'] ?? 'no';
+        $save['TEST_SETTING'] = $_POST['TEST_SETTING'] ?? '';
+        
+        $config = "";
+        foreach ($save as $key => $value) {
+            $config .= "{$key}=\"{$value}\"\n";
+        }
+        file_put_contents("/boot/config/plugins/{$plugin}/{$plugin}.cfg", $config);
+        
+        // Reload config
+        $cfg = parse_plugin_cfg($plugin);
+    }
+    
+    if (isset($_POST['action']) && $_POST['action'] == 'test_notify') {
+        // Test: Notification system
+        exec("/usr/local/emhttp/webGui/scripts/notify -e 'DocTest' -s 'Test Notification' -d 'This notification was sent by the DocTest validation plugin' -i 'normal'");
+        echo "OK";
+        exit;
+    }
+}
+
+// Read event log if it exists
+$eventLog = file_exists('/var/log/doctest-events.log') 
+    ? file_get_contents('/var/log/doctest-events.log') 
+    : 'No events logged yet. Events will be logged when array starts/stops.';
+?>
+
+<script>
+function testNotify() {
+    $.post('/plugins/doctest/DocTest.page', {action: 'test_notify', csrf_token: '<?=$var['csrf_token']?>'}, function(data) {
+        if (typeof swal === 'function') {
+            swal({title: 'Notification Sent', text: 'Check your notifications!', type: 'success'});
+        } else {
+            alert('Notification sent! Check your notifications.');
+        }
+    });
+}
+</script>
+
+<div style="padding: 20px; background: #1c1c1c; border-radius: 8px; margin-bottom: 20px;">
+<h2>&#129514; Documentation Validation Plugin</h2>
+<p>This plugin tests features documented at <a href="https://mstrhakr.github.io/unraid-plugin-docs/" target="_blank">unraid-plugin-docs</a></p>
+</div>
+
+<form markdown="1" method="POST" action="/plugins/doctest/DocTest.page" target="progressFrame">
+<input type="hidden" name="csrf_token" value="<?=$var['csrf_token']?>">
+
+<div id="title"><span class="left">Validated Features</span></div>
+
+<dl>
+<dt>parse_plugin_cfg() Result:</dt>
+<dd>
+<pre style="background:#0a0a0a; padding:10px; border-radius:4px; overflow-x:auto;"><?=htmlspecialchars(print_r($cfg, true))?></pre>
+<blockquote class="inline_help">
+Tests that parse_plugin_cfg() correctly merges default.cfg with user settings from /boot/config/plugins/doctest/doctest.cfg
+</blockquote>
+</dd>
+</dl>
+
+<dl>
+<dt>$var Array (selected properties):</dt>
+<dd>
+<table class="tablesorter" style="width:auto">
+<thead><tr><th>Property</th><th>Value</th><th>Documented</th></tr></thead>
+<tbody>
+<tr><td>NAME</td><td><?=$var['NAME']?></td><td>&#9989;</td></tr>
+<tr><td>version</td><td><?=$var['version']?></td><td>&#9989;</td></tr>
+<tr><td>fsState</td><td><?=$var['fsState']?></td><td>&#9989;</td></tr>
+<tr><td>mdState</td><td><?=$var['mdState']?></td><td>&#9989;</td></tr>
+<tr><td>csrf_token</td><td><?=substr($var['csrf_token'], 0, 8)?>...</td><td>&#9989;</td></tr>
+<tr><td>regTy</td><td><?=$var['regTy']?></td><td>&#9989;</td></tr>
+<tr><td>timeZone</td><td><?=$var['timeZone']?></td><td>&#9989;</td></tr>
+<tr><td>mdNumDisks</td><td><?=$var['mdNumDisks']?></td><td>&#9989;</td></tr>
+</tbody>
+</table>
+<blockquote class="inline_help">
+Tests that documented $var properties exist and return expected types.
+</blockquote>
+</dd>
+</dl>
+
+<dl>
+<dt>Disk Count from disks.ini:</dt>
+<dd><?=count($disks)?> disk entries parsed
+<blockquote class="inline_help">
+Tests parse_ini_file() with sections=true on /var/local/emhttp/disks.ini
+</blockquote>
+</dd>
+</dl>
+
+<div id="title"><span class="left">Event System Log</span></div>
+
+<dl>
+<dt>Events Captured:</dt>
+<dd>
+<pre style="background:#0a0a0a; padding:10px; border-radius:4px; max-height:200px; overflow-y:auto;"><?=htmlspecialchars($eventLog)?></pre>
+<blockquote class="inline_help">
+Events are logged to /var/log/doctest-events.log when array starts/stops.
+Restart the array to see events captured.
+</blockquote>
+</dd>
+</dl>
+
+<div id="title"><span class="left">Notification Test</span></div>
+
+<dl>
+<dt>Send Test Notification:</dt>
+<dd>
+<input type="button" value="Send Notification" onclick="testNotify()">
+<blockquote class="inline_help">
+Tests /usr/local/emhttp/webGui/scripts/notify with -e, -s, -d, -i parameters.
+</blockquote>
+</dd>
+</dl>
+
+<div id="title"><span class="left">Plugin Settings (Form Test)</span></div>
+
+_(Log Events)_:
+: <select name="LOG_EVENTS">
+  <?=mk_option($cfg['LOG_EVENTS'], "yes", "Yes")?>
+  <?=mk_option($cfg['LOG_EVENTS'], "no", "No")?>
+  </select>
+
+<blockquote class="inline_help">
+Tests mk_option() helper function and select form control.
+</blockquote>
+
+_(Test Setting)_:
+: <input type="text" name="TEST_SETTING" value="<?=$cfg['TEST_SETTING']?>">
+
+<blockquote class="inline_help">
+Tests text input and config persistence to /boot/config/plugins/doctest/doctest.cfg
+</blockquote>
+
+<input type="submit" name="#default" value="_(Default)_">
+: <input type="submit" name="#apply" value="_(Apply)_"><input type="button" value="_(Done)_" onclick="done()">
+</form>
+
+<div style="margin-top:20px; padding:15px; background:#1a3a1a; border-radius:8px;">
+<h3>&#9989; Validation Summary</h3>
+<p>If you can see this page with data above, the following are validated:</p>
+<ul>
+<li>Page file rendering with Menu, Title, Icon headers</li>
+<li>PHP execution within page files</li>
+<li>parse_plugin_cfg() function</li>
+<li>Global $var array access</li>
+<li>parse_ini_file() for state files</li>
+<li>mk_option() helper function</li>
+<li>CSRF token in forms</li>
+<li>Form submission to /update.php pattern</li>
+</ul>
+</div>

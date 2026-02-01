@@ -1,0 +1,79 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name        "doctest">
+<!ENTITY author      "unraid-plugin-docs">
+<!ENTITY version     "2026.02.01">
+<!ENTITY launch      "Settings/DocTest">
+<!ENTITY pluginURL   "https://raw.githubusercontent.com/mstrhakr/unraid-plugin-docs/main/validation/doctest.plg">
+<!ENTITY pluginLOC   "/boot/config/plugins/&name;">
+<!ENTITY emhttpLOC   "/usr/local/emhttp/plugins/&name;">
+<!ENTITY txzName     "doctest-2026.02.01.txz">
+<!ENTITY txzURL      "https://github.com/mstrhakr/unraid-plugin-docs/releases/download/v2026.02.01/doctest-2026.02.01.txz">
+<!ENTITY txzSHA256   "961ef8250303d3da11aa546308d82553518494b6819039ac4129e8c0ea24de8a">
+]>
+
+<PLUGIN  name="&name;"
+         author="&author;"
+         version="&version;"
+         launch="&launch;"
+         pluginURL="&pluginURL;"
+         icon="flask"
+         min="6.9.0"
+         support="https://github.com/mstrhakr/unraid-plugin-docs"
+         project="https://github.com/mstrhakr/unraid-plugin-docs"
+         readme="https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/README.md"
+>
+
+<CHANGES>
+### 2026.02.01
+- Initial release
+- Validates: events, page files, config parsing, $var array, notifications
+</CHANGES>
+
+<!-- Create plugin directory on flash -->
+<FILE Run="/bin/bash">
+<INLINE>
+mkdir -p &pluginLOC;
+</INLINE>
+</FILE>
+
+<!-- Download and install the package -->
+<FILE Name="&pluginLOC;/&txzName;">
+<URL>&txzURL;</URL>
+<SHA256>&txzSHA256;</SHA256>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Install the package
+upgradepkg --install-new &pluginLOC;/&txzName;
+
+# Initialize event log
+echo "=== DocTest Event Log ===" > /var/log/doctest-events.log
+echo "Plugin installed: $(date '+%Y-%m-%d %H:%M:%S')" >> /var/log/doctest-events.log
+echo "Unraid version: $(cat /etc/unraid-version | grep version | cut -d'"' -f2)" >> /var/log/doctest-events.log
+echo "---" >> /var/log/doctest-events.log
+
+logger -t "doctest" "DocTest validation plugin installed"
+echo "DocTest validation plugin installed. Go to Settings → DocTest Validation"
+</INLINE>
+</FILE>
+
+<!-- Removal script -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove the package
+removepkg &name;
+
+# Remove plugin files
+rm -rf &emhttpLOC;
+rm -rf &pluginLOC;
+rm -f /var/log/doctest-events.log
+rm -f /tmp/doctest_poll_logged
+
+logger -t "doctest" "DocTest validation plugin removed"
+echo "DocTest validation plugin removed"
+</INLINE>
+</FILE>
+
+</PLUGIN>

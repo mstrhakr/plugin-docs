@@ -1,0 +1,5 @@
+#!/bin/bash
+# Only log once to avoid spam (poll_attributes fires frequently)
+[ -f /tmp/doctest_poll_logged ] && exit 0
+echo "$(date '+%Y-%m-%d %H:%M:%S') - EVENT: poll_attributes (arg: $1)" >> /var/log/doctest-events.log
+touch /tmp/doctest_poll_logged
