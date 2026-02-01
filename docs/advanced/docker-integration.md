@@ -64,6 +64,8 @@ $webui = $labels[$docker_label_webui] ?? '';
 
 ### Via Command Line
 
+The simplest way to interact with Docker from PHP is using the `exec()` function to run Docker CLI commands. Use the `--format` flag with Go templates to get structured output that's easy to parse.
+
 ```php
 <?
 // List running containers
@@ -77,6 +79,8 @@ $info = json_decode(implode('', $output), true);
 ```
 
 ### Via Docker Socket
+
+For more advanced use cases, you can communicate directly with the Docker daemon via its Unix socket. This gives access to the full Docker API but requires more complex request handling.
 
 ```php
 <?
@@ -94,6 +98,8 @@ $containers = json_decode(implode('', $output), true);
 
 ### List Containers
 
+Retrieve all containers (running and stopped) as JSON objects. The `--format '{{json .}}'` flag outputs one JSON object per line, which you can parse into an array.
+
 ```php
 <?
 // Get all containers (including stopped)
@@ -107,6 +113,8 @@ foreach ($output as $line) {
 ```
 
 ### Start/Stop Containers
+
+Basic container lifecycle management functions. Always use `escapeshellarg()` to sanitize container names and check the return value to confirm success.
 
 ```php
 <?
@@ -129,6 +137,8 @@ function restartContainer($name) {
 
 ### Get Container Logs
 
+Fetch recent log output from a container. The `--tail` flag limits output to the most recent lines. Note that `2>&1` redirects stderr (where Docker sends some log output) to stdout.
+
 ```php
 <?
 function getContainerLogs($name, $lines = 100) {
@@ -139,6 +149,8 @@ function getContainerLogs($name, $lines = 100) {
 ```
 
 ### Check Container Status
+
+Use `docker inspect` with a Go template to query specific container properties. This is more efficient than parsing full JSON output when you only need one value.
 
 ```php
 <?
@@ -151,6 +163,8 @@ function isContainerRunning($name) {
 
 ## Container Stats
 
+Get real-time resource usage for a container. The `--no-stream` flag returns a single snapshot instead of continuously updating output. The JSON format includes CPU percentage, memory usage, network I/O, and block I/O statistics.
+
 ```php
 <?
 // Get resource usage
@@ -162,6 +176,8 @@ $stats = json_decode($output[0], true);
 ```
 
 ## Working with Images
+
+Common image operations including listing, pulling, and removing. When pulling images, redirect stderr to capture progress output. Always check return values for error handling.
 
 ```php
 <?
@@ -194,7 +210,7 @@ Docker templates allow Unraid to store container configurations for easy recreat
 
 ### DockerClient.php
 
-Unraid provides a PHP class for Docker operations:
+Unraid includes a built-in PHP class that provides helper functions for Docker operations. The `DockerUtil::ensureImageTag()` function normalizes image names to match Unraid's internal format (adding `library/` prefix for official images and ensuring a tag is present).
 
 ```php
 <?php
@@ -214,7 +230,7 @@ $dockerRunning = ($retval === 0);
 
 ### Wrapper Script Pattern
 
-For plugins that manage Docker Compose, use a wrapper script:
+A wrapper script provides a clean interface for compose operations from PHP. It handles argument parsing, environment file loading, and command execution. Setting `HOME=/root` ensures Docker can find its configuration. Using `getopts` makes the script easy to call with different parameters.
 
 ```bash
 #!/bin/bash
@@ -247,7 +263,7 @@ esac
 
 ### Stack State Detection
 
-Determine if a compose stack is running:
+To determine if a compose stack is running, first check if any containers exist for the project, then verify at least one is actually running. A stack with containers that are all stopped should return 'stopped' rather than appearing active.
 
 ```php
 <?php
