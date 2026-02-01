@@ -25,6 +25,8 @@ plugin <command> <plugin-file>
 
 Install a plugin from a local file or URL:
 
+![Install Plugin tab](../assets/images/screenshots/plugins-install.png)
+
 ```bash
 # From URL
 plugin install https://raw.githubusercontent.com/user/repo/main/myplugin.plg
@@ -42,10 +44,17 @@ plugin install /path/to/myplugin.plg forced
 3. Copies PLG to `/boot/config/plugins/`
 4. Creates symlink in `/var/log/plugins/`
 
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *Plugin installation in progress*
->
-> ![Plugin install](../assets/images/screenshots/plugins-install-withUrl.png)
+Install from URL:
+
+![Plugin install from URL](../assets/images/screenshots/plugins-install-withUrl.png)
+
+Or upload a local file:
+
+![Plugin install from file](../assets/images/screenshots/plugins-install-withFile.png)
+
+The file picker allows selecting local `.plg` files:
+
+![File picker detail](../assets/images/screenshots/plugins-install-withFile.png){: .crop-pluginsInstallFile-picker }
 
 ### remove
 
@@ -83,6 +92,16 @@ plugin checkall
 
 Runs `plugin check` for each plugin in `/var/log/plugins/`.
 
+![Plugins with update available](../assets/images/screenshots/plugins-installed-updateAvailable.png)
+
+The update indicator appears next to plugins with newer versions:
+
+![Update badge detail](../assets/images/screenshots/plugins-installed-updateAvailable.png){: .crop-update-badge }
+
+After check completes, plugins with updates are highlighted:
+
+![Update check complete showing available updates](../assets/images/screenshots/plugins-installed-updateCheckComplete.png)
+
 ### update
 
 Update a plugin to the latest version:
@@ -98,6 +117,8 @@ plugin update myplugin.plg
 4. Updates symlink in `/var/log/plugins/`
 
 > 💡 Run `plugin check` first to download the latest version
+
+![Plugin update complete](../assets/images/screenshots/plugins-installed-updateComplete.png)
 
 ### Attribute Queries
 

@@ -49,6 +49,10 @@ The notification system is accessed via the `notify` script:
 | `warning` | ⚠️ Yellow warning | Issues requiring attention, non-critical problems |
 | `alert` | 🚨 Red alert | Critical errors, failures, security issues |
 
+The plugin system shows success messages like this:
+
+![Success message example](../assets/images/screenshots/plugins-install-complete.png){: .crop-pluginsComplete-message }
+
 {: .placeholder-image }
 > 📷 **Screenshot needed:** *Notification panel showing different importance levels*
 >

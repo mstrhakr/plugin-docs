@@ -11,6 +11,10 @@ nav_order: 1
 
 Unraid uses consistent form styling throughout its web interface. Following these patterns ensures your plugin integrates seamlessly with the Unraid look and feel.
 
+Here's an example of Unraid's input field styling:
+
+![URL input field](../../assets/images/screenshots/plugins-install-withUrl.png){: .crop-pluginsInstallUrl-input }
+
 {: .placeholder-image }
 > 📷 **Screenshot needed:** *A plugin settings page showing form styling*
 >

@@ -410,6 +410,14 @@ https://raw.githubusercontent.com/user/repo/branch/plugin.plg
 
 ## Troubleshooting
 
+When plugins encounter errors during installation or removal, Unraid displays detailed error information in the Plugins page:
+
+![Plugin error display showing installation failures]({{ site.baseurl }}/assets/images/screenshots/plugins-errors.png)
+
+Error entries show the specific issue that occurred:
+
+![Error detail]({{ site.baseurl }}/assets/images/screenshots/plugins-errors.png){: .crop-pluginsErrors-single }
+
 ### Plugin Won't Install
 
 1. Check XML syntax - use an XML validator

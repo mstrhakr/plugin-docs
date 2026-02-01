@@ -14,8 +14,12 @@ nav_order: 4
 
 Complex plugins often need multiple configuration sections. Unraid provides a tab interface for organizing settings into logical groups.
 
+Here's how Unraid's tab interface looks in the Plugins page:
+
+![Tab interface example](../../assets/images/screenshots/plugins-installed.png){: .crop-pluginsInstalled-tabs }
+
 {: .placeholder-image }
-> 📷 **Screenshot needed:** *Plugin with multiple tabs*
+> 📷 **Screenshot needed:** *Plugin with multiple tabs showing custom plugin tabs*
 >
 > ![Tabbed interface](../../assets/images/screenshots/tabs-interface.png)
 

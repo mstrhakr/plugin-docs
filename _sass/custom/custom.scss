@@ -63,3 +63,158 @@ table {
     background: rgba(255, 255, 255, 0.02);
   }
 }
+
+// ============================================
+// Screenshot Crop Utilities
+// ============================================
+// Use: ![alt](image.png){: .crop-pluginsInstalled-tabs }
+
+// Base styles for all cropped images
+[class*="crop-"] {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+// --------------------------------------------
+// plugins-installed.png crops
+// Full page: 1920x~1080 typical
+// --------------------------------------------
+.crop-pluginsInstalled-tabs {
+  // Show just the Installed/Install tabs area
+  object-position: top center;
+  height: 120px;
+}
+
+.crop-pluginsInstalled-row {
+  // Show a single plugin row (header + one row)
+  object-position: 0 15%;
+  height: 150px;
+}
+
+.crop-pluginsInstalled-actions {
+  // Show the right side with action buttons
+  object-position: right 20%;
+  height: 120px;
+  width: 60%;
+  margin-left: auto;
+}
+
+// --------------------------------------------
+// plugins-install.png crops
+// --------------------------------------------
+.crop-pluginsInstall-urlField {
+  // Just the URL input area
+  object-position: center 40%;
+  height: 180px;
+}
+
+.crop-pluginsInstall-tabs {
+  // The Install Plugin tab header
+  object-position: top center;
+  height: 100px;
+}
+
+// --------------------------------------------
+// plugins-install-withUrl.png crops
+// --------------------------------------------
+.crop-pluginsInstallUrl-input {
+  // Focus on the filled URL field
+  object-position: center 35%;
+  height: 200px;
+}
+
+// --------------------------------------------
+// plugins-install-withFile.png crops
+// --------------------------------------------
+.crop-pluginsInstallFile-picker {
+  // Focus on the file picker area
+  object-position: center 40%;
+  height: 200px;
+}
+
+// --------------------------------------------
+// plugins-install-complete.png crops
+// --------------------------------------------
+.crop-pluginsComplete-message {
+  // Just the success message
+  object-position: center center;
+  height: 200px;
+}
+
+// --------------------------------------------
+// plugins-errors.png crops
+// --------------------------------------------
+.crop-pluginsErrors-single {
+  // Show single error entry detail
+  object-position: center 30%;
+  height: 180px;
+}
+
+.crop-pluginsErrors-header {
+  // Show errors tab header
+  object-position: top center;
+  height: 120px;
+}
+
+// --------------------------------------------
+// plugins-installed-updateAvailable.png crops
+// --------------------------------------------
+.crop-update-badge {
+  // Focus on the update available indicator
+  object-position: center 25%;
+  height: 150px;
+}
+
+// --------------------------------------------
+// plugins-installed-updateCheckComplete.png crops
+// --------------------------------------------
+.crop-updateCheck-status {
+  // Show the check complete status
+  object-position: center 20%;
+  height: 150px;
+}
+
+// --------------------------------------------
+// plugins-installed-updateComplete.png crops
+// --------------------------------------------
+.crop-updateComplete-message {
+  // Show the update complete message
+  object-position: center center;
+  height: 200px;
+}
+
+// --------------------------------------------
+// Generic/Reusable crops
+// --------------------------------------------
+.crop-top-third {
+  object-position: top center;
+  height: 33vh;
+  max-height: 300px;
+}
+
+.crop-center-band {
+  object-position: center center;
+  height: 250px;
+}
+
+.crop-bottom-third {
+  object-position: bottom center;
+  height: 33vh;
+  max-height: 300px;
+}
+
+// Size modifiers (combine with crops)
+.img-half {
+  max-width: 50%;
+}
+
+.img-two-thirds {
+  max-width: 66%;
+}
+
+.img-small {
+  max-width: 400px;
+}

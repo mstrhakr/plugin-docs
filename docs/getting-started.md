@@ -240,10 +240,11 @@ Note the MD5 output and update your PLG file.
 3. Check for errors in the console output
 4. Navigate to Settings → Hello World
 
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *Plugin installation in progress or success message*
->
-> ![Plugin installation](../assets/images/screenshots/plugins-install-complete.png)
+![Plugin installation complete](../assets/images/screenshots/plugins-install-complete.png)
+
+The success message confirms your plugin installed correctly:
+
+![Installation success detail](../assets/images/screenshots/plugins-install-complete.png){: .crop-pluginsComplete-message }
 
 ### Test Changes Without Reinstalling
 
