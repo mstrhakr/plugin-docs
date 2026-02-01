@@ -7,6 +7,9 @@ nav_order: 3
 
 # Event Types Reference
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Event names verified against `/usr/local/sbin/emhttp_event`.
+
 ## Overview
 
 This reference documents all available event hooks in Unraid that plugins can respond to. Events are scripts placed in your plugin's `event/` directory.
@@ -42,7 +45,7 @@ Event scripts run with:
 # These are typically available in event scripts
 
 # Passed by some events as arguments
-$1, $2, etc.    # Event-specific arguments
+$1, $2, etc.    # Event-specific arguments (usually the event name)
 
 # Standard environment
 $HOME           # /root
@@ -50,15 +53,35 @@ $PATH           # System path
 $USER           # root
 ```
 
-## Array Events
+## Startup Events
 
-### starting_array
+These events fire during array startup, in the order listed.
 
-Triggered when the array begins starting (before disks are mounted).
+### driver_loaded
+
+Triggered early in emhttp initialization when INI files are valid.
 
 ```bash
 #!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/starting_array
+# /usr/local/emhttp/plugins/yourplugin/event/driver_loaded
+logger -t "yourplugin" "Driver loaded, status info valid"
+
+# Use cases:
+# - Load kernel modules
+# - Early initialization
+```
+
+**Timing**: Early initialization  
+**Blocking**: Yes  
+**Arguments**: `$1` = "driver_loaded"
+
+### starting
+
+Triggered at the beginning of cmdStart execution (array start begins).
+
+```bash
+#!/bin/bash
+# /usr/local/emhttp/plugins/yourplugin/event/starting
 logger -t "yourplugin" "Array is starting"
 
 # Use cases:
@@ -67,72 +90,68 @@ logger -t "yourplugin" "Array is starting"
 # - Clean up stale state from previous run
 ```
 
-**Timing**: Before disk mounts  
+**Timing**: Beginning of array start  
 **Blocking**: Yes - array start waits  
-**Arguments**: None
+**Arguments**: `$1` = "starting"
 
-### started_array
+### array_started
 
-Triggered after array is fully started and all disks are mounted.
+Triggered during cmdStart when the MD devices (`/dev/md*`) become valid.
 
 ```bash
 #!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/started_array
-logger -t "yourplugin" "Array started, starting service"
+# /usr/local/emhttp/plugins/yourplugin/event/array_started
+logger -t "yourplugin" "Array devices are valid"
 
-# Start services that need array access
-/etc/rc.d/rc.yourplugin start
+# Use cases:
+# - Access raw MD devices
+# - Low-level array operations
+```
 
-# Create working directories on array
+**Timing**: After MD devices are valid, before mounts  
+**Blocking**: Yes  
+**Arguments**: `$1` = "array_started"
+
+### disks_mounted
+
+Triggered when disks and user shares (if enabled) are mounted.
+
+```bash
+#!/bin/bash
+# /usr/local/emhttp/plugins/yourplugin/event/disks_mounted
+logger -t "yourplugin" "Disks and user shares mounted"
+
+# Use cases:
+# - Access /mnt/user/ and /mnt/disk*
+# - Create directories on array
 mkdir -p /mnt/user/appdata/yourplugin
 ```
 
-**Timing**: After all mounts complete  
+**Timing**: After mounts complete  
 **Blocking**: Yes  
-**Arguments**: None
+**Arguments**: `$1` = "disks_mounted"
 
-### stopping_array
+### svcs_restarted
 
-Triggered when array begins stopping (before disks are unmounted).
+Triggered when network services are started or restarted (also fires on share changes).
 
 ```bash
 #!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/stopping_array
-logger -t "yourplugin" "Array stopping, stopping service"
+# /usr/local/emhttp/plugins/yourplugin/event/svcs_restarted
+logger -t "yourplugin" "Network services restarted"
 
-# Stop services that use array
-/etc/rc.d/rc.yourplugin stop
-
-# Save state before unmount
-cp /var/run/yourplugin/state /boot/config/plugins/yourplugin/
+# Use cases:
+# - Configure network-dependent services
+# - React to share configuration changes
 ```
 
-**Timing**: Before unmounts  
-**Blocking**: Yes - disks wait  
-**Arguments**: None
-
-### stopped_array
-
-Triggered after array is fully stopped and all disks are unmounted.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/stopped_array
-logger -t "yourplugin" "Array fully stopped"
-
-# Clean up any remaining processes
-killall yourplugin_worker 2>/dev/null
-```
-
-**Timing**: After all unmounts  
+**Timing**: After network services start  
 **Blocking**: Yes  
-**Arguments**: None
-
-## Docker Events
+**Arguments**: `$1` = "svcs_restarted"
 
 ### docker_started
 
-Triggered when Docker service starts and is ready.
+Triggered when Docker service is enabled and started.
 
 ```bash
 #!/bin/bash
@@ -148,67 +167,11 @@ docker start mycontainer 2>/dev/null
 
 **Timing**: After Docker daemon ready  
 **Blocking**: Yes  
-**Arguments**: None
-
-### docker_stopped
-
-Triggered when Docker service stops.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/docker_stopped
-logger -t "yourplugin" "Docker stopped"
-
-# Handle docker-dependent resources
-```
-
-**Timing**: After Docker daemon stops  
-**Blocking**: Yes  
-**Arguments**: None
-
-## Disk Events
-
-### unmounting_disk
-
-Triggered before a specific disk is unmounted.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/unmounting_disk
-
-DISK="$1"  # Disk being unmounted (e.g., "disk1", "cache")
-
-logger -t "yourplugin" "Disk $DISK being unmounted"
-
-# Stop any processes using this disk
-if [ "$DISK" == "cache" ]; then
-    /etc/rc.d/rc.yourplugin stop
-fi
-```
-
-**Timing**: Before unmount  
-**Blocking**: Yes  
-**Arguments**: `$1` = disk name (disk1, disk2, cache, etc.)
-
-### disks_mounted
-
-Triggered after disks are mounted during array start.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/disks_mounted
-logger -t "yourplugin" "Disks mounted"
-```
-
-**Timing**: After mounts  
-**Blocking**: Yes  
-**Arguments**: None
-
-## VM Events
+**Arguments**: `$1` = "docker_started"
 
 ### libvirt_started
 
-Triggered when libvirt/VM service starts.
+Triggered when libvirt/VM service is enabled and started.
 
 ```bash
 #!/bin/bash
@@ -221,181 +184,198 @@ virsh list --all
 
 **Timing**: After libvirt ready  
 **Blocking**: Yes  
-**Arguments**: None
+**Arguments**: `$1` = "libvirt_started"
 
-### libvirt_stopped
+### started
 
-Triggered when libvirt/VM service stops.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/libvirt_stopped
-logger -t "yourplugin" "libvirt stopped"
-```
-
-**Timing**: After libvirt stops  
-**Blocking**: Yes  
-**Arguments**: None
-
-## Network Events
-
-### network_ready
-
-Triggered when network is configured and ready.
+Triggered at the end of cmdStart execution (array start complete).
 
 ```bash
 #!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/network_ready
-logger -t "yourplugin" "Network ready"
+# /usr/local/emhttp/plugins/yourplugin/event/started
+logger -t "yourplugin" "Array fully started, initializing..."
 
-# Start network-dependent services
+# Start services that need full array access
 /etc/rc.d/rc.yourplugin start
+
+# For long-running tasks, background them
+/usr/local/emhttp/plugins/yourplugin/scripts/background_task.sh &
+
+logger -t "yourplugin" "Initialization complete"
 ```
 
-**Timing**: After network configuration  
+**Timing**: End of array start sequence  
 **Blocking**: Yes  
-**Arguments**: None
+**Arguments**: `$1` = "started"
 
-## System Events
+## Shutdown Events
 
-### reboot
+These events fire during array shutdown, in the order listed.
 
-Triggered before system reboot.
+### stopping
+
+Triggered at the beginning of cmdStop execution (array stop begins).
 
 ```bash
 #!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/reboot
-logger -t "yourplugin" "System rebooting, saving state"
+# /usr/local/emhttp/plugins/yourplugin/event/stopping
+logger -t "yourplugin" "Array stopping"
 
-# Save state before reboot
+# Use cases:
+# - Pre-shutdown preparation
+# - Alert dependent processes
+```
+
+**Timing**: Beginning of array stop  
+**Blocking**: Yes  
+**Arguments**: `$1` = "stopping"
+
+### stopping_libvirt
+
+Triggered during cmdStop, about to stop libvirt.
+
+```bash
+#!/bin/bash
+# /usr/local/emhttp/plugins/yourplugin/event/stopping_libvirt
+logger -t "yourplugin" "About to stop libvirt"
+
+# Use cases:
+# - Gracefully stop VMs managed by your plugin
+# - Save VM state
+```
+
+**Timing**: Before libvirt stops  
+**Blocking**: Yes  
+**Arguments**: `$1` = "stopping_libvirt"
+
+### stopping_docker
+
+Triggered during cmdStop, about to stop Docker.
+
+```bash
+#!/bin/bash
+# /usr/local/emhttp/plugins/yourplugin/event/stopping_docker
+logger -t "yourplugin" "About to stop Docker"
+
+# Stop containers managed by your plugin
+docker stop mycontainer 2>/dev/null
+```
+
+**Timing**: Before Docker stops  
+**Blocking**: Yes  
+**Arguments**: `$1` = "stopping_docker"
+
+### stopping_svcs
+
+Triggered during cmdStop, about to stop network services.
+
+```bash
+#!/bin/bash
+# /usr/local/emhttp/plugins/yourplugin/event/stopping_svcs
+logger -t "yourplugin" "About to stop network services"
+
+# Use cases:
+# - Cleanup network resources
+# - Disconnect clients gracefully
+```
+
+**Timing**: Before network services stop  
+**Blocking**: Yes  
+**Arguments**: `$1` = "stopping_svcs"
+
+### unmounting_disks
+
+Triggered during cmdStop when disks are about to be unmounted. At this point, disks have been spun up and a "sync" has been executed.
+
+```bash
+#!/bin/bash
+# /usr/local/emhttp/plugins/yourplugin/event/unmounting_disks
+logger -t "yourplugin" "Disks about to unmount"
+
+# Use cases:
+# - Final disk access before unmount
+# - Save state from array to flash
+cp /mnt/user/appdata/yourplugin/state /boot/config/plugins/yourplugin/
+```
+
+**Timing**: Before unmounts, after sync  
+**Blocking**: Yes  
+**Arguments**: `$1` = "unmounting_disks"
+
+### stopping_array
+
+Triggered during cmdStop after disks and user shares have been unmounted, about to stop the array.
+
+```bash
+#!/bin/bash
+# /usr/local/emhttp/plugins/yourplugin/event/stopping_array
+logger -t "yourplugin" "Array stopping, disks unmounted"
+
+# Stop services that were using the array
 /etc/rc.d/rc.yourplugin stop
-cp /var/run/yourplugin/data /boot/config/plugins/yourplugin/
 ```
 
-**Timing**: Before reboot  
+**Timing**: After unmounts, before array stop  
 **Blocking**: Yes  
-**Arguments**: None
+**Arguments**: `$1` = "stopping_array"
 
-### shutdown
+### stopped
 
-Triggered before system shutdown.
+Triggered at the end of cmdStop execution (array fully stopped), or if cmdStart failed.
 
 ```bash
 #!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/shutdown
-logger -t "yourplugin" "System shutting down"
+# /usr/local/emhttp/plugins/yourplugin/event/stopped
+logger -t "yourplugin" "Array fully stopped"
 
-# Clean shutdown
-/etc/rc.d/rc.yourplugin stop
+# Clean up any remaining processes
+killall yourplugin_worker 2>/dev/null
 ```
 
-**Timing**: Before shutdown  
+**Timing**: End of array stop sequence  
 **Blocking**: Yes  
-**Arguments**: None
+**Arguments**: `$1` = "stopped"
 
-## Parity Events
+## Other Events
 
-### parity_check_started
+### poll_attributes
 
-Triggered when a parity check/sync begins.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/parity_check_started
-ACTION="$1"  # "check", "sync", "repair"
-
-logger -t "yourplugin" "Parity $ACTION started"
-
-# Notify user
-/usr/local/emhttp/webGui/scripts/notify \
-    -e "Parity" \
-    -s "Parity $ACTION Started" \
-    -d "A parity $ACTION has begun" \
-    -i "normal"
-```
-
-**Timing**: When parity operation starts  
-**Blocking**: No (runs in background)  
-**Arguments**: `$1` = action type (check, sync, repair)
-
-### parity_check_finished
-
-Triggered when a parity check/sync completes.
+Triggered after each time emhttp polls disk SMART data. Note that if the array is not started, emhttp will still poll SMART data for spun-up devices and generate this event.
 
 ```bash
 #!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/parity_check_finished
-ACTION="$1"      # "check", "sync", "repair"
-RESULT="$2"      # Exit code
-ERRORS="$3"      # Error count
+# /usr/local/emhttp/plugins/yourplugin/event/poll_attributes
+logger -t "yourplugin" "SMART data polled"
 
-logger -t "yourplugin" "Parity $ACTION finished: $ERRORS errors"
-
-# Notify based on result
-if [ "$ERRORS" -gt 0 ]; then
-    /usr/local/emhttp/webGui/scripts/notify \
-        -e "Parity" \
-        -s "Parity $ACTION Completed with Errors" \
-        -d "Parity $ACTION found $ERRORS errors" \
-        -i "warning"
-fi
+# Use cases:
+# - Monitor disk health
+# - Custom SMART alerting
 ```
 
-**Timing**: When parity operation completes  
-**Blocking**: No  
-**Arguments**: `$1` = action, `$2` = result code, `$3` = error count
-
-## User Share Events
-
-### user_share_created
-
-Triggered when a user share is created.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/user_share_created
-SHARE="$1"
-
-logger -t "yourplugin" "Share '$SHARE' created"
-```
-
-**Arguments**: `$1` = share name
-
-### user_share_deleted
-
-Triggered when a user share is deleted.
-
-```bash
-#!/bin/bash
-# /usr/local/emhttp/plugins/yourplugin/event/user_share_deleted
-SHARE="$1"
-
-logger -t "yourplugin" "Share '$SHARE' deleted"
-```
-
-**Arguments**: `$1` = share name
+**Timing**: After SMART polling  
+**Blocking**: Yes  
+**Arguments**: `$1` = "poll_attributes"
 
 ## Complete Event Table
 
-| Event | Trigger | Blocking | Arguments |
-|-------|---------|----------|-----------|
-| `starting_array` | Array start begins | Yes | None |
-| `started_array` | Array fully started | Yes | None |
-| `stopping_array` | Array stop begins | Yes | None |
-| `stopped_array` | Array fully stopped | Yes | None |
-| `docker_started` | Docker service up | Yes | None |
-| `docker_stopped` | Docker service down | Yes | None |
-| `libvirt_started` | VM service up | Yes | None |
-| `libvirt_stopped` | VM service down | Yes | None |
-| `network_ready` | Network configured | Yes | None |
-| `unmounting_disk` | Before disk unmount | Yes | `$1`=disk |
-| `disks_mounted` | After disk mounts | Yes | None |
-| `reboot` | Before reboot | Yes | None |
-| `shutdown` | Before shutdown | Yes | None |
-| `parity_check_started` | Parity op starts | No | `$1`=action |
-| `parity_check_finished` | Parity op ends | No | `$1`=action, `$2`=result, `$3`=errors |
-| `user_share_created` | Share created | Yes | `$1`=name |
-| `user_share_deleted` | Share deleted | Yes | `$1`=name |
+| Event | Trigger | Blocking | Phase |
+|-------|---------|----------|-------|
+| `driver_loaded` | Early init, INI files valid | Yes | Startup |
+| `starting` | Array start begins | Yes | Startup |
+| `array_started` | MD devices valid | Yes | Startup |
+| `disks_mounted` | Disks and shares mounted | Yes | Startup |
+| `svcs_restarted` | Network services started | Yes | Startup |
+| `docker_started` | Docker service up | Yes | Startup |
+| `libvirt_started` | VM service up | Yes | Startup |
+| `started` | Array start complete | Yes | Startup |
+| `stopping` | Array stop begins | Yes | Shutdown |
+| `stopping_libvirt` | About to stop VMs | Yes | Shutdown |
+| `stopping_docker` | About to stop Docker | Yes | Shutdown |
+| `stopping_svcs` | About to stop network | Yes | Shutdown |
+| `unmounting_disks` | Disks about to unmount | Yes | Shutdown |
+| `stopping_array` | Disks unmounted | Yes | Shutdown |
+| `stopped` | Array fully stopped | Yes | Shutdown |
+| `poll_attributes` | SMART data polled | Yes | Periodic |
 
 ## Event Script Template
 
@@ -404,17 +384,13 @@ logger -t "yourplugin" "Share '$SHARE' deleted"
 #
 # Event: [event_name]
 # Description: [what this event responds to]
-# Arguments: [list any arguments]
 #
 
 PLUGIN="yourplugin"
+EVENT="${1:-unknown}"
 
 # Log the event
-logger -t "$PLUGIN" "Event [event_name] triggered"
-
-# Access arguments if provided
-ARG1="${1:-}"
-ARG2="${2:-}"
+logger -t "$PLUGIN" "Event $EVENT triggered"
 
 # Your event handling code here
 
@@ -439,8 +415,8 @@ exit 0
 
 ### Test manually
 ```bash
-# Run your event script directly
-/usr/local/emhttp/plugins/yourplugin/event/started_array
+# Run your event script directly with the event name argument
+/usr/local/emhttp/plugins/yourplugin/event/started started
 
 # Check exit code
 echo $?

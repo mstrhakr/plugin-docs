@@ -7,6 +7,9 @@ nav_order: 1
 
 # PHP Functions Reference
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Function locations and implementations verified.
+
 {: .warning }
 > This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
 
