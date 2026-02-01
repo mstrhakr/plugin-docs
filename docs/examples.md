@@ -46,14 +46,19 @@ The app store plugin itself is a masterclass in PHP development.
 
 A great example of Docker integration and modern plugin patterns.
 
-- **Repository**: [dcflachs/compose_plugin](https://github.com/dcflachs/compose_plugin)
+- **Repository**: [dcflachs/compose_plugin](https://github.com/dcflachs/compose_plugin) (original)
+- **Repository**: [mstrhakr/compose_plugin](https://github.com/mstrhakr/compose_plugin/tree/dev) (refactored fork with UX improvements)
 - **Good for**: Docker integration, event handlers, WebUI patching
 
 **Key patterns:**
-- Event scripts for Docker
-- WebUI patches
+- Event scripts for Docker (`started`, `stopping_docker`)
+- WebUI patches (version-specific in `patches/` directory)
 - Settings with multiple options
 - Build scripts for packages
+- Docker labels integration (`net.unraid.docker.*`)
+- Async loading patterns for better UX
+- Header menu items (`Type="xmenu"`)
+- Conditional page display
 
 ### User Scripts (by @Squid)
 
