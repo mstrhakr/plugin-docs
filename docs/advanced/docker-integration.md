@@ -7,12 +7,58 @@ nav_order: 1
 
 # Docker Integration
 
-{: .warning }
-> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
-
 ## Overview
 
 Plugins can interact with Docker to manage containers, inspect images, and monitor container status. Unraid runs Docker natively, making container integration a powerful option for plugins.
+
+## Unraid Docker Labels
+
+Unraid uses specific Docker labels to integrate containers with the WebUI. Containers with these labels appear in the Docker tab with icons, web UI links, and shell access.
+
+### Standard Labels
+
+| Label | Description | Example |
+|-------|-------------|---------|
+| `net.unraid.docker.managed` | Indicates management source | `composeman`, `dockerman` |
+| `net.unraid.docker.icon` | URL to container icon | `https://example.com/icon.png` |
+| `net.unraid.docker.webui` | URL to container's web interface | `http://[IP]:[PORT:8080]/` |
+| `net.unraid.docker.shell` | Shell command for console access | `bash`, `sh` |
+
+### Usage in Docker Compose
+
+```yaml
+services:
+  myapp:
+    image: myapp:latest
+    labels:
+      net.unraid.docker.managed: "composeman"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/user/repo/main/icon.png"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]/"
+      net.unraid.docker.shell: "bash"
+```
+
+### Reading Labels in PHP
+
+```php
+<?php
+require_once("/usr/local/emhttp/plugins/dynamix.docker.manager/include/DockerClient.php");
+
+// Define label constants
+$docker_label_managed = "net.unraid.docker.managed";
+$docker_label_icon = "net.unraid.docker.icon";
+$docker_label_webui = "net.unraid.docker.webui";
+$docker_label_shell = "net.unraid.docker.shell";
+
+// Get container info with labels
+exec("docker inspect mycontainer", $output);
+$info = json_decode(implode('', $output), true);
+$labels = $info[0]['Config']['Labels'] ?? [];
+
+// Read specific labels
+$icon = $labels[$docker_label_icon] ?? '';
+$webui = $labels[$docker_label_webui] ?? '';
+?>
+```
 
 ## Docker API Access
 
@@ -134,7 +180,7 @@ exec("docker rmi myimage:latest 2>&1", $output, $retval);
 
 ### Reading Docker Configuration
 
-TODO: Document Unraid-specific Docker config locations
+Unraid stores Docker configuration in specific locations:
 
 ```
 /boot/config/docker.cfg          # Docker settings
@@ -144,7 +190,79 @@ TODO: Document Unraid-specific Docker config locations
 
 ### Docker Templates
 
-TODO: Document interacting with Docker templates
+Docker templates allow Unraid to store container configurations for easy recreation.
+
+### DockerClient.php
+
+Unraid provides a PHP class for Docker operations:
+
+```php
+<?php
+require_once("/usr/local/emhttp/plugins/dynamix.docker.manager/include/DockerClient.php");
+
+// Use DockerUtil for image normalization
+$normalizedImage = DockerUtil::ensureImageTag("nginx");
+// Returns: library/nginx:latest
+
+// Check if Docker is running
+exec('/etc/rc.d/rc.docker status | grep -v "not"', $output, $retval);
+$dockerRunning = ($retval === 0);
+?>
+```
+
+## Docker Compose Integration
+
+### Wrapper Script Pattern
+
+For plugins that manage Docker Compose, use a wrapper script:
+
+```bash
+#!/bin/bash
+# scripts/compose.sh
+export HOME=/root
+
+# Parse arguments
+while getopts "e:c:f:p:d:" opt; do
+  case $opt in
+    e) envFile="--env-file $OPTARG" ;;
+    c) command="$OPTARG" ;;
+    f) files="$files -f $OPTARG" ;;
+    p) name="$OPTARG" ;;
+    d) project_dir="$OPTARG" ;;
+  esac
+done
+
+case $command in
+  up)
+    docker compose $envFile $files -p "$name" up -d
+    ;;
+  down)
+    docker compose $envFile $files -p "$name" down
+    ;;
+  pull)
+    docker compose $envFile $files -p "$name" pull
+    ;;
+esac
+```
+
+### Stack State Detection
+
+Determine if a compose stack is running:
+
+```php
+<?php
+function getStackState($projectName) {
+    exec("docker compose -p " . escapeshellarg($projectName) . " ps -q", $output);
+    if (empty($output)) {
+        return 'stopped';
+    }
+    
+    // Check if any containers are running
+    exec("docker ps -q --filter name=" . escapeshellarg($projectName), $running);
+    return empty($running) ? 'stopped' : 'running';
+}
+?>
+```
 
 ## Event Monitoring
 
