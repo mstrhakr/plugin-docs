@@ -14,6 +14,12 @@
 
 ---
 
+## 🌐 [**Read the Documentation →**](https://mstrhakr.github.io/unraid-plugin-docs/)
+
+> **📚 The full documentation is available at: [mstrhakr.github.io/unraid-plugin-docs](https://mstrhakr.github.io/unraid-plugin-docs/)**
+
+---
+
 ## 📖 About This Documentation
 
 This is the **unofficial, community-driven** documentation for developing plugins for [Unraid OS](https://unraid.net/). The Unraid plugin system is powerful but has historically lacked comprehensive documentation. This project aims to fill that gap by providing clear, well-organized, and up-to-date resources for plugin developers.

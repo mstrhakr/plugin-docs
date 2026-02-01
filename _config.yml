@@ -1,8 +1,8 @@
 theme: just-the-docs
 title: Unraid Plugin Development
 description: Community-maintained documentation for building Unraid plugins
-url: https://mstrhakr.github.io
-baseurl: /unraid-plugin-docs
+url: https://unraid-plugin-docs.mstrhakr.com
+baseurl: ""
 
 # Enable search
 search_enabled: true
