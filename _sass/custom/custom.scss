@@ -156,9 +156,24 @@ $unraid-orange-dark: #ac0800;
 // ============================================
 
 // Fix SVG sizing globally - SVGs need explicit dimensions
-img[src*=".svg"] {
+// But respect explicit height attributes when set
+img[src*=".svg"]:not([height]) {
   max-width: 100%;
   height: auto;
+}
+
+// Inline icon sizing for GitHub logos in content
+.github-icon-inline {
+  height: 20px !important;
+  width: auto !important;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+.github-icon-small {
+  height: 16px !important;
+  width: auto !important;
+  vertical-align: middle;
 }
 
 // GitHub icon in aux nav "View on GitHub" link

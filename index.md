@@ -88,12 +88,10 @@ This project aims to consolidate that knowledge into a single, well-organized re
 
 ## Contributing
 
-<a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="28" style="vertical-align: middle;"></a>
-
 This documentation is open source! Found an error? Want to add content?
 
-- <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" height="16" style="vertical-align: middle;"> [View on GitHub](https://github.com/mstrhakr/unraid-plugin-docs)
-- <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" height="16" style="vertical-align: middle;"> [Report an Issue](https://github.com/mstrhakr/unraid-plugin-docs/issues)
+- <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" class="github-icon-inline"> [View on GitHub](https://github.com/mstrhakr/unraid-plugin-docs)
+- <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" class="github-icon-inline"> [Report an Issue](https://github.com/mstrhakr/unraid-plugin-docs/issues)
 - [Contributing Guide](CONTRIBUTING.md)
 
 ## Resources
