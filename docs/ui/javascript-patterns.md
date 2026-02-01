@@ -20,6 +20,8 @@ Unraid includes these JavaScript libraries by default:
 
 ## AJAX Form Submission
 
+Use jQuery's `$.post()` method to submit forms without a full page reload. This pattern intercepts the form's submit event, serializes the form data, and sends it to your PHP handler. The response can be JSON for programmatic handling or trigger a page reload on success.
+
 ```javascript
 $(function() {
     $('#myForm').on('submit', function(e) {
@@ -40,6 +42,8 @@ $(function() {
 
 ## Saving Settings with $.post()
 
+For simpler cases where you don't need form serialization, you can build the POST data object manually. This is useful when saving individual settings or triggering actions from buttons rather than forms. Always include the CSRF token for security.
+
 ```javascript
 function saveSettings() {
     $.post('/update.php', {
@@ -56,12 +60,16 @@ function saveSettings() {
 
 ### Simple Alert
 
+The simplest form of SweetAlert takes three arguments: title, message, and type. Use this for quick notifications that don't require user input or confirmation.
+
 ```javascript
 swal('Title', 'Message text', 'info');
 // Types: 'success', 'error', 'warning', 'info'
 ```
 
 ### Confirmation Dialog
+
+Use confirmation dialogs before destructive actions like deletion or irreversible changes. The callback receives `true` if the user confirmed, allowing you to proceed with the action only after explicit approval.
 
 ```javascript
 swal({
@@ -79,6 +87,8 @@ swal({
 ```
 
 ### Input Dialog
+
+Input dialogs collect a single text value from the user. The callback receives `false` if cancelled, an empty string if submitted empty, or the actual input value. Use `swal.showInputError()` to display validation errors without closing the dialog.
 
 ```javascript
 swal({
@@ -98,6 +108,8 @@ swal({
 
 ## Dynamic Content Loading
 
+Load content dynamically via AJAX to update portions of the page without a full reload. This pattern is useful for status displays, logs, or any content that changes frequently. Use `setInterval()` for automatic refresh, but remember to clear the interval when the page unloads.
+
 ```javascript
 function loadStatus() {
     $.get('/plugins/yourplugin/status.php', function(html) {
@@ -111,6 +123,8 @@ setInterval(loadStatus, 5000);
 
 ## Toggle Visibility
 
+Conditionally show or hide form sections based on user selections. This improves UX by hiding irrelevant options. The `.trigger('change')` call at the end ensures the correct visibility state is set when the page first loads, not just when the user changes the value.
+
 ```javascript
 // Show/hide based on select value
 $('#enableFeature').on('change', function() {
@@ -123,6 +137,8 @@ $('#enableFeature').on('change', function() {
 ```
 
 ## Inline Script in Page Files
+
+Page files can mix PHP and JavaScript, allowing you to inject server-side values into your client-side code. Use `addslashes()` when outputting PHP strings into JavaScript to prevent quote characters from breaking your code. The CSRF token is accessed from the `$var` superglobal.
 
 ```php
 <?
@@ -147,6 +163,8 @@ $(function() {
 
 ## Event Handlers
 
+These are the most common jQuery event patterns you'll use in Unraid plugins. The document ready handler ensures DOM elements exist before your code runs. Use `.on()` for event binding as it's the modern jQuery approach and supports event delegation.
+
 ```javascript
 // Document ready
 $(function() {
@@ -168,6 +186,8 @@ $('input, select').on('change', function() {
 
 ## Error Handling
 
+Always handle AJAX errors gracefully. Network failures, server errors, and timeouts can all occur. The `$.ajax()` method provides an `error` callback for these cases. Display user-friendly error messages rather than exposing technical details.
+
 ```javascript
 $.ajax({
     url: '/plugins/yourplugin/action.php',
@@ -185,6 +205,8 @@ $.ajax({
 ## Progress Indicators
 
 ### Simple Loading Spinner
+
+Provide visual feedback during AJAX operations so users know something is happening. A simple spinner or "Loading..." message prevents users from clicking repeatedly or thinking the UI is broken.
 
 ```javascript
 // Show loading state
@@ -204,6 +226,8 @@ $.get('/plugins/yourplugin/status.php', function(data) {
 ```
 
 ### Progress Bar
+
+For operations with measurable progress (file uploads, batch processing), a progress bar provides better feedback than a spinner. This example includes both a visual bar and text percentage. The CSS transition creates smooth animation as the bar width changes.
 
 ```html
 <div id="progress-container" style="display:none;">
@@ -243,6 +267,8 @@ function hideProgress() {
 
 ### Long-Running Task with Progress
 
+For server-side tasks that take significant time (backup, conversion, download), use a polling pattern. Start the task and receive a task ID, then periodically query the server for progress updates. This avoids HTTP timeouts and provides real-time feedback.
+
 ```javascript
 function startLongTask() {
     updateProgress(0, 'Starting...');
@@ -278,6 +304,8 @@ SweetAlert is included in Unraid and provides attractive modal dialogs.
 
 #### Basic Alerts
 
+SweetAlert provides more attractive and customizable alerts than the browser's native `alert()` function. The type parameter controls the icon displayed: success (green checkmark), error (red X), warning (yellow exclamation), or info (blue i).
+
 ```javascript
 // Simple alert
 swal('Title', 'Message text', 'info');
@@ -293,6 +321,8 @@ swal({
 ```
 
 #### Confirmation Dialog
+
+Require explicit user confirmation before destructive operations. The red confirm button color (`#d33`) signals danger. Customize button text to clearly describe what will happen ("Yes, delete it!" is clearer than "OK").
 
 ```javascript
 swal({
@@ -311,6 +341,8 @@ swal({
 ```
 
 #### Input Dialog
+
+Collect user input inline without navigating to a separate form. The `inputValue` option pre-fills the field with a default. Handle three cases: cancelled (false), empty string, or valid input. Use `swal.showInputError()` for inline validation without closing the dialog.
 
 ```javascript
 swal({
@@ -333,6 +365,8 @@ swal({
 
 #### HTML Content Dialog
 
+Enable the `html: true` option to render HTML markup in the dialog body. This allows formatted content like tables, lists, or styled text. Be cautious with user-provided content—sanitize it to prevent XSS attacks.
+
 ```javascript
 swal({
     title: 'Details',
@@ -345,6 +379,8 @@ swal({
 ```
 
 #### Loading Dialog
+
+Display a modal loading indicator during async operations to prevent user interaction. Disable the confirm button and outside clicks to keep users from dismissing it prematurely. Call `swal.close()` when the operation completes.
 
 ```javascript
 // Show loading
@@ -362,6 +398,8 @@ doAsyncTask().then(function() {
 ```
 
 ### Custom Modal
+
+When SweetAlert doesn't meet your needs (complex forms, rich content, custom layouts), build a custom modal. This pattern includes the overlay background, close button, escape key handling, and click-outside-to-close behavior that users expect from modal dialogs.
 
 ```html
 <!-- Modal HTML -->
@@ -429,6 +467,8 @@ Unraid includes `dynamix.js` with useful utilities:
 
 ### Common Functions
 
+Unraid's `dynamix.js` provides utility functions for common operations. These handle locale-aware number formatting and file size display, ensuring consistency with the rest of the Unraid UI. Use these instead of writing your own formatting code.
+
 ```javascript
 // Format file size
 var size = my_scale(bytes);  // Returns "1.5 GB" etc.
@@ -447,6 +487,8 @@ function done() {
 
 ### Refresh and Reload
 
+Unraid provides a `refresh()` function for updating specific page sections without a full reload. For complete page refreshes, use the standard `location.reload()`. Pass `true` to force a cache-clearing reload when you need the latest server content.
+
 ```javascript
 // Refresh specific section
 function refresh(section) {
@@ -463,6 +505,8 @@ location.reload(true);
 ## Keyboard Shortcuts
 
 ### Basic Shortcuts
+
+Add keyboard shortcuts for power users. Common conventions include Ctrl+S to save and Escape to close/cancel. Always call `e.preventDefault()` to stop the browser's default behavior (Ctrl+S normally opens a "Save Page" dialog).
 
 ```javascript
 $(document).on('keydown', function(e) {
@@ -620,6 +664,8 @@ $('#container').html('<span class="error">' + escapeHtml(errorMessage) + '</span
 
 ### Preventing Double-Submit
 
+Prevent users from accidentally submitting a form multiple times by clicking rapidly or pressing Enter repeatedly. This pattern disables the submit button after the first click and uses a data attribute to track submission state.
+
 ```javascript
 $('#myForm').on('submit', function(e) {
     var $button = $(this).find('input[type="submit"]');
@@ -632,6 +678,8 @@ $('#myForm').on('submit', function(e) {
 ```
 
 ### Debouncing Input
+
+Debouncing delays execution until the user stops typing, preventing excessive API calls on every keystroke. The 300ms delay is a good balance—short enough to feel responsive, long enough to avoid firing during normal typing. Clear the previous timer on each keystroke to reset the delay.
 
 ```javascript
 var debounceTimer;
