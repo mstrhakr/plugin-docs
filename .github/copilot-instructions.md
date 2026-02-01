@@ -2,6 +2,19 @@
 
 This is a Jekyll documentation site for Unraid plugin development, hosted on GitHub Pages using the [just-the-docs](https://just-the-docs.github.io/just-the-docs/) theme.
 
+## Related Projects
+
+This workspace may include:
+- **unraid-plugin-docs** ([mstrhakr/unraid-plugin-docs](https://github.com/mstrhakr/unraid-plugin-docs)) - Documentation repository (this site)
+- **compose_plugin** ([mstrhakr/compose_plugin](https://github.com/mstrhakr/compose_plugin), `dev` branch) - Refactored fork with modern patterns, real-world reference implementation
+
+When working across both projects:
+- Use compose_plugin (`dev` branch) as the primary reference for implementation patterns
+- The compose_plugin is a refactored version with UX improvements over the original dcflachs/compose_plugin
+- Update documentation when discovering new patterns or techniques
+- Validate documentation against real plugin code
+- Both repos are owned by mstrhakr
+
 ## Project Structure
 
 ```
@@ -89,6 +102,50 @@ This documentation covers Unraid-specific patterns. When writing or editing:
 | **Page files** | `.page` files with header/content separator `---` |
 | **Events** | Scripts in `event/` directory, blocking behavior warning |
 | **Persistence** | `/boot/config/plugins/` survives reboot; `/usr/local/emhttp/` is RAM |
+| **Settings** | Config files use `key="value"` format, read with `parse_plugin_cfg()` |
+| **Docker Labels** | Unraid-specific labels for webui integration (`net.unraid.docker.*`) |
+
+## Patterns from compose_plugin Reference
+
+The compose_plugin repository demonstrates several advanced patterns:
+
+### PLG File Patterns
+- **DOCTYPE Entities** for reusable values (version, paths, URLs)
+- **Pre-install scripts** for migrations and directory setup
+- **Post-install scripts** for optional UI patching
+- **Remove scripts** to clean up patches and packages
+
+### Page File Patterns
+- **Menu placement**: `Menu="Docker:2"` for submenu positioning
+- **Conditional display**: `Cond="$var['fsState'] == 'Started' && exec('...')"`
+- **Header menu items**: `Type="xmenu"` for Tasks/header bar items
+- **Settings pages**: `Type="xmenu"` under `Menu="Utilities"`
+
+### Event Handlers
+- **started** - Array is fully running, start dependent services
+- **stopping_docker** - Graceful shutdown of compose stacks
+- Pattern: Source both default.cfg and user's .cfg file for settings
+
+### Configuration Patterns
+```ini
+# default.cfg - Default values (in package)
+OUTPUTSTYLE="ttyd"
+PROJECTS_FOLDER="/boot/config/plugins/compose.manager/projects"
+
+# user.cfg - User overrides (on USB flash)
+PROJECTS_FOLDER="/mnt/user/appdata/compose_projects"
+```
+
+### PHP Patterns
+- `parse_plugin_cfg($sName)` - Read plugin settings
+- `$cfg['SETTING'] ?? 'default'` - Null coalescing for defaults
+- `shell_exec("logger ...")` - Log to syslog from PHP
+- Separate defines.php for constants/paths
+
+### UI Patching (Advanced)
+- Version-specific patches in `patches/6_10/`, `patches/6_11/` directories
+- Use `patch -s -N -r -` with backup files
+- Always provide unpatch capability
 
 ## Adding New Documentation Pages
 
@@ -139,4 +196,41 @@ Content with code examples:
 Link to real plugin repositories for complex examples:
 - [Dynamix plugins](https://github.com/unraid/dynamix) - Official reference implementation
 - [Community Applications](https://github.com/Squidly271/community.applications) - Complex PHP patterns
-- [Compose Manager](https://github.com/dcflachs/compose_plugin) - Docker integration patterns
+- [Compose Manager (original)](https://github.com/dcflachs/compose_plugin) - Original Docker integration patterns
+- [Compose Manager (mstrhakr fork)](https://github.com/mstrhakr/compose_plugin/tree/dev) - Refactored version with UX improvements (workspace reference)
+
+## compose_plugin Source Structure
+
+When referencing compose_plugin (`dev` branch) for patterns, the key files are:
+
+```
+compose_plugin/
+├── compose.manager.plg          # Main plugin installer
+├── source/compose.manager/
+│   ├── compose.manager.page     # Main page (Docker submenu)
+│   ├── compose.manager.settings.page  # Settings (Utilities)
+│   ├── Compose.page             # Header menu alternative (xmenu)
+│   ├── default.cfg              # Default configuration values
+│   ├── event/
+│   │   ├── started              # Array start handler
+│   │   └── stopping_docker      # Docker shutdown handler
+│   ├── php/
+│   │   ├── defines.php          # Plugin constants, paths
+│   │   ├── compose_util.php     # Compose command execution
+│   │   ├── util.php             # Helper functions
+│   │   └── exec.php             # AJAX action handlers
+│   ├── scripts/
+│   │   ├── compose.sh           # Docker compose wrapper
+│   │   └── patch_ui.sh          # WebUI patching script
+│   └── patches/                 # Version-specific UI patches
+│       ├── 6_9/
+│       ├── 6_10/
+│       └── 6_11/
+```
+
+## Working with Both Repositories
+
+1. **Look up patterns**: Check compose_plugin for real-world examples
+2. **Validate docs**: Ensure documentation matches actual plugin behavior
+3. **Update docs**: Add new patterns discovered in compose_plugin
+4. **Test examples**: Code snippets should be validated against compose_plugin
