@@ -44,9 +44,10 @@ plugins:
 
 # Exclude from processing
 exclude:
+  - README.md
+  - CONTRIBUTING.md
   - node_modules/
   - vendor/
   - .git/
   - Gemfile
   - Gemfile.lock
-  - CONTRIBUTING.md
