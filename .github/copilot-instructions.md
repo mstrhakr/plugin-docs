@@ -147,6 +147,25 @@ PROJECTS_FOLDER="/mnt/user/appdata/compose_projects"
 - Use `patch -s -N -r -` with backup files
 - Always provide unpatch capability
 
+### JavaScript/UX Patterns
+- **Async loading**: Load expensive data (docker commands) via AJAX after page load
+- **Namespaced events**: Use `$(document).on('keydown.pluginName', ...)` to avoid event collisions
+- **Debounce validation**: Delay YAML/input validation for better performance
+- **Focus trapping**: Implement keyboard navigation for modals (Tab, Escape, Arrow keys)
+- **XSS prevention**: Use `createTextNode()` for user/error content, never `.html()`
+
+### Security Patterns
+- Validate URLs with `filter_var($url, FILTER_VALIDATE_URL)`
+- Sanitize container names with `escapeshellarg()`
+- Whitelist allowed actions: `in_array($action, $allowedActions)`
+- Clear cached data when stale (e.g., clear local SHA after docker pull)
+
+### Common Bugs/Fixes (from git history)
+- **Stale cache**: Clear `update-status.json` local SHA after `docker compose pull`
+- **Spaces in names**: Always quote paths with `${var@Q}` in bash or `escapeshellarg()` in PHP
+- **Timer collisions**: Namespace plugin timers (e.g., `composeTimers.load` not just `timers.load`)
+- **Text wrapping**: Use instant toggle for view modes to prevent layout issues
+
 ## Adding New Documentation Pages
 
 ### Step-by-step process:
