@@ -65,6 +65,156 @@ table {
 }
 
 // ============================================
+// Unraid Branding Styles
+// ============================================
+
+// Unraid brand colors
+$unraid-orange: #e64a19;
+$unraid-orange-light: #ff7d47;
+$unraid-orange-dark: #ac0800;
+
+// Unraid logo utilities
+.unraid-logo {
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.unraid-logo-small {
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+.unraid-logo-large {
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.unraid-logo-hero {
+  height: 80px;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+// Unraid mark (icon only)
+.unraid-mark {
+  height: 24px;
+  vertical-align: middle;
+}
+
+.unraid-mark-small {
+  height: 16px;
+  vertical-align: middle;
+}
+
+// Unraid button styling
+.unraid-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, $unraid-orange 0%, $unraid-orange-dark 100%);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: linear-gradient(135deg, $unraid-orange-light 0%, $unraid-orange 100%);
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($unraid-orange, 0.3);
+  }
+  
+  img {
+    height: 20px;
+    margin-right: 0.5rem;
+  }
+}
+
+// Inline Unraid reference styling
+.unraid-inline {
+  display: inline-flex;
+  align-items: center;
+  
+  img {
+    height: 16px;
+    margin-right: 0.25rem;
+    vertical-align: middle;
+  }
+}
+
+// ============================================
+// GitHub Branding Styles
+// ============================================
+
+// GitHub logo in headers - auto invert for light mode
+.github-logo {
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.github-logo-small {
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+.github-logo-large {
+  height: 48px;
+  margin-bottom: 1rem;
+}
+
+// GitHub button styling
+.github-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #24292e;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease;
+  
+  &:hover {
+    background: #2f363d;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  img {
+    height: 20px;
+    margin-right: 0.5rem;
+  }
+}
+
+// Inline GitHub reference styling
+.github-inline {
+  display: inline-flex;
+  align-items: center;
+  
+  img {
+    height: 16px;
+    margin-right: 0.25rem;
+    vertical-align: middle;
+  }
+}
+
+// ============================================
 // Screenshot Crop Utilities
 // ============================================
 // Use: ![alt](image.png){: .crop-pluginsInstalled-tabs }

@@ -7,6 +7,11 @@ mermaid: true
 
 # Getting Started: Your First Plugin
 
+<p style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+  <img src="../assets/images/logos/Unraid%20Logos/un-mark-gradient.svg" alt="" style="height: 24px;">
+  <span>Build your first Unraid plugin step-by-step</span>
+</p>
+
 This tutorial walks you through creating a simple "Hello World" Unraid plugin from scratch.
 
 ## What We'll Build

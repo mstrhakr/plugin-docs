@@ -7,6 +7,11 @@ nav_order: 1
 
 # Community Applications (CA)
 
+<p style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+  <img src="../../assets/images/logos/Unraid%20Logos/un-mark-gradient.svg" alt="" style="height: 24px;">
+  <span>Get your plugin into the official Unraid app store</span>
+</p>
+
 ## Overview
 
 Community Applications (CA) is the primary plugin/container discovery platform for Unraid. Getting your plugin listed in CA makes it easily discoverable and installable by Unraid users.
@@ -96,7 +101,7 @@ Multiple categories can be combined: `Tools:System:Status:`
 - **Format**: PNG (with transparency recommended)
 - **Size**: 256x256 pixels (minimum)
 - **Style**: Clear, recognizable at small sizes
-- **Hosting**: GitHub raw URL or other reliable CDN
+- **Hosting**: <img src="../../assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="16" style="vertical-align: middle;"> GitHub raw URL or other reliable CDN
 
 {: .placeholder-image }
 > 📷 **Screenshot needed:** *Plugin icons as displayed in CA*
@@ -131,6 +136,8 @@ Host your template XML file in your repository or submit it to the CA templates 
 ### 4. Submit to CA
 
 **Option A: CA Templates Repository (Recommended)**
+
+<img src="../../assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="32" style="vertical-align: middle; margin-right: 0.5rem;"> Fork and submit a pull request:
 
 1. Fork the [CA templates repository](https://github.com/Squidly271/plugin-repository)
 2. Add your template XML to the appropriate folder

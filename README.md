@@ -6,6 +6,12 @@
 [![Unraid](https://img.shields.io/badge/Unraid-6.9+-orange.svg)](https://unraid.net/)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
+<p>
+  <a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="32"></a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/features/copilot"><img src="assets/images/logos/GitHub%20Logos/GitHub_Copilot_Lockup_White.svg" alt="Built with GitHub Copilot" height="28"></a>
+</p>
+
 ---
 
 ## 📖 About This Documentation
@@ -180,6 +186,8 @@ plugin version /var/log/plugins/myplugin.plg
 ---
 
 ## 🤝 Contributing
+
+<a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="48" align="right"></a>
 
 This documentation is a community effort! Contributions are welcome:
 

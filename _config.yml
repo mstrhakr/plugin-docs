@@ -19,6 +19,14 @@ back_to_top_text: "Back to top"
 # Footer content
 footer_content: "Unofficial community documentation. Not affiliated with Lime Technology."
 
+# GitHub Edit Link
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/mstrhakr/unraid-plugin-docs"
+gh_edit_branch: "main"
+gh_edit_source: docs
+gh_edit_view_mode: "edit"
+
 # Color scheme
 color_scheme: dark
 
@@ -27,7 +35,7 @@ mermaid:
   version: "10.6.0"
 
 # Logo
-logo: "/assets/images/logo.png"
+logo: "/assets/images/logo.svg"
 
 # Aux links (top right)
 aux_links:

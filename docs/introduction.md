@@ -7,6 +7,11 @@ mermaid: true
 
 # Introduction to Unraid Plugins
 
+<p style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+  <img src="../assets/images/logos/Unraid%20Logos/un-mark-gradient.svg" alt="" style="height: 24px;">
+  <span>Extend your <a href="https://unraid.net/">Unraid</a> server with custom functionality</span>
+</p>
+
 ## What is an Unraid Plugin?
 
 An Unraid plugin is an extension that adds functionality to your Unraid server. Plugins can:

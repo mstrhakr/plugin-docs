@@ -5,6 +5,12 @@ nav_order: 1
 permalink: /
 ---
 
+<div style="text-align: center; margin-bottom: 2rem;">
+  <a href="https://unraid.net/">
+    <img src="assets/images/logos/Unraid%20Logos/UN-logotype-gradient.svg" alt="Unraid" style="height: 60px;">
+  </a>
+</div>
+
 # Unraid Plugin Development Documentation
 
 Welcome to the community-maintained documentation for building plugins for [Unraid OS](https://unraid.net/).
@@ -82,10 +88,12 @@ This project aims to consolidate that knowledge into a single, well-organized re
 
 ## Contributing
 
+<a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="28" style="vertical-align: middle;"></a>
+
 This documentation is open source! Found an error? Want to add content?
 
-- [View on GitHub](https://github.com/mstrhakr/unraid-plugin-docs)
-- [Report an Issue](https://github.com/mstrhakr/unraid-plugin-docs/issues)
+- <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" height="16" style="vertical-align: middle;"> [View on GitHub](https://github.com/mstrhakr/unraid-plugin-docs)
+- <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" height="16" style="vertical-align: middle;"> [Report an Issue](https://github.com/mstrhakr/unraid-plugin-docs/issues)
 - [Contributing Guide](CONTRIBUTING.md)
 
 ## Resources

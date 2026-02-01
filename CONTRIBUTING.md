@@ -1,5 +1,7 @@
 # Contributing to Unraid Plugin Documentation
 
+<a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="GitHub" height="40" align="right"></a>
+
 Thank you for your interest in contributing! This documentation is a community effort, and we welcome all contributions.
 
 ## Ways to Contribute
