@@ -2,7 +2,6 @@
 layout: default
 title: Core Concepts
 nav_order: 10
-has_children: true
 ---
 
 # Core Concepts

@@ -1,8 +1,7 @@
 ---
 layout: default
 title: Distribution
-nav_order: 10
-has_children: true
+nav_order: 60
 ---
 
 # Distribution & Publishing

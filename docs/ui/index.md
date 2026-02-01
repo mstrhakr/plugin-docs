@@ -2,7 +2,6 @@
 layout: default
 title: UI Development
 nav_order: 20
-has_children: true
 ---
 
 # UI Development

@@ -2,7 +2,6 @@
 layout: default
 title: Security & Best Practices
 nav_order: 40
-has_children: true
 ---
 
 # Security & Best Practices

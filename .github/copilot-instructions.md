@@ -30,7 +30,6 @@ nav_order: 3
 | `title` | Yes | Appears in navigation sidebar |
 | `nav_order` | Yes | Lower numbers appear higher in nav (1, 2, 3...) |
 | `parent` | No | For nested pages, reference parent's `title` |
-| `has_children` | No | Set to `true` if page has child pages |
 
 ### Link Syntax
 **Internal links between doc pages use relative paths without leading slash:**

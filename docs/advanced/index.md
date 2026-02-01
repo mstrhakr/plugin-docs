@@ -2,7 +2,6 @@
 layout: default
 title: Advanced Topics
 nav_order: 30
-has_children: true
 ---
 
 # Advanced Topics
