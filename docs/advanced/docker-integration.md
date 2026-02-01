@@ -273,12 +273,122 @@ docker events --filter 'type=container'
 
 ## Security Considerations
 
-- Always sanitize container names/input
-- Be cautious with privileged operations
-- Consider user permissions
-- Log sensitive operations
+### Input Sanitization
+
+```php
+<?php
+// Always escape shell arguments
+$containerName = escapeshellarg($_POST['container']);
+exec("docker stop $containerName");
+
+// Validate URLs before storing
+$iconUrl = $_POST['iconUrl'];
+if (!filter_var($iconUrl, FILTER_VALIDATE_URL) || 
+    (strpos($iconUrl, 'http://') !== 0 && strpos($iconUrl, 'https://') !== 0)) {
+    echo json_encode(['result' => 'error', 'message' => 'Invalid URL']);
+    exit;
+}
+
+// Whitelist allowed actions
+$allowedActions = ['start', 'stop', 'restart', 'pause', 'unpause'];
+if (!in_array($action, $allowedActions)) {
+    echo json_encode(['result' => 'error', 'message' => 'Invalid action']);
+    exit;
+}
+?>
+```
+
+### XSS Prevention in JavaScript
+
+```javascript
+// BAD - vulnerable to XSS
+$('#error-display').html(errorMessage);
+
+// GOOD - safe text insertion
+var textNode = document.createTextNode(errorMessage);
+$('#error-display').empty().append(textNode);
+```
 
 ## Best Practices
+
+### Async Loading Pattern
+
+Don't block page load with expensive Docker commands:
+
+```php
+// compose_manager_main.php - Page loads instantly
+<?php
+// Note: Stack list is loaded asynchronously via AJAX
+?>
+<div id="compose_list">Loading...</div>
+<script>
+// Load data after page renders
+function loadlist() {
+  composeTimers.load = setTimeout(function(){
+    $('div.spinner.fixed').show('slow');
+  }, 500);
+  
+  $.get('/plugins/myplugin/php/list.php', function(data) {
+    clearTimeout(composeTimers.load);
+    $('#compose_list').html(data);
+    $('div.spinner.fixed').hide('slow');
+  });
+}
+$(loadlist);
+</script>
+```
+
+### Namespace Your Timers
+
+Avoid collision with Unraid's global timers:
+
+```javascript
+// BAD - may conflict with Unraid's timers
+var timers = {};
+
+// GOOD - plugin-specific namespace
+var composeTimers = {};
+composeTimers.load = setTimeout(...);
+composeTimers.check = setInterval(...);
+```
+
+### Handle Stale Cache
+
+Clear cached data after operations that change state:
+
+```php
+<?php
+// After docker compose pull, clear the cached local SHA
+$updateStatusData = DockerUtil::loadJSON($dockerManPaths['update-status']);
+if (isset($updateStatusData[$image])) {
+    $updateStatusData[$image]['local'] = null;  // Force re-inspection
+    DockerUtil::saveJSON($dockerManPaths['update-status'], $updateStatusData);
+}
+?>
+```
+
+### Image Name Normalization
+
+Docker Compose adds prefixes that must be stripped for Unraid compatibility:
+
+```php
+<?php
+function normalizeImageForUpdateCheck($image) {
+    // Strip docker.io/ prefix (docker compose adds this for Hub images)
+    if (strpos($image, 'docker.io/') === 0) {
+        $image = substr($image, 10);
+    }
+    // Strip @sha256: digest suffix (image pinning)
+    if (($digestPos = strpos($image, '@sha256:')) !== false) {
+        $image = substr($image, 0, $digestPos);
+    }
+    // Use Unraid's normalization for consistent format
+    return DockerUtil::ensureImageTag($image);
+}
+?>
+```
+
+### General Guidelines
 
 - Cache container lists when appropriate
 - Handle Docker service not running
