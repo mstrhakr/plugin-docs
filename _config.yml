@@ -1,7 +1,7 @@
 theme: just-the-docs
 title: Unraid Plugin Development
 description: Community-maintained documentation for building Unraid plugins
-url: https://dcflachs.github.io
+url: https://mstrhakr.github.io
 baseurl: /unraid-plugin-docs
 
 # Enable search
@@ -28,7 +28,7 @@ logo: "/assets/images/logo.png"
 # Aux links (top right)
 aux_links:
   "View on GitHub":
-    - "https://github.com/dcflachs/unraid-plugin-docs"
+    - "https://github.com/mstrhakr/unraid-plugin-docs"
   "Unraid Forums":
     - "https://forums.unraid.net/"
 

@@ -48,8 +48,8 @@ This project aims to consolidate that knowledge into a single, well-organized re
 
 This documentation is open source! Found an error? Want to add content?
 
-- [View on GitHub](https://github.com/dcflachs/unraid-plugin-docs)
-- [Report an Issue](https://github.com/dcflachs/unraid-plugin-docs/issues)
+- [View on GitHub](https://github.com/mstrhakr/unraid-plugin-docs)
+- [Report an Issue](https://github.com/mstrhakr/unraid-plugin-docs/issues)
 - [Contributing Guide](CONTRIBUTING.md)
 
 ## Resources
