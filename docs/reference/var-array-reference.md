@@ -7,6 +7,9 @@ nav_order: 4
 
 # $var Array Reference
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - All properties verified against `/var/local/emhttp/var.ini` on live systems.
+
 ## Overview
 
 The `$var` array contains system state and configuration variables. It's one of the most important globals for plugin development, providing access to array status, disk information, system identity, and security tokens.

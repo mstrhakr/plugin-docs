@@ -7,6 +7,9 @@ nav_order: 2
 
 # File Path Reference
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Directory paths and persistence behavior verified.
+
 {: .warning }
 > This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
 

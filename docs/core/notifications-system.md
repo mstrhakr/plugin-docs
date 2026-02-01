@@ -7,6 +7,9 @@ nav_order: 6
 
 # Notifications System
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Notify script location and options verified.
+
 ## Overview
 
 Unraid has a built-in notification system that plugins can use to alert users. Notifications can appear in the web UI and optionally be sent via email, Pushover, Discord, Telegram, Slack, and other notification agents.

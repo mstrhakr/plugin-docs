@@ -7,6 +7,9 @@ mermaid: true
 
 # File System Layout
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Directory structures and paths verified on live systems.
+
 Understanding where files are stored and why is crucial for Unraid plugin development. Unraid runs from RAM, which creates unique challenges and opportunities.
 
 ## The RAM-Based Architecture

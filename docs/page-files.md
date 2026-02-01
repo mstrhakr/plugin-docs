@@ -7,6 +7,9 @@ mermaid: true
 
 # Page Files Reference
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Page file structure and header attributes verified against system plugins.
+
 Page files (`.page`) are how plugins add pages to the Unraid web UI. They combine metadata headers with PHP/HTML/JavaScript content to create settings pages, tools, and dashboards.
 
 ## Basic Structure

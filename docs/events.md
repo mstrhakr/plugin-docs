@@ -7,6 +7,9 @@ mermaid: true
 
 # Event System
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Event names and execution order verified against `/usr/local/sbin/emhttp_event`.
+
 Unraid plugins can respond to system events by placing executable scripts in their `event/` directory. This allows plugins to perform actions when the array starts, Docker launches, or the system is shutting down.
 
 ## How Events Work

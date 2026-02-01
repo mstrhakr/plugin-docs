@@ -6,6 +6,9 @@ nav_order: 3
 
 # PLG File Reference
 
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - PLG structure and attributes verified against installed plugins.
+
 The `.plg` file is the heart of every Unraid plugin. It's an XML document that tells the plugin system how to install, update, and remove your plugin.
 
 ## Basic Structure
