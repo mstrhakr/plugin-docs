@@ -275,6 +275,8 @@ docker events --filter 'type=container'
 
 ### Input Sanitization
 
+Always sanitize user input before passing to shell commands or storing in files. Use `escapeshellarg()` for command arguments, `filter_var()` for URLs, and whitelist validation for action parameters.
+
 ```php
 <?php
 // Always escape shell arguments
@@ -300,6 +302,8 @@ if (!in_array($action, $allowedActions)) {
 
 ### XSS Prevention in JavaScript
 
+When displaying error messages or user-provided content, never insert it directly into the DOM using `.html()`. Instead, use `.text()` or `createTextNode()` to ensure special characters are escaped and cannot be interpreted as HTML or JavaScript.
+
 ```javascript
 // BAD - vulnerable to XSS
 $('#error-display').html(errorMessage);
@@ -313,7 +317,9 @@ $('#error-display').empty().append(textNode);
 
 ### Async Loading Pattern
 
-Don't block page load with expensive Docker commands:
+Docker commands can take several seconds to execute, especially when listing containers or checking update status. Instead of running these commands synchronously (which blocks the page from rendering), load the page shell immediately and fetch the data via AJAX. This dramatically improves perceived performance.
+
+The pattern below shows a delayed spinner that only appears if the AJAX request takes more than 500ms, avoiding a flash of spinner on fast responses:
 
 ```php
 // compose_manager_main.php - Page loads instantly
@@ -340,7 +346,7 @@ $(loadlist);
 
 ### Namespace Your Timers
 
-Avoid collision with Unraid's global timers:
+Unraid's web UI uses a global `timers` object for its own interval/timeout management. If your plugin creates a variable with the same name, you'll overwrite Unraid's timers and break core functionality. Always use a plugin-specific namespace for your timers.
 
 ```javascript
 // BAD - may conflict with Unraid's timers
@@ -354,7 +360,7 @@ composeTimers.check = setInterval(...);
 
 ### Handle Stale Cache
 
-Clear cached data after operations that change state:
+Unraid caches Docker image SHA hashes in `/boot/config/plugins/dynamix.docker.manager/update-status.json` for update checking. After running `docker compose pull`, the local image has changed but Unraid's cache still has the old SHA. You must clear the cached value to force Unraid to re-inspect the image and detect the update correctly.
 
 ```php
 <?php
@@ -369,7 +375,7 @@ if (isset($updateStatusData[$image])) {
 
 ### Image Name Normalization
 
-Docker Compose adds prefixes that must be stripped for Unraid compatibility:
+Docker Compose normalizes image names differently than Unraid's Docker Manager. Compose adds `docker.io/` prefix to Docker Hub images and may include `@sha256:` digests for pinned images. To match Unraid's update-status keys, you need to strip these additions and use Unraid's `DockerUtil::ensureImageTag()` function which adds `library/` prefix to official images.
 
 ```php
 <?php
