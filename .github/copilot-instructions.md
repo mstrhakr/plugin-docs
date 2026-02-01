@@ -14,7 +14,7 @@ Gemfile         # Ruby dependencies (jekyll ~> 4.3, just-the-docs ~> 0.8)
 ## Documentation Conventions
 
 ### Front Matter for Doc Pages
-All pages in `docs/` should have front matter. The just-the-docs theme uses `nav_order` for menu position:
+All pages in `docs/` must have YAML front matter. The just-the-docs theme uses these fields:
 
 ```yaml
 ---
@@ -24,8 +24,33 @@ nav_order: 3
 ---
 ```
 
+| Field | Required | Description |
+|-------|----------|-------------|
+| `layout` | Yes | Always use `default` |
+| `title` | Yes | Appears in navigation sidebar |
+| `nav_order` | Yes | Lower numbers appear higher in nav (1, 2, 3...) |
+| `parent` | No | For nested pages, reference parent's `title` |
+| `has_children` | No | Set to `true` if page has child pages |
+
+### Link Syntax
+**Internal links between doc pages use relative paths without leading slash:**
+```markdown
+<!-- Correct - relative to current file -->
+[PLG File Reference](plg-file.md)
+[Getting Started](getting-started.md)
+
+<!-- Wrong - these will break -->
+[PLG File Reference](/docs/plg-file.md)
+[PLG File Reference](docs/plg-file.md)
+```
+
+**Anchor links for same-page sections:**
+```markdown
+[See Events section](#available-events)
+```
+
 ### Markdown Style
-- Use `#` for the main title (matches `title` in front matter)
+- Use `#` for the main title (should match `title` in front matter)
 - Tables for reference information (attributes, commands, events)
 - Code blocks with language hints: ` ```xml `, ` ```php `, ` ```bash `
 - ASCII diagrams for architecture/flow concepts (see `docs/filesystem.md` for examples)
@@ -68,10 +93,47 @@ This documentation covers Unraid-specific patterns. When writing or editing:
 
 ## Adding New Documentation Pages
 
-1. Create `docs/new-topic.md` with proper front matter
-2. Add to navigation in the appropriate section (see `index.md` links)
-3. Cross-reference from related pages
-4. Include working code examples from real plugins like `dynamix.*` or `compose.manager`
+### Step-by-step process:
+1. Create `docs/new-topic.md` with required front matter
+2. Set `nav_order` to position it correctly (check existing pages for numbering)
+3. Add cross-reference links from related pages using relative syntax
+4. Update `index.md` if adding to the main navigation sections
+5. Include working code examples from real plugins
+
+### Template for new page:
+```markdown
+---
+layout: default
+title: Your Topic Title
+nav_order: 10
+---
+
+# Your Topic Title
+
+Brief introduction explaining what this topic covers.
+
+## Section One
+
+Content with code examples:
+
+\`\`\`php
+<?php
+// Example code here
+?>
+\`\`\`
+
+## Next Steps
+
+- [Related Topic](related-topic.md)
+- [Another Topic](another-topic.md)
+```
+
+### Checklist before committing:
+- [ ] Front matter has `layout: default`, `title`, and `nav_order`
+- [ ] Main `# heading` matches `title` in front matter
+- [ ] Internal links use relative paths (e.g., `plg-file.md` not `/docs/plg-file.md`)
+- [ ] Code blocks have language hints for syntax highlighting
+- [ ] Tested locally with `bundle exec jekyll serve`
 
 ## External References
 
