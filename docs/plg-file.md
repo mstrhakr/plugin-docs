@@ -119,8 +119,32 @@ This is displayed in the Plugin Manager when viewing plugin details.
 ```xml
 <FILE Name="/boot/config/plugins/myplugin/myfile.txz">
 <URL>https://example.com/myfile.txz</URL>
+<SHA256>a1b2c3d4e5f6...</SHA256>
+</FILE>
+```
+
+### Integrity Verification
+
+Unraid supports both SHA256 and MD5 for file verification:
+
+```xml
+<!-- Preferred: SHA256 (more secure) -->
+<FILE Name="/boot/config/plugins/myplugin/myfile.txz">
+<URL>https://example.com/myfile.txz</URL>
+<SHA256>a1b2c3d4e5f6789...</SHA256>
+</FILE>
+
+<!-- Legacy: MD5 (still supported) -->
+<FILE Name="/boot/config/plugins/myplugin/myfile.txz">
+<URL>https://example.com/myfile.txz</URL>
 <MD5>abc123def456...</MD5>
 </FILE>
+```
+
+Generate hashes with:
+```bash
+sha256sum file.txz   # SHA256 (recommended)
+md5sum file.txz      # MD5 (legacy)
 ```
 
 ### Download and Install a Package
@@ -327,18 +351,29 @@ The plugin name, folder names, and package name should all match:
 
 Define version, URLs, and paths as entities so you only update them in one place.
 
-### 3. Always Include MD5 Checksums
+### 3. Always Include Integrity Checksums
 
-This ensures file integrity and helps with caching:
+This ensures file integrity and helps with caching. Use SHA256 for new plugins:
 
 ```xml
+<!-- Preferred: SHA256 -->
+<FILE Name="/path/to/file.txz" Run="upgradepkg --install-new">
+<URL>https://example.com/file.txz</URL>
+<SHA256>a1b2c3d4e5f6789...</SHA256>
+</FILE>
+
+<!-- Legacy: MD5 (still supported) -->
 <FILE Name="/path/to/file.txz" Run="upgradepkg --install-new">
 <URL>https://example.com/file.txz</URL>
 <MD5>d41d8cd98f00b204e9800998ecf8427e</MD5>
 </FILE>
 ```
 
-Generate MD5 with: `md5sum file.txz`
+Generate checksums with:
+```bash
+sha256sum file.txz   # SHA256 (recommended)
+md5sum file.txz      # MD5 (legacy)
+```
 
 ### 4. Clean Up Old Versions
 
@@ -392,6 +427,6 @@ Files in `/usr/local/emhttp/` are in RAM. They must be:
 
 ## Next Steps
 
-- Learn about [Page Files](page-files.md) for creating the web UI
-- See [Packaging](packaging.md) for creating `.txz` packages
-- Check [Examples](examples.md) for real-world plugins to study
+- Learn about [Page Files]({% link docs/page-files.md %}) for creating the web UI
+- See [Build and Packaging]({% link docs/build-and-packaging.md %}) for CI/CD pipelines and distribution
+- Check [Examples]({% link docs/examples.md %}) for real-world plugins to study

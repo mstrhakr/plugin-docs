@@ -32,6 +32,7 @@ New to plugin development? Start here:
 
 ### Reference
 - [Plugin Command]({% link docs/plugin-command.md %}) - CLI tool usage
+- [Build and Packaging]({% link docs/build-and-packaging.md %}) - CI/CD pipelines, versioning, and distribution
 - [Example Plugins]({% link docs/examples.md %}) - Learn from real plugins
 
 ## Why This Documentation?
