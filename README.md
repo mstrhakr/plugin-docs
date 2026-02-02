@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Works with Unraid®](https://img.shields.io/badge/Works_with-Unraid®_6.9+-orange.svg)](https://unraid.net/)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Funraid-plugin-docs.mstrhakr.com&count_bg=%23FF8C00&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Page+Views&edge_flat=false)](https://mstrhakr.goatcounter.com)
+[![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fplugin-docs.mstrhakr.com&count_bg=%23FF8C00&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Page+Views&edge_flat=false)](https://mstrhakr.goatcounter.com)
 
 <p>
   <a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="32"></a>

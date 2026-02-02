@@ -1,7 +1,7 @@
 theme: just-the-docs
 title: Plugin Development Docs for Unraid®
 description: Community-maintained documentation for building plugins for Unraid®. Not affiliated with Lime Technology, Inc.
-url: https://unraid-plugin-docs.mstrhakr.com
+url: https://plugin-docs.mstrhakr.com
 baseurl: ""
 
 # Enable search
