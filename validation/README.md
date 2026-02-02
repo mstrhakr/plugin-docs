@@ -18,7 +18,7 @@ This directory contains tools to validate the accuracy of this documentation aga
 Install directly from the Unraid Plugin Manager or via command line:
 
 ```bash
-plugin install https://raw.githubusercontent.com/mstrhakr/unraid-plugin-docs/main/validation/doctest.plg
+plugin install https://raw.githubusercontent.com/mstrhakr/plugin-docs/main/validation/doctest.plg
 ```
 
 The plugin will auto-update when new versions are released.

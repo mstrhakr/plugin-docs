@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # validate-paths.sh - Validate documented file paths exist
-# Part of: https://github.com/mstrhakr/unraid-plugin-docs
+# Part of: https://github.com/mstrhakr/plugin-docs
 #
 
 echo "Validating documented file paths:"

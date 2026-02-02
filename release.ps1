@@ -130,7 +130,7 @@ Write-Host "  2. Generate the PLG file" -ForegroundColor Gray
 Write-Host "  3. Create a GitHub Release" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Monitor progress at:" -ForegroundColor Cyan
-Write-Host "  https://github.com/mstrhakr/unraid-plugin-docs/actions" -ForegroundColor Blue
+Write-Host "  https://github.com/mstrhakr/plugin-docs/actions" -ForegroundColor Blue
 Write-Host ""
 Write-Host "Release will be available at:" -ForegroundColor Cyan
-Write-Host "  https://github.com/mstrhakr/unraid-plugin-docs/releases/tag/$newTag" -ForegroundColor Blue
+Write-Host "  https://github.com/mstrhakr/plugin-docs/releases/tag/$newTag" -ForegroundColor Blue

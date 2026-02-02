@@ -1,11 +1,13 @@
-# Copilot Instructions for unraid-plugin-docs
+# Copilot Instructions for plugin-docs
 
-This is a Jekyll documentation site for Unraid plugin development, hosted on GitHub Pages using the [just-the-docs](https://just-the-docs.github.io/just-the-docs/) theme.
+This is a Jekyll documentation site for Unraid® plugin development, hosted on GitHub Pages using the [just-the-docs](https://just-the-docs.github.io/just-the-docs/) theme.
+
+> **Trademark Notice:** Unraid® is a registered trademark of Lime Technology, Inc. This project is not affiliated with, endorsed by, or sponsored by Lime Technology, Inc.
 
 ## Related Projects
 
 This workspace may include:
-- **unraid-plugin-docs** ([mstrhakr/unraid-plugin-docs](https://github.com/mstrhakr/unraid-plugin-docs)) - Documentation repository (this site)
+- **plugin-docs** ([mstrhakr/plugin-docs](https://github.com/mstrhakr/plugin-docs)) - Documentation repository (this site)
 - **compose_plugin** ([mstrhakr/compose_plugin](https://github.com/mstrhakr/compose_plugin), `dev` branch) - Refactored fork with modern patterns, real-world reference implementation
 
 When working across both projects:
@@ -21,8 +23,9 @@ When working across both projects:
 - Internal links use relative paths without leading slash (e.g., `plg-file.md`)
 - Code blocks need language hints for syntax highlighting
 - Include explanatory text before code snippets, not just code comments
+- Use "Unraid®" with the registered trademark symbol at first mention in each document
 
-## Key Unraid Concepts
+## Key Unraid® Concepts
 
 | Concept | Key Points |
 |---------|-----------|
@@ -31,7 +34,7 @@ When working across both projects:
 | **Events** | Scripts in `event/` directory, blocking behavior warning |
 | **Persistence** | `/boot/config/plugins/` survives reboot; `/usr/local/emhttp/` is RAM |
 | **Settings** | Config files use `key="value"` format, read with `parse_plugin_cfg()` |
-| **Docker Labels** | Unraid-specific labels for webui integration (`net.unraid.docker.*`) |
+| **Docker Labels** | Unraid®-specific labels for webui integration (`net.unraid.docker.*`) |
 
 ## compose_plugin Reference Structure
 

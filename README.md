@@ -1,14 +1,16 @@
-# Unraid Plugin Development Documentation
+# Plugin Development Documentation for Unraid®
 
-> **The community-maintained guide to building plugins for Unraid OS**
+> **The community-maintained guide to building plugins for Unraid® OS**
+>
+> *Unraid® is a registered trademark of Lime Technology, Inc. This project is not affiliated with, endorsed by, or sponsored by Lime Technology, Inc.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Unraid](https://img.shields.io/badge/Unraid-6.9+-orange.svg)](https://unraid.net/)
+[![Works with Unraid®](https://img.shields.io/badge/Works_with-Unraid®_6.9+-orange.svg)](https://unraid.net/)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Funraid-plugin-docs.mstrhakr.com&count_bg=%23FF8C00&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Page+Views&edge_flat=false)](https://mstrhakr.goatcounter.com)
+[![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fplugin-docs.mstrhakr.com&count_bg=%23FF8C00&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Page+Views&edge_flat=false)](https://mstrhakr.goatcounter.com)
 
 <p>
-  <a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="32"></a>
+  <a href="https://github.com/mstrhakr/plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="32"></a>
   &nbsp;&nbsp;
   <a href="https://github.com/features/copilot"><img src="assets/images/logos/GitHub%20Logos/GitHub_Copilot_Lockup_White.svg" alt="Built with GitHub Copilot" height="28"></a>
   &nbsp;&nbsp;
@@ -25,15 +27,15 @@
 
 ## 📖 About This Documentation
 
-This is the **unofficial, community-driven** documentation for developing plugins for [Unraid OS](https://unraid.net/). The Unraid plugin system is powerful but has historically lacked comprehensive documentation. This project aims to fill that gap by providing clear, well-organized, and up-to-date resources for plugin developers.
+This is the **unofficial, community-driven** documentation for developing plugins for [Unraid® OS](https://unraid.net/). The Unraid® plugin system is powerful but has historically lacked comprehensive documentation. This project aims to fill that gap by providing clear, well-organized, and up-to-date resources for plugin developers.
 
-> ⚠️ **Disclaimer**: This is not official Lime Technology documentation. While every effort is made to ensure accuracy, please verify critical information against official sources and existing plugins.
+> ⚠️ **Disclaimer**: This is not official Lime Technology documentation. Unraid® is a registered trademark of Lime Technology, Inc. This project is not affiliated with, endorsed by, or sponsored by Lime Technology, Inc. While every effort is made to ensure accuracy, please verify critical information against official sources and existing plugins.
 
 ---
 
 ## 🚀 Quick Start
 
-New to Unraid plugin development? Start here:
+New to Unraid® plugin development? Start here:
 
 1. **[Introduction to Plugins](docs/introduction.md)** - What are plugins and how do they work?
 2. **[Plugin File Structure](docs/plg-file.md)** - Anatomy of a `.plg` file
@@ -48,7 +50,7 @@ New to Unraid plugin development? Start here:
 
 | Topic | Description |
 |-------|-------------|
-| [Introduction](docs/introduction.md) | Overview of the Unraid plugin system |
+| [Introduction](docs/introduction.md) | Overview of the Unraid® plugin system |
 | [PLG File Reference](docs/plg-file.md) | Complete reference for `.plg` XML structure |
 | [Page Files](docs/page-files.md) | Creating web UI pages (`.page` files) |
 | [Plugin Lifecycle](docs/lifecycle.md) | Installation, updates, and removal |
@@ -59,7 +61,7 @@ New to Unraid plugin development? Start here:
 | Topic | Description |
 |-------|-------------|
 | [Page Headers](docs/page-headers.md) | Menu, Title, Type, Icon, and more |
-| [Dynamix Markdown](docs/dynamix-markdown.md) | The form syntax used in Unraid UI |
+| [Dynamix Markdown](docs/dynamix-markdown.md) | The form syntax used in Unraid® UI |
 | [PHP Integration](docs/php-integration.md) | Using PHP in your pages |
 | [JavaScript & AJAX](docs/javascript.md) | Client-side scripting |
 | [CSS & Theming](docs/theming.md) | Styling your plugin UI |
@@ -95,7 +97,7 @@ New to Unraid plugin development? Start here:
 
 ## 🗂️ Plugin System Overview
 
-At a high level, an Unraid plugin consists of:
+At a high level, an Unraid® plugin consists of:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -196,7 +198,7 @@ plugin version /var/log/plugins/myplugin.plg
 
 ## 🤝 Contributing
 
-<a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="48" align="right"></a>
+<a href="https://github.com/mstrhakr/plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="48" align="right"></a>
 
 This documentation is a community effort! Contributions are welcome:
 
@@ -211,8 +213,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## 📜 Resources & Links
 
 ### Official Resources
-- [Unraid Forums](https://forums.unraid.net/) - The primary community hub
-- [Unraid Documentation](https://docs.unraid.net/) - Official docs
+- [Unraid® Forums](https://forums.unraid.net/) - The primary community hub
+- [Unraid® Documentation](https://docs.unraid.net/) - Official docs
 - [Plugin Support Forum](https://forums.unraid.net/forum/77-plugin-support/)
 - [Programming Forum](https://forums.unraid.net/forum/57-programming/)
 
@@ -233,6 +235,6 @@ This documentation is licensed under [CC BY-SA 4.0](LICENSE). Code examples are 
 ---
 
 <p align="center">
-  <strong>Made with ❤️ by the Unraid community</strong><br>
+  <strong>Made with ❤️ by the Unraid® community</strong><br>
   <a href="https://unraid.net/">unraid.net</a>
 </p>

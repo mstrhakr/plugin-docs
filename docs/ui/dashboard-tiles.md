@@ -8,7 +8,7 @@ nav_order: 5
 # Dashboard Tiles
 
 {: .warning }
-> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
+> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/plugin-docs/blob/main/CONTRIBUTING.md)
 
 ## Overview
 

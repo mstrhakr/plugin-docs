@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # validate-events.sh - Validate documented event names exist
-# Part of: https://github.com/mstrhakr/unraid-plugin-docs
+# Part of: https://github.com/mstrhakr/plugin-docs
 #
 
 EMHTTP_EVENT="/usr/local/sbin/emhttp_event"

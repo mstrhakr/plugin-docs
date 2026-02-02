@@ -8,7 +8,7 @@ nav_order: 4
 # Debugging Techniques
 
 {: .warning }
-> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
+> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/plugin-docs/blob/main/CONTRIBUTING.md)
 
 ## Overview
 
@@ -204,7 +204,7 @@ chmod 755 *
 ```
 
 {: .note }
-> See the [validation plugin build script](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/build.sh) for a working example that handles line ending conversion automatically.
+> See the [validation plugin build script](https://github.com/mstrhakr/plugin-docs/blob/main/validation/plugin/build.sh) for a working example that handles line ending conversion automatically.
 
 ### Permission Problems
 

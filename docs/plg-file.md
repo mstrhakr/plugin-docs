@@ -9,7 +9,7 @@ nav_order: 3
 {: .note }
 > ✅ **Validated against Unraid 7.2.3** - PLG structure and attributes verified against installed plugins.
 >
-> See the [DocTest validation plugin PLG](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/doctest.plg) for a complete working example.
+> See the [DocTest validation plugin PLG](https://github.com/mstrhakr/plugin-docs/blob/main/validation/doctest.plg) for a complete working example.
 
 The `.plg` file is the heart of every Unraid plugin. It's an XML document that tells the plugin system how to install, update, and remove your plugin.
 

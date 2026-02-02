@@ -15,9 +15,9 @@
          launch="&launch;"
          icon="flask"
          min="6.9.0"
-         support="https://github.com/mstrhakr/unraid-plugin-docs"
-         project="https://github.com/mstrhakr/unraid-plugin-docs"
-         readme="https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/README.md"
+         support="https://github.com/mstrhakr/plugin-docs"
+         project="https://github.com/mstrhakr/plugin-docs"
+         readme="https://github.com/mstrhakr/plugin-docs/blob/main/validation/README.md"
 >
 
 <CHANGES>

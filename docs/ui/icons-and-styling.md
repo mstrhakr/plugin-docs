@@ -8,7 +8,7 @@ nav_order: 3
 # Icons and Styling
 
 {: .warning }
-> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
+> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/plugin-docs/blob/main/CONTRIBUTING.md)
 
 ## Overview
 

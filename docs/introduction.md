@@ -5,16 +5,16 @@ nav_order: 1
 mermaid: true
 ---
 
-# Introduction to Unraid Plugins
+# Introduction to Unraid® Plugins
 
-<p style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
-  <img src="../assets/images/logos/Unraid%20Logos/un-mark-gradient.svg" alt="" style="height: 24px;">
-  <span>Extend your <a href="https://unraid.net/">Unraid</a> server with custom functionality</span>
-</p>
+{: .note }
+> Unraid® is a registered trademark of Lime Technology, Inc. This documentation is not affiliated with Lime Technology, Inc.
 
-## What is an Unraid Plugin?
+Extend your [Unraid®](https://unraid.net/) server with custom functionality.
 
-An Unraid plugin is an extension that adds functionality to your Unraid server. Plugins can:
+## What is an Unraid® Plugin?
+
+An Unraid® plugin is an extension that adds functionality to your Unraid® server. Plugins can:
 
 - Add new pages to the web UI
 - Install additional software packages
@@ -158,9 +158,9 @@ This documentation will guide you through:
 
 This repository includes a complete, working validation plugin that demonstrates all documented features. You can:
 
-- **[View the source code](https://github.com/mstrhakr/unraid-plugin-docs/tree/main/validation/plugin)** - See how a real plugin is structured
-- **[Install it on your server](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/README.md)** - Test documented features live
-- **[Check validation results](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/results/)** - See what we've verified against Unraid
+- **[View the source code](https://github.com/mstrhakr/plugin-docs/tree/main/validation/plugin)** - See how a real plugin is structured
+- **[Install it on your server](https://github.com/mstrhakr/plugin-docs/blob/main/validation/README.md)** - Test documented features live
+- **[Check validation results](https://github.com/mstrhakr/plugin-docs/blob/main/validation/results/)** - See what we've verified against Unraid
 
 The DocTest plugin validates:
 - All 16 documented event handlers

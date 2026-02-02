@@ -4,12 +4,12 @@
 <!ENTITY author      "unraid-plugin-docs">
 <!ENTITY version     "2026.02.01">
 <!ENTITY launch      "Settings/DocTest">
-<!ENTITY pluginURL   "https://raw.githubusercontent.com/mstrhakr/unraid-plugin-docs/main/validation/doctest.plg">
+<!ENTITY pluginURL   "https://raw.githubusercontent.com/mstrhakr/plugin-docs/main/validation/doctest.plg">
 <!ENTITY pluginLOC   "/boot/config/plugins/&name;">
 <!ENTITY emhttpLOC   "/usr/local/emhttp/plugins/&name;">
-<!ENTITY gitURL      "https://github.com/mstrhakr/unraid-plugin-docs">
+<!ENTITY gitURL      "https://github.com/mstrhakr/plugin-docs">
 <!ENTITY txzName     "doctest-2026.02.01.txz">
-<!ENTITY txzURL      "https://github.com/mstrhakr/unraid-plugin-docs/releases/download/v2026.02.01/doctest-2026.02.01.txz">
+<!ENTITY txzURL      "https://github.com/mstrhakr/plugin-docs/releases/download/v2026.02.01/doctest-2026.02.01.txz">
 <!ENTITY txzSHA256   "961ef8250303d3da11aa546308d82553518494b6819039ac4129e8c0ea24de8a">
 ]>
 
@@ -20,9 +20,9 @@
          pluginURL="&pluginURL;"
          icon="flask"
          min="6.9.0"
-         support="https://github.com/mstrhakr/unraid-plugin-docs"
-         project="https://github.com/mstrhakr/unraid-plugin-docs"
-         readme="https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/README.md"
+         support="https://github.com/mstrhakr/plugin-docs"
+         project="https://github.com/mstrhakr/plugin-docs"
+         readme="https://github.com/mstrhakr/plugin-docs/blob/main/validation/README.md"
 >
 
 <CHANGES>
