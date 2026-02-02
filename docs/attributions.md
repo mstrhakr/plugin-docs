@@ -20,6 +20,14 @@ This project complies with the [Third-Party App Naming & Trademark Use Policy](h
 
 ---
 
+## Responsive WebGUI Migration Guide
+
+The responsive design and dashboard tiles documentation is based on the official [Responsive WebGUI Plugin Migration Guide](https://forums.unraid.net/topic/192172-responsive-webgui-plugin-migration-guide/) by **ljm42** (Unraid Administrator), published July 21, 2025.
+
+Used with permission — ljm42 granted permission for use in open-source plugin templates and documentation (see forum thread).
+
+---
+
 ## GitHub
 
 **GitHub®** is a registered trademark of [GitHub, Inc.](https://github.com/)

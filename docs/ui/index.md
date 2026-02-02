@@ -8,6 +8,10 @@ nav_order: 20
 
 This section covers building user interfaces for your Unraid plugins.
 
+## Responsive Design (Unraid 7.2+)
+
+- [Responsive Design]({% link docs/ui/responsive-design.md %}) - Essential patterns for mobile/tablet support
+
 ## Form Elements
 
 - [Form Controls]({% link docs/ui/form-controls.md %}) - Standard Unraid form elements and styling
