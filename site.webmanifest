@@ -1,0 +1,17 @@
+{
+  "name": "Plugin Development Docs for Unraid®",
+  "short_name": "Unraid Plugin Docs",
+  "description": "Community-maintained documentation for building plugins for Unraid®",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e1e1e",
+  "theme_color": "#1e1e1e",
+  "icons": [
+    {
+      "src": "/assets/images/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
