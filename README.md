@@ -7,15 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Works with Unraid®](https://img.shields.io/badge/Works_with-Unraid®_6.9+-orange.svg)](https://unraid.net/)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fplugin-docs.mstrhakr.com&count_bg=%23FF8C00&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Page+Views&edge_flat=false)](https://stats.plugin-docs.mstrhakr.com)
-
-<p>
-  <a href="https://github.com/mstrhakr/plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="32"></a>
-  &nbsp;&nbsp;
-  <a href="https://github.com/features/copilot"><img src="assets/images/logos/GitHub%20Logos/GitHub_Copilot_Lockup_White.svg" alt="Built with GitHub Copilot" height="28"></a>
-  &nbsp;&nbsp;
-  <a href="https://stats.plugin-docs.mstrhakr.com"><img src="https://img.shields.io/badge/📊_View_Analytics-GoatCounter-9cf" alt="View Analytics" height="20"></a>
-</p>
+[![View Analytics](https://img.shields.io/badge/📊_View_Analytics-GoatCounter-9cf)](https://stats.plugin-docs.mstrhakr.com)
 
 ---
 
