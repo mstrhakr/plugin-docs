@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 163.34011 30.623875"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="logo.svg"
+   width="163.3401"
+   height="30.623875"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#888888"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="false"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="true"
+     inkscape:zoom="8.0727273"
+     inkscape:cx="90.613739"
+     inkscape:cy="17.156532"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6">
+    <inkscape:grid
+       id="grid6"
+       units="px"
+       originx="-14.27027"
+       originy="-4.891892"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <linearGradient
+       id="textGradient"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0">
+      <stop
+         offset="0%"
+         stop-color="#e32929"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#ff8d30"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="accentGradient"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0">
+      <stop
+         offset="0%"
+         stop-color="#ff8d30"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#e32929"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="textGradient-0"
+       x1="4.6869245"
+       y1="3.9604862"
+       x2="22.582455"
+       y2="3.9604862"
+       gradientTransform="matrix(0.58673869,0,0,1.7043362,186.77703,-0.37612613)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#e32929"
+         id="stop1-9" />
+      <stop
+         offset="100%"
+         stop-color="#ff8d30"
+         id="stop2-4" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#textGradient"
+       id="linearGradient6"
+       x1="4.6869245"
+       y1="3.9604862"
+       x2="22.582455"
+       y2="3.9604862"
+       gradientTransform="matrix(0.58673869,0,0,1.7043362,-2.75,-6.75)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#textGradient"
+       id="linearGradient7"
+       x1="11.696331"
+       y1="16.746983"
+       x2="55.225407"
+       y2="16.746983"
+       gradientTransform="matrix(1.7169513,0,0,0.58242769,-14.27027,-4.8918919)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- Left bracket accent -->
+  <path
+     d="m 1.25,1.25 v 28 m 0,-28 h 8 m -8,28 h 8"
+     stroke="url(#textGradient)"
+     stroke-width="2.5"
+     fill="none"
+     stroke-linecap="round"
+     id="path4"
+     style="stroke:url(#linearGradient6)" />
+  <!-- Plugin text -->
+  <text
+     x="3.7297299"
+     y="24.108109"
+     font-family="system-ui, '-apple-system', 'Segoe UI', sans-serif"
+     font-size="26px"
+     font-weight="700"
+     fill="url(#textGradient)"
+     id="text4"
+     style="fill:url(#linearGradient7)">Plugin</text>
+  <!-- Separator dash -->
+  <rect
+     x="86.403152"
+     y="14.222973"
+     width="12"
+     height="3"
+     rx="1.5"
+     fill="#ff8d30"
+     id="rect4" />
+  <!-- Docs text -->
+  <text
+     x="100.91667"
+     y="24.479731"
+     font-family="system-ui, '-apple-system', 'Segoe UI', sans-serif"
+     font-size="26px"
+     font-weight="400"
+     fill="#ffffff"
+     id="text5">Docs</text>
+  <!-- Right bracket accent -->
+  <path
+     d="M 162.0901,1.3738739 V 29.373874 m 0,-28.0000001 h -8 m 8,28.0000001 h -8"
+     stroke="#ffffff"
+     stroke-width="2.5"
+     fill="none"
+     stroke-linecap="round"
+     opacity="0.7"
+     id="path5" />
+  <!-- Underline accent -->
+</svg>
