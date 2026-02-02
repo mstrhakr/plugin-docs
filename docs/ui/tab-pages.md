@@ -7,8 +7,8 @@ nav_order: 4
 
 # Tab Pages
 
-{: .warning }
-> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/plugin-docs/blob/main/CONTRIBUTING.md)
+{: .note }
+> ✅ **Validated against Unraid 7.2.3** - Menu structures and page types verified against live server.
 
 ## Overview
 
@@ -79,18 +79,43 @@ $(function() {
 });
 ```
 
-## Page Header with Tabs
+## Page Header Attributes
 
-Some Unraid page types support a `Tab` header attribute that enables the built-in tabbed interface. This integrates with Unraid's native tab styling rather than requiring custom tab implementation.
+Unraid® page files use header attributes to control menu placement, page type, and behavior. Here are the key attributes:
+
+| Attribute | Description | Example |
+|-----------|-------------|--------|
+| `Menu` | Parent menu and sort order | `Menu="Docker:2"` |
+| `Title` | Display name in menu/tab | `Title="Compose"` |
+| `Type` | Page type (see below) | `Type="xmenu"` |
+| `Icon` | Menu icon (icon class or path) | `Icon="cubes"` |
+| `Tag` | Font Awesome icon for tabs | `Tag="fa-cubes"` |
+| `Code` | Unicode for custom icon | `Code="f1b3"` |
+| `Cond` | PHP condition for visibility | `Cond="$var['fsState'] == 'Started'"` |
+| `Tabs` | Enable/disable tabs | `Tabs="true"` or `Tabs="false"` |
+| `Lock` | Prevent menu movement | `Lock="true"` |
+
+### Page Types
+
+| Type | Purpose |
+|------|--------|
+| `xmenu` | Top-level navigation item (appears in header bar) |
+| `menu` | Container page that groups child pages into panels |
+| `php` | Standard PHP page (default if not specified) |
+
+### The Tabs Attribute
+
+The `Tabs` attribute controls whether child pages appear as tabs:
 
 ```
-Menu="Settings"
-Title="My Plugin"
-Icon="cog"
-Tab="true"
+# Enable built-in tab interface
+Menu="Tasks:60"
+Type="xmenu"
+Tabs="true"
+---
 ```
 
-TODO: Document actual tab header syntax
+When `Tabs="true"`, all pages with `Menu="ParentName:N"` appear as tabs. When `Tabs="false"`, child pages are listed but don't use the tab interface.
 
 ## Preserving Tab State
 
@@ -133,25 +158,44 @@ Each tab can have its own form with independent submission:
 </div>
 ```
 
-## Multi-Page Tabs
+## Multi-Page Tabs (Menu Numbering System)
 
-For very large plugins, use separate `.page` files that appear as tabs:
+Use separate `.page` files with the `Menu` attribute to create multi-tab pages. The format is:
 
 ```
-# plugins/yourplugin/YourPlugin.page
-Menu="Settings"
-Title="My Plugin"
-Icon="cog"
----
+Menu="ParentName:SortOrder"
+```
 
-# plugins/yourplugin/YourPluginAdvanced.page
-Menu="Settings:2"
-Title="My Plugin Advanced"
-Icon="cog"
+- **ParentName** - The name of the parent page (without `.page` extension)
+- **SortOrder** - Numeric value determining tab order (lower numbers appear first)
+
+### Example: Adding a Tab to Docker
+
+```
+# compose.manager.page - Adds "Compose" tab to Docker page
+Menu="Docker:2"
+Title="Compose"
+Type="php"
+Cond="$var['fsState'] == 'Started' && exec('/etc/rc.d/rc.docker status | grep -v \"not\"')"
 ---
 ```
 
-TODO: Document the Menu numbering system for related pages
+This creates a second tab on the Docker page (Docker Containers is at position 1).
+
+### Sort Order Conventions
+
+Lower numbers appear first (leftmost). Common patterns observed in Unraid®:
+
+| Range | Usage |
+|-------|-------|
+| 1-10 | Primary/default tabs |
+| 10-50 | Secondary features |
+| 50-100 | Plugin additions |
+| 100+ | Low-priority or conditional items |
+| 999+ | "Other" or catch-all items |
+
+{: .tip }
+> Leave gaps between your sort numbers (e.g., use 10, 20, 30 instead of 1, 2, 3) to allow other plugins to insert tabs between yours.
 
 ## Styling Tabs
 
@@ -182,6 +226,145 @@ TODO: Document the Menu numbering system for related pages
 }
 ```
 
+## Unraid® Menu Structure Reference
+
+This reference documents all standard menu locations in Unraid® where plugins can add pages or tabs.
+
+### Header Navigation Bar (Tasks)
+
+The main navigation bar uses `Menu="Tasks:N"` with these standard positions:
+
+| Position | Page | Description |
+|----------|------|-------------|
+| `Tasks:1` | Main, Dashboard | Array status and dashboard (shared position) |
+| `Tasks:2` | Shares, Favorites | User shares and favorites (shared position) |
+| `Tasks:3` | Users | User management (conditionally shown) |
+| `Tasks:4` | Settings | System settings container |
+| `Tasks:50` | Plugins | Plugin manager |
+| `Tasks:60` | Docker | Docker container management |
+| `Tasks:61` | *Available* | Compose Manager uses this for standalone menu |
+| `Tasks:70` | VMs | Virtual machine management |
+| `Tasks:80` | Apps | Community Applications |
+| `Tasks:90` | Tools | System tools container |
+
+{: .tip }
+> Positions 1-4 are reserved for core Unraid® pages. Plugins should use positions 50+ to avoid conflicts.
+
+### Settings Submenus
+
+The Settings page (`Tasks:4`) contains these category panels:
+
+| Menu | Title | Type | Description |
+|------|-------|------|-------------|
+| `Settings:1` | OtherSettings | menu | System Settings panel |
+| `Settings:2` | NetworkServices | menu | Network Services panel |
+| `Settings:3` | UserPreferences | menu | User Preferences panel |
+| `Settings` | Utilities | menu | User Utilities panel (no number = alphabetical) |
+
+### System Settings (OtherSettings)
+
+Pages in the System Settings panel use `Menu="OtherSettings"`:
+
+| Existing Pages | Your Plugin |
+|---------------|-------------|
+| CPU Pinning, Date and Time, Disk Settings, Docker, Global Share Settings, Identification, Management Access, Network Settings, Power Mode, VM Manager | Add with `Menu="OtherSettings"` |
+
+### Network Services
+
+Pages in the Network Services panel use `Menu="NetworkServices"` or `Menu="NetworkServices:N"`:
+
+| Position | Page |
+|----------|------|
+| `NetworkServices:2` | NFS |
+| `NetworkServices:3` | SMB (has sub-tabs) |
+| `NetworkServices:999` | FTP Server |
+| `NetworkServices` | VPN Manager, Outgoing Proxy, Syslog Server (no number = alphabetical) |
+
+### User Utilities
+
+Plugin settings pages commonly go here using `Menu="Utilities"`:
+
+| Existing Pages |
+|---------------|
+| Community Applications, User Scripts, TurboWrite, Backup/Restore Appdata, Fix Common Problems, Stats Settings, System Temp, Custom Tab, rclone, etc. |
+
+### User Preferences (UserPreferences)
+
+User-specific settings use `Menu="UserPreferences"`:
+
+| Existing Pages |
+|---------------|
+| Confirmations, Console Settings, Display Settings, Notification Settings, Scheduler |
+
+### Tools Submenus
+
+The Tools page (`Tasks:90`) contains:
+
+| Menu | Title | Type |
+|------|-------|------|
+| `Tools:10` | UNRAID-OS | menu (Unraid OS utilities) |
+| `Tools:20` | WebGui | menu (WebUI debugging tools) |
+| `Tools:90` | About | menu (Credits, EULA) |
+| `Tools` | System Information | menu (no number) |
+
+### Unraid OS (UNRAID-OS)
+
+System utilities use `Menu="UNRAID-OS"`:
+
+| Existing Pages |
+|---------------|
+| Diagnostics, Hardware Profile, Log Viewer, New Config, New Permissions, Open Terminal, Processes, System Devices, System Drivers, System Log |
+
+### About Menu
+
+Documentation and system info use `Menu="About"` or `Menu="About:N"`:
+
+| Position | Page |
+|----------|------|
+| `About:10` | Update OS |
+| `About:20` | Downgrade OS |
+| `About:30` | Registration |
+| `About` | Credits, EULA (no number = alphabetical) |
+
+### Adding Tabs to Existing Pages
+
+These are common parent pages that support tabs:
+
+| Parent | Your Menu Value | Example Use |
+|--------|----------------|-------------|
+| Docker | `Menu="Docker:N"` | Add compose/stack management |
+| VMs | `Menu="VMs:N"` | Add VM-related features |
+| Plugins | `Menu="Plugins"` | Plugin-related pages |
+| SMB | `Menu="SMB:N"` | SMB configuration tabs |
+| About | `Menu="About:N"` | System info pages |
+
+### Conditional Menu Display
+
+Use the `Cond` attribute to show/hide menu items based on system state:
+
+```
+# Only show when Docker is enabled and running
+Cond="exec(\"grep -o '^DOCKER_ENABLED=.yes' /boot/config/docker.cfg 2>/dev/null\")"
+
+# Only show when array is started
+Cond="$var['fsState'] == 'Started'"
+
+# Only show when a service is running
+Cond="is_file('/var/run/dockerd.pid')"
+
+# Combine conditions
+Cond="$var['fsState'] == 'Started' && exec('/etc/rc.d/rc.docker status | grep -v \"not\"')"
+```
+
+### Dynamic Menu Placement
+
+Some menus use PHP variables for conditional placement:
+
+```
+# Users menu - conditionally shown based on display setting
+Menu="$display['users'] Tasks:3"
+```
+
 ## Best Practices
 
 - Keep related settings together
@@ -189,24 +372,15 @@ TODO: Document the Menu numbering system for related pages
 - Don't create too many tabs (3-5 is usually ideal)
 - Consider user workflow when ordering tabs
 - Save tab state for better UX
+- Use unique, plugin-prefixed class names to avoid conflicts
+- Scope your jQuery selectors to your container elements
 
 ## Adding Tabs to Existing Pages
 
-Plugins can add new tabs to existing Unraid pages (like the Docker page) using the `Menu` header in `.page` files. This creates a seamless integrated experience but requires careful attention to avoid conflicts.
+Plugins can add new tabs to existing Unraid® pages (like the Docker page) using the `Menu` header in `.page` files. This creates a seamless integrated experience but requires careful attention to avoid conflicts.
 
 ![Docker page with Compose tab](../../assets/images/screenshots/docker-compose-tabs.png)
 *Example: Compose Manager adds a "Compose" tab to the Docker page*
-
-### Menu Placement
-
-To add a tab to an existing menu, use the menu name with an optional sort order:
-
-```
-# Add to Docker page as second tab
-Menu="Docker:2"
-Title="Compose"
-Type="php"
-```
 
 ### Selector Scoping
 
