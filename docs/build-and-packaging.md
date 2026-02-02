@@ -257,6 +257,8 @@ esac
 
 ## CI/CD Pipeline with GitHub Actions
 
+![GitHub Actions workflow running](../assets/images/screenshots/github-actions-list.png)
+
 {: .tip }
 > **Starting fresh?** The [Unraid Plugin Template](https://github.com/dkaser/unraid-plugin-template) includes a complete GitHub Actions workflow out of the box—just enable Actions and create a release.
 
