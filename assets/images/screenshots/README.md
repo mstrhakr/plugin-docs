@@ -32,6 +32,8 @@ These screenshots are ready to use:
 | ✅ `plugins-install-withFile.png` | Install Plugin with file selected |
 | ✅ `plugins-install-complete.png` | Plugin installation complete message |
 | ✅ `plugins-errors.png` | Plugin File Install Errors tab |
+| ✅ `docker-compose-tabs.png` | Docker page with Compose tab added by plugin |
+| ✅ `apps-plugins-details.png` | Plugin details/info panel (click on a plugin name) |
 
 ---
 
@@ -39,7 +41,6 @@ These screenshots are ready to use:
 
 | Status | Filename | Description | Used In |
 |:------:|----------|-------------|---------|
-| ⬜ | `plugins-details.png` | Plugin details/info panel (click on a plugin name) | PLG File Reference |
 | ⬜ | `settings-page-example.png` | A plugin settings page with form controls | Getting Started, Page Files, Form Controls |
 | ⬜ | `settings-display.png` | Unraid Display Settings page | Dynamix Framework |
 | ⬜ | `form-toggle.png` | Yes/No dropdown or toggle switch | Form Controls |
@@ -47,7 +48,6 @@ These screenshots are ready to use:
 | ⬜ | `form-share-dropdown.png` | Share selector dropdown | Form Controls |
 | ⬜ | `sidebar-menu.png` | Sidebar showing menu sections with plugins | Page Files, Icons & Styling |
 | ⬜ | `header-menu.png` | Header bar showing Docker/VMs/custom xmenu | Page Files |
-| ⬜ | `tabs-interface.png` | A plugin with multiple tabs | Tab Pages |
 | ⬜ | `dashboard-tiles.png` | Dashboard with plugin tiles | Dashboard Tiles |
 | ⬜ | `notifications-panel.png` | Notifications (normal/warning/alert) | Notifications System |
 | ⬜ | `terminal-plugin-help.png` | Output of `plugin` command | Plugin Command |
@@ -66,8 +66,8 @@ These screenshots are ready to use:
 
 ## Summary
 
-- **Available**: 8 screenshots ✅
-- **Still needed**: 22 screenshots
+- **Available**: 11 screenshots ✅
+- **Still needed**: 19 screenshots
 - **Total**: 30 screenshots
 
 ---

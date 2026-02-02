@@ -18,10 +18,10 @@ Here's how Unraid's tab interface looks in the Plugins page:
 
 ![Tab interface example](../../assets/images/screenshots/plugins-installed.png){: .crop-pluginsInstalled-tabs }
 
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *Plugin with multiple tabs showing custom plugin tabs*
->
-> ![Tabbed interface](../../assets/images/screenshots/tabs-interface.png)
+Here's an example of a plugin adding a custom tab to an existing page:
+
+![Docker page with Compose tab](../../assets/images/screenshots/docker-compose-tabs.png)
+*Compose Manager adds a "Compose" tab to the Docker page*
 
 ## Basic Tab Structure
 

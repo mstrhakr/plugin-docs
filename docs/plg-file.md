@@ -98,10 +98,10 @@ The `<PLUGIN>` tag supports these attributes:
 | `min` | Minimum Unraid version required (e.g., `"6.9.0"`). |
 | `max` | Maximum Unraid version supported. |
 
-{: .placeholder-image }
-> 📷 **Screenshot needed:** *Plugin details panel with version, author, changelog*
->
-> ![Plugin details](../assets/images/screenshots/plugins-details.png)
+Clicking a plugin name in the Plugins page opens the details panel:
+
+![Plugin details panel](../assets/images/screenshots/apps-plugins-details.png)
+*Plugin details showing version, author, support link, and changelog*
 
 ## CHANGES Section
 
