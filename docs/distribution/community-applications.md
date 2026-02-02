@@ -7,14 +7,14 @@ nav_order: 1
 
 # Community Applications (CA)
 
-<p style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
-  <img src="../../assets/images/logos/Unraid%20Logos/un-mark-gradient.svg" alt="" style="height: 24px;">
-  <span>Get your plugin into the official Unraid app store</span>
-</p>
+{: .note }
+> Unraid® is a registered trademark of Lime Technology, Inc. This documentation is not affiliated with Lime Technology, Inc.
+
+Get your plugin into the official Unraid® app store.
 
 ## Overview
 
-Community Applications (CA) is the primary plugin/container discovery platform for Unraid. Getting your plugin listed in CA makes it easily discoverable and installable by Unraid users.
+Community Applications (CA) is the primary plugin/container discovery platform for Unraid®. Getting your plugin listed in CA makes it easily discoverable and installable by Unraid® users.
 
 ![CA plugins section showing top downloads](../../assets/images/screenshots/apps-plugins-topDownloads.png)
 *The CA plugins section displays available plugins sorted by popularity, showing download counts and quick-access actions*

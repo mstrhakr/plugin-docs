@@ -5,16 +5,16 @@ nav_order: 1
 mermaid: true
 ---
 
-# Introduction to Unraid Plugins
+# Introduction to Unraid® Plugins
 
-<p style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
-  <img src="../assets/images/logos/Unraid%20Logos/un-mark-gradient.svg" alt="" style="height: 24px;">
-  <span>Extend your <a href="https://unraid.net/">Unraid</a> server with custom functionality</span>
-</p>
+{: .note }
+> Unraid® is a registered trademark of Lime Technology, Inc. This documentation is not affiliated with Lime Technology, Inc.
 
-## What is an Unraid Plugin?
+Extend your [Unraid®](https://unraid.net/) server with custom functionality.
 
-An Unraid plugin is an extension that adds functionality to your Unraid server. Plugins can:
+## What is an Unraid® Plugin?
+
+An Unraid® plugin is an extension that adds functionality to your Unraid® server. Plugins can:
 
 - Add new pages to the web UI
 - Install additional software packages

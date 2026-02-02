@@ -14,24 +14,16 @@ GitHub® and the GitHub logo are registered trademarks of GitHub, Inc. The GitHu
 - Do not use the logo to imply endorsement or sponsorship
 - Follow all guidelines at [brand.github.com](https://brand.github.com)
 
-## Unraid Logo
+## Unraid® Trademark
 
-**Source:** [Official Unraid Logo Assets](https://drive.google.com/drive/folders/1wafHPR2bRqMtDPRdLuY5unMK6emkBx5T) (linked from [unraid.net](https://unraid.net) footer under "Unraid Logos")
+Per the [Third-Party App Naming & Trademark Use Policy](https://unraid.net/policies) (effective October 1, 2025), we do not use Unraid® logos on this site. We use only plain text references with proper attribution.
 
-Unraid® is a registered trademark of Lime Technology, Inc. The Unraid logo is provided by Lime Technology for community and documentation use.
-
-### Usage Requirements
-- Do not modify the logo design or colors
-- Maintain the logo's aspect ratio
-- Do not use the logo to imply official endorsement unless authorized
-- Follow Lime Technology's brand guidelines
+Unraid® is a registered trademark of Lime Technology, Inc. This project is not affiliated with, endorsed by, or sponsored by Lime Technology, Inc.
 
 ---
 
 ## Disclaimer
 
-This documentation project is a community resource and is not officially affiliated with, endorsed by, or sponsored by GitHub, Inc. or Lime Technology, Inc. All trademarks, logos, and brand names are the property of their respective owners.
-
-The logos in this directory are included solely for educational and informational purposes within the context of Unraid plugin development documentation.
+This documentation project is a community resource and is not affiliated with, endorsed by, or sponsored by GitHub, Inc. or Lime Technology, Inc. All trademarks and brand names are the property of their respective owners.
 
 If you are a representative of either company and have concerns about the use of these assets, please open an issue in this repository.

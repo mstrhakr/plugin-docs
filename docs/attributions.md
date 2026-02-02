@@ -6,17 +6,17 @@ nav_order: 99
 
 # Attributions & Credits
 
-This documentation site uses logos and assets from third-party brands. All logos remain the property of their respective owners and are used in accordance with their brand guidelines.
+This documentation site references third-party trademarks and brands. All trademarks remain the property of their respective owners.
 
 ---
 
-## Unraid
+## Unraid®
 
 **Unraid®** is a registered trademark of [Lime Technology, Inc.](https://unraid.net/)
 
-The Unraid logo used on this site is sourced from the official [Unraid Logo Assets](https://drive.google.com/drive/folders/1wafHPR2bRqMtDPRdLuY5unMK6emkBx5T), linked from the [unraid.net](https://unraid.net) footer.
+This documentation project is a **community resource** and is **not affiliated with, endorsed by, or sponsored by Lime Technology, Inc.**
 
-This documentation project is a **community resource** and is not officially affiliated with, endorsed by, or sponsored by Lime Technology, Inc.
+This project complies with the [Third-Party App Naming & Trademark Use Policy](https://unraid.net/policies) effective October 1, 2025.
 
 ---
 
@@ -50,4 +50,4 @@ Third-party trademarks, logos, and brand names are the property of their respect
 
 ## Questions or Concerns?
 
-If you are a representative of any company whose assets appear on this site and have concerns about their use, please [open an issue](https://github.com/mstrhakr/unraid-plugin-docs/issues) in the repository.
+If you are a representative of any company whose trademarks appear on this site and have concerns about their use, please [open an issue](https://github.com/mstrhakr/unraid-plugin-docs/issues) in the repository.

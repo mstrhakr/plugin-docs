@@ -5,17 +5,14 @@ nav_order: 1
 permalink: /
 ---
 
-<div style="text-align: center; margin-bottom: 2rem;">
-  <a href="https://unraid.net/">
-    <img src="assets/images/logos/Unraid%20Logos/UN-logotype-gradient.svg" alt="Unraid" style="height: 60px;">
-  </a>
-</div>
+# Plugin Development Documentation for Unraid®
 
-# Unraid Plugin Development Documentation
+Welcome to the community-maintained documentation for building plugins for [Unraid® OS](https://unraid.net/).
 
-Welcome to the community-maintained documentation for building plugins for [Unraid OS](https://unraid.net/).
+{: .note }
+> Unraid® is a registered trademark of Lime Technology, Inc. This documentation is not affiliated with, endorsed by, or sponsored by Lime Technology, Inc.
 
-![Unraid Plugins page showing installed plugins](assets/images/screenshots/plugins-installed.png)
+![Unraid® Plugins page showing installed plugins](assets/images/screenshots/plugins-installed.png)
 
 {: .warning }
 > This is unofficial documentation maintained by the community. While we strive for accuracy, please verify critical information against official sources and existing plugins.
@@ -78,7 +75,7 @@ New to plugin development? Start here:
 
 ## Why This Documentation?
 
-As noted in [this forum thread](https://forums.unraid.net/topic/52623-plugin-system-documentation/), official documentation for Unraid plugin development is scattered and incomplete. Most developers learn by:
+As noted in [this forum thread](https://forums.unraid.net/topic/52623-plugin-system-documentation/), official documentation for Unraid® plugin development is scattered and incomplete. Most developers learn by:
 
 - Reverse engineering existing plugins
 - Asking questions in forums
@@ -96,6 +93,6 @@ This documentation is open source! Found an error? Want to add content?
 
 ## Resources
 
-- [Unraid Forums](https://forums.unraid.net/)
-- [Official Unraid Docs](https://docs.unraid.net/)
+- [Unraid® Forums](https://forums.unraid.net/)
+- [Official Unraid® Docs](https://docs.unraid.net/)
 - [Community Applications](https://github.com/Squidly271/community.applications)
