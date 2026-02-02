@@ -43,6 +43,8 @@ aux_links:
     - "https://github.com/mstrhakr/plugin-docs"
   "Unraid Forums":
     - "https://forums.unraid.net/"
+  "Analytics":
+    - "https://stats.plugin-docs.mstrhakr.com"
 
 aux_links_new_tab: true
 
