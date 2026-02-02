@@ -551,7 +551,7 @@ _(My Label)_:
 The `: ` (colon-space at start of line) creates proper Dynamix field alignment. For read-only display sections outside forms, use standard HTML tables or `<pre>` blocks.
 
 {: .note }
-> See the [DocTest validation plugin](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example of proper form structure.
+> See the [DocTest validation plugin](https://github.com/mstrhakr/plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example of proper form structure.
 
 ## Next Steps
 

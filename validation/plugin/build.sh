@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # build.sh - Build the doctest validation plugin
-# Part of: https://github.com/mstrhakr/unraid-plugin-docs
+# Part of: https://github.com/mstrhakr/plugin-docs
 #
 # Usage: ./build.sh [version]
 #   version: Optional version string (default: 2026.02.01)

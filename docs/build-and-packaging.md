@@ -60,7 +60,7 @@ myplugin-1.0.0.txz
 ### Creating the TXZ Package
 
 {: .note }
-> See the [DocTest validation plugin build script](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/build.sh) for a complete working example.
+> See the [DocTest validation plugin build script](https://github.com/mstrhakr/plugin-docs/blob/main/validation/plugin/build.sh) for a complete working example.
 
 ```bash
 #!/bin/bash
@@ -265,7 +265,7 @@ esac
 <img src="../assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="40" align="right">
 
 {: .note }
-> See the [DocTest plugin CI/CD workflow](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/.github/workflows/plugin-release.yml) for a complete working example used by this documentation project.
+> See the [DocTest plugin CI/CD workflow](https://github.com/mstrhakr/plugin-docs/blob/main/.github/workflows/plugin-release.yml) for a complete working example used by this documentation project.
 
 ### Release Automation Script
 
@@ -282,7 +282,7 @@ For Windows development environments, a PowerShell script can automate the relea
 .\release.ps1 -Force
 ```
 
-The [release.ps1 script](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/release.ps1) handles:
+The [release.ps1 script](https://github.com/mstrhakr/plugin-docs/blob/main/release.ps1) handles:
 - **Date-based versioning** - Automatically generates `vYYYY.MM.DD` tags
 - **Multiple daily releases** - Appends suffix letters (`a`, `b`, `c`...) for same-day releases
 - **Safety checks** - Warns about uncommitted changes, wrong branch, or being behind remote

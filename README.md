@@ -10,7 +10,7 @@
 [![Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fplugin-docs.mstrhakr.com&count_bg=%23FF8C00&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Page+Views&edge_flat=false)](https://mstrhakr.goatcounter.com)
 
 <p>
-  <a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="32"></a>
+  <a href="https://github.com/mstrhakr/plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Lockup_White.svg" alt="View on GitHub" height="32"></a>
   &nbsp;&nbsp;
   <a href="https://github.com/features/copilot"><img src="assets/images/logos/GitHub%20Logos/GitHub_Copilot_Lockup_White.svg" alt="Built with GitHub Copilot" height="28"></a>
   &nbsp;&nbsp;
@@ -198,7 +198,7 @@ plugin version /var/log/plugins/myplugin.plg
 
 ## 🤝 Contributing
 
-<a href="https://github.com/mstrhakr/unraid-plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="48" align="right"></a>
+<a href="https://github.com/mstrhakr/plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="48" align="right"></a>
 
 This documentation is a community effort! Contributions are welcome:
 

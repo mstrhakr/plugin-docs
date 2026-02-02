@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # validate-all.sh - Run all documentation validation scripts
-# Part of: https://github.com/mstrhakr/unraid-plugin-docs
+# Part of: https://github.com/mstrhakr/plugin-docs
 #
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

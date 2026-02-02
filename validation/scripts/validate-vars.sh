@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # validate-vars.sh - Validate documented $var array properties
-# Part of: https://github.com/mstrhakr/unraid-plugin-docs
+# Part of: https://github.com/mstrhakr/plugin-docs
 #
 
 VAR_INI="/var/local/emhttp/var.ini"

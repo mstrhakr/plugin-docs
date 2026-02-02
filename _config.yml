@@ -22,7 +22,7 @@ footer_content: "Unraid® is a trademark of Lime Technology, Inc. Not affiliated
 # GitHub Edit Link
 gh_edit_link: true
 gh_edit_link_text: "Edit this page on GitHub"
-gh_edit_repository: "https://github.com/mstrhakr/unraid-plugin-docs"
+gh_edit_repository: "https://github.com/mstrhakr/plugin-docs"
 gh_edit_branch: "main"
 gh_edit_source: docs
 gh_edit_view_mode: "edit"
@@ -40,7 +40,7 @@ logo: "/assets/images/logo.svg"
 # Aux links (top right)
 aux_links:
   "View on GitHub":
-    - "https://github.com/mstrhakr/unraid-plugin-docs"
+    - "https://github.com/mstrhakr/plugin-docs"
   "Unraid Forums":
     - "https://forums.unraid.net/"
 

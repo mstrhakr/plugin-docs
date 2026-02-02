@@ -1,4 +1,4 @@
-# Copilot Instructions for unraid-plugin-docs
+# Copilot Instructions for plugin-docs
 
 This is a Jekyll documentation site for Unraid® plugin development, hosted on GitHub Pages using the [just-the-docs](https://just-the-docs.github.io/just-the-docs/) theme.
 
@@ -7,7 +7,7 @@ This is a Jekyll documentation site for Unraid® plugin development, hosted on G
 ## Related Projects
 
 This workspace may include:
-- **unraid-plugin-docs** ([mstrhakr/unraid-plugin-docs](https://github.com/mstrhakr/unraid-plugin-docs)) - Documentation repository (this site)
+- **plugin-docs** ([mstrhakr/plugin-docs](https://github.com/mstrhakr/plugin-docs)) - Documentation repository (this site)
 - **compose_plugin** ([mstrhakr/compose_plugin](https://github.com/mstrhakr/compose_plugin), `dev` branch) - Refactored fork with modern patterns, real-world reference implementation
 
 When working across both projects:

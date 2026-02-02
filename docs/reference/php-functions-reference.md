@@ -10,10 +10,10 @@ nav_order: 1
 {: .note }
 > ✅ **Validated against Unraid 7.2.3** - Function locations and implementations verified.
 >
-> See the [DocTest validation plugin](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example that demonstrates `parse_plugin_cfg()`, `mk_option()`, `$var` array access, and more.
+> See the [DocTest validation plugin](https://github.com/mstrhakr/plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example that demonstrates `parse_plugin_cfg()`, `mk_option()`, `$var` array access, and more.
 
 {: .warning }
-> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/CONTRIBUTING.md)
+> This page is a stub. [Help us expand it!](https://github.com/mstrhakr/plugin-docs/blob/main/CONTRIBUTING.md)
 
 ## Overview
 

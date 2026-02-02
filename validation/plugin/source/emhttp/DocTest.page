@@ -5,7 +5,7 @@ Icon="flask"
 <?php
 /* DocTest Validation Plugin
  * Tests documented Unraid plugin features
- * Part of: https://github.com/mstrhakr/unraid-plugin-docs
+ * Part of: https://github.com/mstrhakr/plugin-docs
  */
 
 $plugin = "doctest";

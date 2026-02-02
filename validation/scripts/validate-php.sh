@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # validate-php.sh - Validate documented PHP functions exist
-# Part of: https://github.com/mstrhakr/unraid-plugin-docs
+# Part of: https://github.com/mstrhakr/plugin-docs
 #
 
 echo "Validating documented PHP functions:"

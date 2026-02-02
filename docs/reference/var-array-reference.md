@@ -10,7 +10,7 @@ nav_order: 4
 {: .note }
 > ✅ **Validated against Unraid 7.2.3** - All properties verified against `/var/local/emhttp/var.ini` on live systems.
 >
-> See the [DocTest validation plugin](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example that displays `$var` array values.
+> See the [DocTest validation plugin](https://github.com/mstrhakr/plugin-docs/blob/main/validation/plugin/source/emhttp/DocTest.page) for a working example that displays `$var` array values.
 
 ## Overview
 

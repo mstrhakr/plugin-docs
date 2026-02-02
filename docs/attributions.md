@@ -42,7 +42,7 @@ This site is built with [Just the Docs](https://just-the-docs.github.io/just-the
 
 ## License
 
-The documentation content in this repository is available under the [MIT License](https://github.com/mstrhakr/unraid-plugin-docs/blob/main/LICENSE).
+The documentation content in this repository is available under the [MIT License](https://github.com/mstrhakr/plugin-docs/blob/main/LICENSE).
 
 Third-party trademarks, logos, and brand names are the property of their respective owners and are subject to their own licensing terms.
 
@@ -50,4 +50,4 @@ Third-party trademarks, logos, and brand names are the property of their respect
 
 ## Questions or Concerns?
 
-If you are a representative of any company whose trademarks appear on this site and have concerns about their use, please [open an issue](https://github.com/mstrhakr/unraid-plugin-docs/issues) in the repository.
+If you are a representative of any company whose trademarks appear on this site and have concerns about their use, please [open an issue](https://github.com/mstrhakr/plugin-docs/issues) in the repository.
