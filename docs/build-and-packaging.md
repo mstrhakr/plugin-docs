@@ -9,6 +9,8 @@ mermaid: true
 
 This guide covers advanced build and packaging practices for Unraid plugins, including CI/CD pipelines, versioning strategies, and distribution best practices. The concepts here are derived from how LimeTech and the community build professional-grade plugins.
 
+![GitHub Actions workflow finished](../assets/images/screenshots/github-actions-finished.png)
+
 ## Build Artifacts Overview
 
 A complete Unraid plugin distribution consists of two primary artifacts:
