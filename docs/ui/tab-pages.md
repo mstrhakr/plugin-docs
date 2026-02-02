@@ -237,7 +237,23 @@ $('#my_plugin_table .advanced').toggle();
 
 ### Use Unique Class Names
 
-For elements that need to be globally unique (like an Advanced View toggle in the tab bar), use plugin-specific class names:
+Even with scoped selectors in your own code, Unraid's core pages use **unscoped selectors** that will still match your elements. For example, the Docker tab's JavaScript uses `$('tr.sortable')` and `$('.updatecolumn')` without scoping to its own container. If your plugin uses these class names, Docker's "Check for Updates" button will animate your plugin's rows too.
+
+The only reliable solution is to use plugin-specific class names:
+
+```html
+<!-- BAD - Docker's unscoped JavaScript will target these -->
+<tr class="sortable">
+    <td class="updatecolumn">not checked</td>
+</tr>
+
+<!-- GOOD - Unique class names prevent cross-tab interference -->
+<tr class="myplugin-sortable">
+    <td class="myplugin-updatecolumn">not checked</td>
+</tr>
+```
+
+For elements added to shared areas (like an Advanced View toggle in the tab bar), always use plugin-specific class names:
 
 ```javascript
 // BAD - may conflict with Docker tab's advancedview toggle
@@ -272,4 +288,5 @@ function loadMyPluginContent() {
 
 - [Page Files]({% link docs/page-files.md %})
 - [Form Controls]({% link docs/ui/form-controls.md %})
-- [JavaScript Patterns]({% link docs/ui/javascript-patterns.md %})
+- [JavaScript Patterns]({% link docs/ui/javascript-patterns.md %}) - See "Scope Your Selectors" and "Namespace Your CSS Classes"
+- [Icons and Styling]({% link docs/ui/icons-and-styling.md %}) - See "Namespace Your Class Names"

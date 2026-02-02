@@ -149,6 +149,23 @@ Tips for theme compatibility:
 
 ## Custom CSS
 
+### Namespace Your Class Names
+
+Unraid's core pages use common class names with unscoped jQuery selectors. If your plugin uses the same class names, Unraid's JavaScript may inadvertently modify your elements, causing visual glitches.
+
+Always prefix your CSS classes with your plugin name:
+
+| Generic (avoid) | Namespaced (use) |
+|-----------------|------------------|
+| `.sortable` | `.myplugin-sortable` |
+| `.updatecolumn` | `.myplugin-updatecolumn` |
+| `.container` | `.myplugin-container` |
+| `.status` | `.myplugin-status` |
+
+This is especially important when adding tabs to existing Unraid pages like the Docker menu, where your tab's DOM shares the page with Unraid's JavaScript.
+
+### Adding Custom Styles
+
 Add custom styles in your page file:
 
 ```php

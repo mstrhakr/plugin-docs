@@ -581,23 +581,25 @@ $(document).on('keydown.mymodal', function(e) {
 
 When your plugin adds a tab to an existing Unraid page (like adding a tab to the Docker menu), your JavaScript runs in the same context as that page's JavaScript. Unscoped selectors can accidentally target elements from the parent page, causing visual glitches or broken functionality.
 
-Common classes like `.auto_start`, `.advanced`, `.basic`, and `.updatecolumn` are used by multiple Unraid pages. jQuery plugins like `switchButton` should never be re-initialized on elements that are already set up.
+Common classes like `.auto_start`, `.advanced`, `.basic`, `tr.sortable`, and `.updatecolumn` are used by multiple Unraid pages. jQuery plugins like `switchButton` should never be re-initialized on elements that are already set up.
 
 ```javascript
-// BAD - Selects ALL .auto_start elements on the page
-// If Docker tab already initialized these, you'll break them
-$('.auto_start').switchButton({labels_placement:'right', on_label:'On', off_label:'Off'});
+// BAD - Selects ALL tr.sortable rows on the page
+// Docker tab uses this class too, so you'll iterate over Docker containers
+$('tr.sortable').each(function() {
+    var $updateCell = $(this).find('.updatecolumn');
+    $updateCell.html('<i class="fa fa-refresh fa-spin"></i> checking...');
+});
 
-// BAD - Toggles ALL .advanced elements, including Docker tab's columns
-$('.advanced').toggle();
-
-// GOOD - Scope to your plugin's container
-$('#myplugin_table .auto_start').switchButton({labels_placement:'right', on_label:'On', off_label:'Off'});
-
-// GOOD - Only affect your plugin's elements
-$('#myplugin_table .advanced').toggle();
-$('#myplugin_table .basic').toggle();
+// GOOD - Scope to your plugin's table
+$('#myplugin_table tr.sortable').each(function() {
+    var $updateCell = $(this).find('.updatecolumn');
+    $updateCell.html('<i class="fa fa-refresh fa-spin"></i> checking...');
+});
 ```
+
+{: .warning }
+> The Docker tab uses unscoped selectors like `$('tr.sortable')` and `$('.updatecolumn')`. If your plugin uses these same class names, clicking "Check for Updates" on Docker will animate *your* plugin's rows too. See [Namespace Your CSS Classes](#namespace-your-css-classes) below.
 
 For elements added to shared areas (like the tab bar), use plugin-specific class names:
 
@@ -615,7 +617,41 @@ $('.myplugin-advancedview').change(function(){
 });
 ```
 
-See [Tab Pages - Adding Tabs to Existing Pages](tab-pages.md#adding-tabs-to-existing-pages) for more details.
+See [Tab Pages - Adding Tabs to Existing Pages](tab-pages.md#adding-tabs-to-existing-pages) and [Icons and Styling - Namespace Your Class Names](icons-and-styling.md#namespace-your-class-names) for more details.
+
+### Namespace Your CSS Classes
+
+Even with scoped selectors in your own code, Unraid's core pages use unscoped selectors that will match your elements if you use common class names. The only reliable solution is to use plugin-specific class names.
+
+Classes to avoid (used by Docker tab with unscoped selectors):
+- `sortable` - Used for drag-to-reorder rows
+- `updatecolumn` - Update status column
+- `ct-name` - Container name cells
+
+```html
+<!-- BAD - Docker's JavaScript will target these rows -->
+<tr class="sortable" id="stack-row-1">
+    <td class="ct-name">My Stack</td>
+    <td class="updatecolumn">not checked</td>
+</tr>
+
+<!-- GOOD - Unique class names prevent cross-tab interference -->
+<tr class="myplugin-sortable" id="stack-row-1">
+    <td class="myplugin-name">My Stack</td>
+    <td class="myplugin-updatecolumn">not checked</td>
+</tr>
+```
+
+Update your JavaScript to match:
+
+```javascript
+// Use your namespaced classes
+$('#myplugin_table tr.myplugin-sortable').each(function() {
+    $(this).find('.myplugin-updatecolumn').html('checking...');
+});
+```
+
+This approach ensures your plugin works correctly regardless of what selectors other tabs or Unraid core might use.
 
 ### Namespace Your Timers
 
