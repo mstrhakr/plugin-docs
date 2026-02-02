@@ -194,6 +194,9 @@ TODO: Document the Menu numbering system for related pages
 
 Plugins can add new tabs to existing Unraid pages (like the Docker page) using the `Menu` header in `.page` files. This creates a seamless integrated experience but requires careful attention to avoid conflicts.
 
+![Docker page with Compose tab](../../assets/images/screenshots/docker-compose-tabs.png)
+*Example: Compose Manager adds a "Compose" tab to the Docker page*
+
 ### Menu Placement
 
 To add a tab to an existing menu, use the menu name with an optional sort order:
