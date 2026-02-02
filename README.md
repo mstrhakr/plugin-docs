@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Works with Unraid®](https://img.shields.io/badge/Works_with-Unraid®_6.9+-orange.svg)](https://unraid.net/)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![View Analytics](https://img.shields.io/badge/📊_View_Analytics-GoatCounter-9cf)](https://stats.plugin-docs.mstrhakr.com)
+[![Total Views](https://stats.plugin-docs.mstrhakr.com/counter/TOTAL.svg?no_branding)](https://stats.plugin-docs.mstrhakr.com)
 
 ---
 
