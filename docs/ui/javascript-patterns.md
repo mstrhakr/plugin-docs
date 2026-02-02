@@ -577,6 +577,46 @@ $(document).on('keydown.mymodal', function(e) {
 
 ## Best Practices
 
+### Scope Your Selectors
+
+When your plugin adds a tab to an existing Unraid page (like adding a tab to the Docker menu), your JavaScript runs in the same context as that page's JavaScript. Unscoped selectors can accidentally target elements from the parent page, causing visual glitches or broken functionality.
+
+Common classes like `.auto_start`, `.advanced`, `.basic`, and `.updatecolumn` are used by multiple Unraid pages. jQuery plugins like `switchButton` should never be re-initialized on elements that are already set up.
+
+```javascript
+// BAD - Selects ALL .auto_start elements on the page
+// If Docker tab already initialized these, you'll break them
+$('.auto_start').switchButton({labels_placement:'right', on_label:'On', off_label:'Off'});
+
+// BAD - Toggles ALL .advanced elements, including Docker tab's columns
+$('.advanced').toggle();
+
+// GOOD - Scope to your plugin's container
+$('#myplugin_table .auto_start').switchButton({labels_placement:'right', on_label:'On', off_label:'Off'});
+
+// GOOD - Only affect your plugin's elements
+$('#myplugin_table .advanced').toggle();
+$('#myplugin_table .basic').toggle();
+```
+
+For elements added to shared areas (like the tab bar), use plugin-specific class names:
+
+```javascript
+// BAD - 'advancedview' class may conflict with Docker tab's toggle
+$(".tabs").append('<span class="status"><input type="checkbox" class="advancedview"></span>');
+$('.advancedview').switchButton({...});
+
+// GOOD - unique class name prevents conflicts
+$(".tabs").append('<span class="status"><input type="checkbox" class="myplugin-advancedview"></span>');
+$('.myplugin-advancedview').switchButton({...});
+$('.myplugin-advancedview').change(function(){
+    // Only toggle your plugin's elements
+    $('#myplugin_table .advanced').toggle();
+});
+```
+
+See [Tab Pages - Adding Tabs to Existing Pages](tab-pages.md#adding-tabs-to-existing-pages) for more details.
+
 ### Namespace Your Timers
 
 Unraid's core JavaScript uses a global `timers` object to manage intervals and timeouts. If your plugin declares `var timers = {}`, you'll overwrite Unraid's object and break functionality like auto-refresh and status polling. Always use a plugin-specific name like `myPluginTimers` to avoid this collision.
