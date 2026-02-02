@@ -19,9 +19,7 @@
 
 ---
 
-## 🌐 [**Read the Documentation →**](https://mstrhakr.github.io/unraid-plugin-docs/)
-
-> **📚 The full documentation is available at: [mstrhakr.github.io/unraid-plugin-docs](https://mstrhakr.github.io/unraid-plugin-docs/)**
+## 🌐 [**Read the Documentation →**](https://plugin-docs.mstrhakr.com/)
 
 ---
 
