@@ -25,7 +25,10 @@ For each event, scripts are executed in this order:
 1. **any_event handlers** - Scripts in `event/any_event/` or `event/any_event` receive ALL events
 2. **Specific event handlers** - Scripts matching the event name
 
-Plugins are processed alphabetically by plugin name.
+Plugins are processed **alphabetically by plugin folder name** (ASCII sort order).
+
+{: .note }
+> If your plugin depends on another plugin's event handler running first, you can prefix your plugin name with a character that sorts after the dependency. For example, `z-myplugin` would run after `compose.manager`. However, relying on execution order is fragile—design your event handlers to be independent when possible.
 
 ## Available Events
 
@@ -250,9 +253,42 @@ The emhttp process waits for event scripts to complete. For long tasks:
 sleep 60
 do_long_task
 
-# Good - runs in background
+# Good - runs in background using &
 do_long_task &
 ```
+
+### Using the `at` Command for Background Processes
+
+For more reliable background execution (especially when the parent process may exit), use the `at` command which schedules a job to run independently:
+
+```bash
+#!/bin/bash
+# Using 'at' command - most reliable for background tasks
+
+# Schedule task to run immediately but independently
+echo "/usr/local/emhttp/plugins/myplugin/scripts/long_task.sh" | at now
+
+# With logging
+echo "/usr/local/emhttp/plugins/myplugin/scripts/long_task.sh >> /var/log/myplugin.log 2>&1" | at now
+```
+
+### Using `nohup` for Background Processes
+
+The `nohup` command prevents the process from being killed when the parent exits:
+
+```bash
+#!/bin/bash
+# Using nohup - process continues even if parent exits
+
+nohup /usr/local/emhttp/plugins/myplugin/scripts/long_task.sh > /var/log/myplugin.log 2>&1 &
+
+# Disown to fully detach from shell
+nohup /usr/local/emhttp/plugins/myplugin/scripts/long_task.sh > /var/log/myplugin.log 2>&1 &
+disown
+```
+
+{: .note }
+> The `at` command is generally preferred over `nohup &` because it creates a completely independent process that won't be affected by signal propagation when emhttp continues execution.
 
 ### 2. Use Logger for Debugging
 

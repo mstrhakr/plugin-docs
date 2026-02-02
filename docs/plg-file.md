@@ -204,6 +204,32 @@ The `<LOCAL>` element copies a previously downloaded file:
 
 This caches files on the USB flash so they don't need to be re-downloaded on each boot.
 
+### Embedding Base64 Content
+
+For small files like icons, you can embed them directly in the PLG file using base64 encoding:
+
+```xml
+<FILE Name="/usr/local/emhttp/plugins/myplugin/images/icon.png" Type="base64">
+<INLINE>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA...
+</INLINE>
+</FILE>
+```
+
+The `Type="base64"` attribute tells the plugin system to decode the content before writing the file.
+
+**When to use base64 embedding:**
+- Small icons (< 10KB recommended)
+- Files that rarely change
+- Reducing external dependencies during install
+
+**Generate base64 content:**
+```bash
+base64 -w 0 icon.png
+# Or with line wrapping (easier to read in PLG)
+base64 icon.png
+```
+
 ## Method Attribute
 
 The `Method` attribute controls when a FILE element is processed:

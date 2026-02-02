@@ -172,3 +172,32 @@ The DocTest plugin validates:
 ## Next Steps
 
 Ready to build your first plugin? Continue to [Your First Plugin](getting-started.md) for a hands-on tutorial.
+
+## Learning Resources
+
+The best way to learn Unraid plugin development is to study existing plugins:
+
+### System Scripts
+
+The `/usr/local/sbin/` directory contains many Unraid system scripts that demonstrate patterns:
+- `emhttp_event` - How events are dispatched to plugins
+- `notify` - Notification system internals
+- Various utility scripts
+
+### Reference Plugins
+
+- **[Dynamix plugins](https://github.com/unraid/dynamix)** - Official Unraid plugins (the reference implementation)
+- **[Community Applications](https://github.com/Squidly271/community.applications)** - Complex PHP patterns
+- **[Compose Manager](https://github.com/dcflachs/compose_plugin)** - Docker Compose integration example
+
+### Community Resources
+
+- **[Unraid Forums - Plugin Support](https://forums.unraid.net/forum/index.php?board=45.0)** - Get help from the community
+- **[Unraid Forums - Programming](https://forums.unraid.net/forum/index.php?board=79.0)** - Technical discussions
+
+### Key Forum Threads
+
+These foundational posts contain detailed plugin development information:
+
+- [How does the plugin system work?](https://forums.unraid.net/topic/38582-how-does-the-plugin-system-work-documentation-added/) - Comprehensive PLG structure guide
+- [Plugin System Documentation](https://forums.unraid.net/topic/52623-plugin-system-documentation/) - Links to essential resources

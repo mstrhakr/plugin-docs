@@ -313,6 +313,8 @@ function my_time($timestamp = null) {
 
 ## Loading States and Spinners
 
+### Standard Spinner CSS
+
 ```html
 <!-- Standard Dynamix loading spinner -->
 <div class="spinner"></div>
@@ -332,6 +334,60 @@ function hideLoading() {
 }
 </script>
 ```
+
+### showStatus() Function
+
+The `showStatus()` function displays a spinning status indicator in the page header during long-running operations:
+
+```javascript
+// Show status indicator with message
+showStatus('Processing...');
+
+// Your long-running operation
+$.post('/plugins/myplugin/action.php', data, function(response) {
+    // Hide status when done
+    hideStatus();
+});
+```
+
+### openBox() Function
+
+The `openBox()` function opens a modal dialog box that typically displays command output or progress:
+
+```javascript
+// Open a modal with content
+// openBox(content, title, height, width, showCloseButton)
+openBox(htmlContent, "Operation Title", 600, 800, true);
+
+// Common pattern: Execute command and show output
+$.post('/plugins/myplugin/exec.php', {action: 'runCommand'}, function(data) {
+    if (data) {
+        openBox(data, "Command Output", 600, 800, true);
+    }
+});
+```
+
+**Parameters:**
+- `content` - HTML content to display in the modal
+- `title` - Title shown in the modal header
+- `height` - Modal height in pixels
+- `width` - Modal width in pixels
+- `showCloseButton` - Boolean to show/hide the close button
+
+### Progress Frame Pattern
+
+Many plugins use an iframe named `progressFrame` to display command output:
+
+```html
+<form method="POST" action="/plugins/myplugin/action.php" target="progressFrame">
+    <input type="hidden" name="csrf_token" value="<?=$var['csrf_token']?>">
+    <input type="submit" value="Run Action">
+</form>
+
+<!-- The progressFrame receives form submissions -->
+```
+
+When the form targets `progressFrame`, the response is displayed in a dedicated progress area rather than replacing the current page.
 
 ## Page Structure Integration
 
