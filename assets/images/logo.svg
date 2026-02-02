@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 163.34011 30.623875"
+   viewBox="0 0 184.52254 30.747748"
    version="1.1"
    id="svg6"
    sodipodi:docname="logo.svg"
-   width="163.3401"
-   height="30.623875"
+   width="184.52254"
+   height="30.747747"
    inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -23,8 +23,8 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="true"
      inkscape:zoom="8.0727273"
-     inkscape:cx="90.613739"
-     inkscape:cy="17.156532"
+     inkscape:cx="51.96509"
+     inkscape:cy="17.280405"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -34,8 +34,8 @@
     <inkscape:grid
        id="grid6"
        units="px"
-       originx="-14.27027"
-       originy="-4.891892"
+       originx="-3.6171171"
+       originy="-4.7680181"
        spacingx="1"
        spacingy="1"
        empcolor="#0099e5"
@@ -103,7 +103,7 @@
        y1="3.9604862"
        x2="22.582455"
        y2="3.9604862"
-       gradientTransform="matrix(0.58673869,0,0,1.7043362,-2.75,-6.75)"
+       gradientTransform="matrix(0.58673869,0,0,1.7043362,-2.7499999,-6.75)"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
@@ -113,7 +113,7 @@
        y1="16.746983"
        x2="55.225407"
        y2="16.746983"
-       gradientTransform="matrix(1.7169513,0,0,0.58242769,-14.27027,-4.8918919)"
+       gradientTransform="matrix(1.7169513,0,0,0.58242769,-3.6171169,-4.768018)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <!-- Left bracket accent -->
@@ -127,8 +127,8 @@
      style="stroke:url(#linearGradient6)" />
   <!-- Plugin text -->
   <text
-     x="3.7297299"
-     y="24.108109"
+     x="14.382883"
+     y="24.231983"
      font-family="system-ui, '-apple-system', 'Segoe UI', sans-serif"
      font-size="26px"
      font-weight="700"
@@ -137,8 +137,8 @@
      style="fill:url(#linearGradient7)">Plugin</text>
   <!-- Separator dash -->
   <rect
-     x="86.403152"
-     y="14.222973"
+     x="97.056305"
+     y="14.346847"
      width="12"
      height="3"
      rx="1.5"
@@ -146,8 +146,8 @@
      id="rect4" />
   <!-- Docs text -->
   <text
-     x="100.91667"
-     y="24.479731"
+     x="111.56982"
+     y="24.603605"
      font-family="system-ui, '-apple-system', 'Segoe UI', sans-serif"
      font-size="26px"
      font-weight="400"
@@ -155,7 +155,7 @@
      id="text5">Docs</text>
   <!-- Right bracket accent -->
   <path
-     d="M 162.0901,1.3738739 V 29.373874 m 0,-28.0000001 h -8 m 8,28.0000001 h -8"
+     d="M 183.27253,1.4977478 V 29.497748 m 0,-28.0000002 h -8 m 8,28.0000002 h -8"
      stroke="#ffffff"
      stroke-width="2.5"
      fill="none"
