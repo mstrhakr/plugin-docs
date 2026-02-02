@@ -12,7 +12,10 @@ mermaid: true
   <span>Build your first Unraid plugin step-by-step</span>
 </p>
 
-This tutorial walks you through creating a simple "Hello World" Unraid plugin from scratch.
+This tutorial walks you through creating a simple "Hello World" Unraid plugin. You can follow along step-by-step to understand how plugins are structured, or start from a template repository to move faster.
+
+## Template Repository
+https://github.com/dkaser/unraid-plugin-template
 
 ## What We'll Build
 
