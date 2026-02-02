@@ -10,10 +10,10 @@ mermaid: true
 {: .note }
 > Unraid® is a registered trademark of Lime Technology, Inc. This documentation is not affiliated with Lime Technology, Inc.
 
-This tutorial walks you through creating a simple "Hello World" Unraid plugin. You can follow along step-by-step to understand how plugins are structured, or start from a template repository to move faster.
+This tutorial walks you through creating a simple "Hello World" Unraid plugin. You can follow along step-by-step to understand how plugins are structured, or use a template repository to move faster.
 
-## Template Repository
-https://github.com/dkaser/unraid-plugin-template
+{: .tip }
+> **Want to skip the manual setup?** The [Unraid Plugin Template](https://github.com/dkaser/unraid-plugin-template) provides a ready-to-use starting point with GitHub Actions, code quality tools, and automated versioning. Click "Use this template" on GitHub, run the `customize.sh` script, and you're ready to go.
 
 ## What We'll Build
 

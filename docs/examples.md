@@ -13,6 +13,29 @@ Learning from existing plugins is one of the best ways to understand Unraid plug
 >
 > ![Example plugins](../assets/images/screenshots/example-plugins.png)
 
+## Starting From a Template
+
+### Unraid Plugin Template (by @dkaser)
+
+The best way to start a new plugin. A GitHub template repository with everything you need.
+
+- **Repository**: [dkaser/unraid-plugin-template](https://github.com/dkaser/unraid-plugin-template)
+- **Good for**: New plugin development, proper project structure, CI/CD setup
+
+**Key features:**
+- GitHub Actions workflow for automated builds and releases
+- Code quality tools (phpstan for bug detection, php-cs-fixer for formatting)
+- Automated `customize.sh` script for quick setup
+- Proper YYYY.MM.DD versioning with same-day release support
+- diagnostics.json support for troubleshooting
+- commitlint for consistent commit messages
+
+**How to use:**
+1. Click "Use this template" on GitHub
+2. Run `./customize.sh` to personalize
+3. Enable GitHub Actions in repository settings
+4. Create a release to build your first package
+
 ## Recommended for Learning
 
 ### Dynamix Plugins (by @bonienl)

@@ -264,6 +264,9 @@ esac
 
 <img src="../assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="40" align="right">
 
+{: .tip }
+> **Starting fresh?** The [Unraid Plugin Template](https://github.com/dkaser/unraid-plugin-template) includes a complete GitHub Actions workflow out of the box—just enable Actions and create a release.
+
 {: .note }
 > See the [DocTest plugin CI/CD workflow](https://github.com/mstrhakr/plugin-docs/blob/main/.github/workflows/plugin-release.yml) for a complete working example used by this documentation project.
 
