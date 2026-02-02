@@ -34,9 +34,6 @@ color_scheme: dark
 mermaid:
   version: "10.6.0"
 
-# Logo
-logo: "/assets/images/logo.svg"
-
 # Aux links (top right)
 aux_links:
   "View on GitHub":
