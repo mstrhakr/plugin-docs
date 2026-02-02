@@ -10,9 +10,9 @@ This section covers how to distribute and publish your Unraid plugins.
 
 ## Topics
 
-- [Community Applications](community-applications.md) - Getting listed in the CA plugin store
-- [Hosting Your Plugin](hosting.md) - Where to host your plugin files
-- [Support Resources](support.md) - Providing user support
+- [Community Applications](community-applications) - Getting listed in the CA plugin store
+- [Hosting Your Plugin](hosting) - Where to host your plugin files
+- [Support Resources](support) - Providing user support
 
 ## Distribution Overview
 
