@@ -179,6 +179,129 @@ $stats = json_decode($output[0], true);
 ?>
 ```
 
+## Container Terminal Access
+
+Unraid® provides a built-in `openTerminal()` JavaScript function for opening container console sessions and viewing container logs in a popup window. This function handles spawning the ttyd terminal server and opening the WebSocket connection.
+
+### The openTerminal Function
+
+The global `openTerminal(tag, name, more)` function is defined in Unraid's core JavaScript (HeadInlineJS.php) and is available on all pages.
+
+| Parameter | Description | Values |
+|-----------|-------------|--------|
+| `tag` | Terminal type | `'docker'` for containers, `'ttyd'` or `'syslog'` for system |
+| `name` | Container name | Must match Docker container name exactly |
+| `more` | Shell or log flag | Shell command (e.g., `'bash'`, `'sh'`) or `'.log'` for logs |
+
+### Opening Container Console
+
+To open an interactive shell session in a container:
+
+```javascript
+// Open bash console in a container
+openTerminal('docker', 'mycontainer', 'bash');
+
+// Open sh console (for containers without bash)
+openTerminal('docker', 'mycontainer', 'sh');
+```
+
+### Viewing Container Logs
+
+To open a live-streaming log viewer for a container, pass `'.log'` as the third parameter:
+
+```javascript
+// Open container logs in a terminal window
+openTerminal('docker', 'mycontainer', '.log');
+```
+
+{: .important }
+> The `'.log'` value must include the leading dot. This tells Unraid to open a log viewer instead of a shell session.
+
+### How It Works Internally
+
+When `openTerminal()` is called, it:
+
+1. **Sanitizes the name**: Replaces spaces and `#` characters with underscores
+2. **Opens a popup window**: Creates a sized popup for the terminal
+3. **Calls OpenTerminal.php**: Makes an AJAX request to `/webGui/include/OpenTerminal.php` which spawns the ttyd process
+4. **Navigates to socket URL**: After a short delay, redirects the popup to the WebSocket URL:
+   - Logs: `/logterminal/{name}.log/`
+   - Console: The function constructs the appropriate webterminal URL
+
+```javascript
+// Simplified view of what openTerminal does internally
+function openTerminal(tag, name, more) {
+  name = name.replace(/[ #]/g, "_");
+  var popup = window.open('', name + (more == '.log' ? more : ''), 'width=1200,height=800');
+  
+  // Determine socket URL
+  var socket = '/logterminal/' + name + (more == '.log' ? more : '') + '/';
+  
+  // Spawn ttyd process then navigate
+  $.get('/webGui/include/OpenTerminal.php', {tag: tag, name: name, more: more}, function() {
+    setTimeout(function() {
+      popup.location = socket;
+    }, 200);
+  });
+}
+```
+
+### Using in Plugin Context Menus
+
+When building container context menus (like the Docker tab does), you can add Console and Logs options:
+
+```javascript
+// Adding terminal options to a context menu
+var opts = [];
+
+// Console option (only when container is running)
+if (isRunning) {
+  opts.push({
+    text: 'Console',
+    icon: 'fa-terminal',
+    action: function(e) {
+      e.preventDefault();
+      openTerminal('docker', containerName, shell || 'bash');
+    }
+  });
+}
+
+// Logs option
+opts.push({
+  text: 'Logs',
+  icon: 'fa-navicon',
+  action: function(e) {
+    e.preventDefault();
+    openTerminal('docker', containerName, '.log');
+  }
+});
+
+context.attach('#' + elementId, opts);
+```
+
+### Dashboard Tiles and openTerminal
+
+On dashboard tiles, the global `openTerminal` function may not be available if `docker.js` isn't loaded. Check for its existence before calling, or use a fallback:
+
+```javascript
+function openContainerTerminal(name, isLogs, shell) {
+  if (typeof window.openTerminal === 'function') {
+    // Use Unraid's built-in function
+    window.openTerminal('docker', name, isLogs ? '.log' : (shell || 'sh'));
+  } else {
+    // Fallback: open terminal URL directly (less reliable)
+    var safeName = name.replace(/[ #]/g, '_');
+    var url = isLogs
+      ? '/logterminal/' + encodeURIComponent(safeName) + '.log/'
+      : '/webterminal/docker/';
+    window.open(url, '_blank');
+  }
+}
+```
+
+{: .warning }
+> The fallback method of directly opening the URL may not work reliably because it doesn't call `OpenTerminal.php` to spawn the ttyd process first. Always prefer using the global `openTerminal()` function when available.
+
 ## Working with Images
 
 Common image operations including listing, pulling, and removing. When pulling images, redirect stderr to capture progress output. Always check return values for error handling.

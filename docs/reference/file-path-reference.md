@@ -393,3 +393,17 @@ VAR_FILE="/var/local/emhttp/var.ini"
 - [Plugin Settings Storage](../core/plugin-settings-storage.md)
 - [PLG File Reference](../plg-file.md)
 - [Var Array Reference](var-array-reference.md)
+
+## Web Terminal URLs
+
+Unraid provides terminal access via ttyd WebSocket URLs. These are used by the `openTerminal()` JavaScript function (see [Docker Integration - Container Terminal Access](../advanced/docker-integration.md#container-terminal-access)).
+
+| URL Pattern | Description |
+|-------------|-------------|
+| `/logterminal/{container}.log/` | Container log viewer (live streaming) |
+| `/webterminal/docker/{container}/{shell}/` | Container console shell |
+| `/webterminal/ttyd/` | System terminal |
+| `/webterminal/syslog/` | System log viewer |
+
+{: .important }
+> Don't navigate to these URLs directly. Use the `openTerminal()` JavaScript function which calls `/webGui/include/OpenTerminal.php` to spawn the ttyd process first.
