@@ -17,6 +17,7 @@ This section covers advanced plugin development topics for more complex integrat
 ## Development & Debugging
 
 - [Debugging Techniques]({% link docs/advanced/debugging-techniques.md %}) - Logging, error handling, dev tools
+- [Testing Plugins]({% link docs/advanced/testing.md %}) - Unit testing, static analysis, CI/CD
 
 ## Distribution
 
