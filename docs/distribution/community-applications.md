@@ -121,7 +121,7 @@ Ensure your plugin:
 
 ### 2. Create Support Thread
 
-Create a support thread on the [Unraid Forums](https://forums.unraid.net/forum/90-plugin-support/):
+Create a support thread on the [Unraid Forums](https://forums.unraid.net/forum/61-plugin-support/):
 - Choose an appropriate subforum
 - Include installation instructions
 - Document features and usage
