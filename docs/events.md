@@ -200,7 +200,7 @@ COMPOSE_WRAPPER=/usr/local/emhttp/plugins/compose.manager/scripts/compose.sh
 # Process each project directory
 for dir in $COMPOSE_ROOT/*; do
     if [ -d "$dir" ]; then
-        if [ -f "$dir/docker-compose.yml" ]; then
+        if [ -f "$dir/compose.yaml" ]; then
             if [ -f "$dir/autostart" ]; then
                 name=$(< "${dir}/name")
                 logger "Starting compose stack: ${name}"

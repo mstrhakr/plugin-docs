@@ -57,12 +57,12 @@ setup() {
 }
 
 @test "parse_stack_name extracts name from path" {
-    result=$(parse_stack_name "/mnt/user/appdata/mystack/docker-compose.yml")
+    result=$(parse_stack_name "/mnt/user/appdata/mystack/compose.yaml")
     [ "$result" = "mystack" ]
 }
 
 @test "validate_compose_file detects missing file" {
-    run validate_compose_file "/nonexistent/docker-compose.yml"
+    run validate_compose_file "/nonexistent/compose.yaml"
     [ "$status" -eq 1 ]
 }
 ```
