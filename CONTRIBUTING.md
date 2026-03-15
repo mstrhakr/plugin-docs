@@ -9,6 +9,7 @@ Thank you for your interest in contributing! This documentation is a community e
 ### Report Issues
 
 Found an error or something unclear? [Open an issue](../../issues) with:
+
 - A clear description of the problem
 - The page/section affected
 - Suggested correction (if you have one)
@@ -41,11 +42,13 @@ Have knowledge to share? Pull requests are welcome:
 
 - Use proper Markdown formatting
 - Include code blocks with language hints:
+
   ```php
   <?php
   // PHP code here
   ?>
   ```
+
 - Use tables for reference information
 - Include diagrams for complex concepts (ASCII art is fine)
 
@@ -61,7 +64,7 @@ Each documentation page should have:
 
 ### File Organization
 
-```
+```text
 docs/
 ├── introduction.md      # Getting started
 ├── plg-file.md          # PLG file reference
