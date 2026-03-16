@@ -674,6 +674,37 @@ $(window).on('beforeunload', function() {
 });
 ```
 
+### Plugin Update UI: Use Built-In Helpers
+
+For plugin update checks and status display, prefer Unraid's built-in Plugin Manager helpers instead of custom JavaScript tables and polling logic.
+
+```php
+<?
+$docroot ??= ($_SERVER['DOCUMENT_ROOT'] ?: '/usr/local/emhttp');
+require_once "$docroot/plugins/dynamix.plugin.manager/include/PluginHelpers.php";
+
+// Renders the same style of install/update/remove controls used by core pages.
+echo make_link('update', 'yourplugin.plg');
+?>
+```
+
+```javascript
+// Built-in API used by core plugin manager pages for update checks.
+$.post('/plugins/dynamix.plugin.manager/scripts/PluginAPI.php', {
+    action: 'checkPlugin',
+    options: {
+        plugin: 'yourplugin.plg',
+        name: 'Your Plugin'
+    }
+}, function(response) {
+    if (response.updateAvailable) {
+        // Show your preferred indicator or enable update action.
+    }
+}, 'json');
+```
+
+This keeps behavior aligned with core Unraid update handling and avoids duplicating fragile check/update code paths.
+
 ### Async Loading for Expensive Operations
 
 Operations like listing Docker containers or checking update status can take several seconds. If you run these synchronously during page load, the user sees a blank or frozen page. Instead, render the page shell immediately with a placeholder, then fetch expensive data via AJAX.
@@ -688,7 +719,6 @@ function loadList() {
     myPluginTimers.load = setTimeout(function(){
         $('div.spinner.fixed').show('slow');
     }, 500);
-    
     $.get('/plugins/myplugin/php/list.php', function(data) {
         clearTimeout(myPluginTimers.load);
         $('#list-container').html(data);
