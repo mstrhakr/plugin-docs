@@ -25,8 +25,11 @@ The `$Dynamix` array contains essential configuration and state information abou
 // Access the Dynamix configuration
 global $Dynamix;
 
-// Example: Check current theme
-$theme = $Dynamix['theme'];
+// Exported variables like $theme are already available in page files
+// and mirror values from $Dynamix.
+if ($theme === 'black') {
+    // dark theme logic
+}
 ?>
 ```
 
@@ -89,9 +92,6 @@ $formattedNumber = number_format($value, 2, $decimal, $thousands);
 
 ```php
 <?
-global $Dynamix;
-
-$theme = $Dynamix['theme'];
 $isDarkTheme = in_array($theme, ['black', 'gray']);
 ?>
 
@@ -109,6 +109,9 @@ $isDarkTheme = in_array($theme, ['black', 'gray']);
 <?endif;?>
 </style>
 ```
+
+{: .note }
+> In `.page` files, variables like `$theme` are already exported. Avoid reassigning or mutating these shared variables.
 
 ### Theme CSS Variables
 
