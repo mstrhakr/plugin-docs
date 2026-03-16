@@ -41,25 +41,26 @@ The template file describes your plugin to Community Applications. It contains d
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<Containers>
-    <Plugin>
-        <Name>My Plugin Name</Name>
-        <PluginURL>https://raw.githubusercontent.com/username/repo/main/myplugin.plg</PluginURL>
-        <PluginAuthor>Your Name</PluginAuthor>
-        <Description>
+<Plugin>
+    <Name>My Plugin Name</Name>
+    <PluginURL>https://raw.githubusercontent.com/username/repo/main/myplugin.plg</PluginURL>
+    <PluginAuthor>Your Name</PluginAuthor>
+    <Description>
 A brief description of what your plugin does. This appears in search results.
 
 A longer description can follow. Use plain text, basic formatting is supported.
-        </Description>
-        <Icon>https://raw.githubusercontent.com/username/repo/main/icon.png</Icon>
-        <Category>Tools: Productivity:</Category>
-        <Support>https://forums.unraid.net/topic/12345-my-plugin-support/</Support>
-        <Project>https://github.com/username/repo</Project>
-        <MinVer>6.9.0</MinVer>
-        <MaxVer>7.99</MaxVer>
-    </Plugin>
-</Containers>
+    </Description>
+    <Icon>https://raw.githubusercontent.com/username/repo/main/icon.png</Icon>
+    <Category>Tools: Productivity:</Category>
+    <Support>https://forums.unraid.net/topic/12345-my-plugin-support/</Support>
+    <Project>https://github.com/username/repo</Project>
+    <MinVer>6.9.0</MinVer>
+    <MaxVer>7.99</MaxVer>
+</Plugin>
 ```
+
+{: .note }
+> Use either a `Plugin` root or a `Containers` root format expected by the target CA template type. Do not nest `<Plugin>` inside `<Containers>` for plugin templates.
 
 ### Template Elements
 
