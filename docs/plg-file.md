@@ -186,6 +186,38 @@ echo "Done!"
 </FILE>
 ```
 
+{: .warning }
+> Any non-zero exit code from an `<INLINE>` block aborts installation/update. If your script may hit non-fatal failures, handle them and end with a successful exit status.
+
+```xml
+<FILE Run="/bin/bash">
+<INLINE>
+set +e
+some_optional_command || true
+echo "Continuing install"
+exit 0
+</INLINE>
+</FILE>
+```
+
+### Version-Gated Sections with `min` and `max`
+
+Individual `<FILE>` sections support `min` and `max` attributes to conditionally execute or download based on OS version.
+
+```xml
+<!-- Only processed on Unraid 7.0.0+ -->
+<FILE Name="/boot/config/plugins/myplugin/newer-only.txz" min="7.0.0">
+<URL>https://example.com/newer-only.txz</URL>
+</FILE>
+
+<!-- Only processed on Unraid 6.12.x and below -->
+<FILE Run="/bin/bash" max="6.12.99">
+<INLINE>
+echo "Legacy compatibility step"
+</INLINE>
+</FILE>
+```
+
 ### Using LOCAL for Caching
 
 The `<LOCAL>` element copies a previously downloaded file:
