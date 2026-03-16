@@ -9,7 +9,7 @@ nav_order: 7
 
 ## Overview
 
-Plugins can add scheduled tasks using cron. Unraid uses the standard cron daemon with files in `/etc/cron.d/`. Additionally, Unraid provides a built-in **Dynamix Scheduler** that offers a GUI-based interface for managing scheduled tasks.
+Plugins can add scheduled tasks using cron. Unraid uses the standard cron daemon with files in `/etc/cron.d/`. For plugin-managed cron entries, the simplest persistent pattern is storing a file like `/boot/config/plugins/yourplugin/yourplugin.cron` and calling `update_cron` after changes. Additionally, Unraid provides a built-in **Dynamix Scheduler** that offers a GUI-based interface for managing scheduled tasks.
 
 ## Methods for Scheduling Tasks
 
@@ -17,9 +17,28 @@ There are three primary ways to schedule tasks in Unraid:
 
 | Method | Best For | Persistence |
 |--------|----------|-------------|
+| `/boot/config/plugins/<plugin>/<plugin>.cron` | Plugin-owned cron entries | Persistent on flash |
 | `/etc/cron.d/` files | System-level tasks | Recreate on boot |
 | Dynamix Scheduler | User-configurable tasks | Automatic via GUI |
 | User Scripts plugin | User-defined scripts | Via plugin settings |
+
+## Recommended: Plugin Cron File + `update_cron`
+
+Store your cron line in a plugin-owned file on flash and let `update_cron` sync it into active cron state.
+
+```xml
+<FILE Name="/boot/config/plugins/yourplugin/yourplugin.cron">
+<INLINE>
+0 * * * * root /usr/local/emhttp/plugins/yourplugin/scripts/hourly.sh &gt;/dev/null 2&gt;&amp;1
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+/usr/local/sbin/update_cron
+</INLINE>
+</FILE>
+```
 
 ## Adding a Cron Job via /etc/cron.d/
 
@@ -48,12 +67,14 @@ For dynamic schedules or conditional cron jobs, create/remove the cron file from
 
 case "$1" in
   'start')
-    # Create cron job
-    echo "*/5 * * * * root /usr/local/emhttp/plugins/yourplugin/check.sh" > /etc/cron.d/yourplugin
+    # Create/update persistent cron file
+    echo "*/5 * * * * root /usr/local/emhttp/plugins/yourplugin/check.sh" > /boot/config/plugins/yourplugin/yourplugin.cron
+    /usr/local/sbin/update_cron
     ;;
   'stop')
-    # Remove cron job
-    rm -f /etc/cron.d/yourplugin
+    # Remove persistent cron file and refresh cron
+    rm -f /boot/config/plugins/yourplugin/yourplugin.cron
+    /usr/local/sbin/update_cron
     ;;
 esac
 ```
