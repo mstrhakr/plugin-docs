@@ -97,29 +97,31 @@ if (file_exists($path)) {
 
 ## Reading Configuration
 
-### With Defaults (Recommended Pattern)
+### With `default.cfg` (Recommended Pattern)
 
 ```php
 <?
-// Define defaults
-$defaults = [
-    'enabled' => 'no',
-    'interval' => '60',
-    'path' => '/mnt/user/appdata',
-    'notify_level' => 'normal',
-    'log_enabled' => 'no',
-    'max_log_size' => '1048576'
-];
-
-// Read config and merge with defaults
+// Keep defaults in:
+// /usr/local/emhttp/plugins/yourplugin/default.cfg
+// parse_plugin_cfg() merges defaults with user config automatically.
 $cfg = parse_plugin_cfg("yourplugin");
-$settings = array_merge($defaults, $cfg);
 
-// Now $settings always has all keys
-$enabled = $settings['enabled'];
-$interval = $settings['interval'];
+// $cfg already includes defaults for any missing keys.
+$enabled = $cfg['enabled'] === 'yes';
+$interval = intval($cfg['interval']);
 ?>
 ```
+
+```ini
+# /usr/local/emhttp/plugins/yourplugin/default.cfg
+enabled="no"
+interval="60"
+path="/mnt/user/appdata"
+notify_level="normal"
+```
+
+{: .note }
+> Keep defaults in `default.cfg` (under `/usr/local/emhttp/plugins/<plugin>/`) instead of recreating default values in each PHP script.
 
 ### Type-Safe Access
 
@@ -143,11 +145,24 @@ if (!is_dir($path)) {
 
 ## Writing Configuration
 
+When handling form submissions or AJAX writes, validate the CSRF token before saving settings. See [CSRF Tokens](csrf-tokens.md) for the full pattern and background.
+
 ### Basic Write Pattern
 
 ```php
 <?
 // /plugins/yourplugin/update.php
+
+function save_plugin_cfg($plugin, $settings) {
+    $cfg_file = "/boot/config/plugins/$plugin/$plugin.cfg";
+    $config = "";
+
+    foreach ($settings as $key => $value) {
+        $config .= "$key=\"$value\"\n";
+    }
+
+    return file_put_contents($cfg_file, $config) !== false;
+}
 
 // Validate CSRF
 $var = parse_ini_file('/var/local/emhttp/var.ini');
@@ -155,17 +170,12 @@ if ($_POST['csrf_token'] !== $var['csrf_token']) {
     die("Invalid CSRF token");
 }
 
-// Define config file path
-$cfg_file = "/boot/config/plugins/yourplugin/yourplugin.cfg";
-
-// Build configuration content
-$config = "";
-$config .= "enabled=\"{$_POST['enabled']}\"\n";
-$config .= "interval=\"{$_POST['interval']}\"\n";
-$config .= "path=\"{$_POST['path']}\"\n";
-
-// Write to file
-file_put_contents($cfg_file, $config);
+// Use the helper
+save_plugin_cfg("yourplugin", [
+    'enabled' => $_POST['enabled'],
+    'interval' => $_POST['interval'],
+    'path' => $_POST['path']
+]);
 ?>
 ```
 
@@ -174,11 +184,6 @@ file_put_contents($cfg_file, $config);
 ```php
 <?
 // /plugins/yourplugin/update.php
-
-$var = parse_ini_file('/var/local/emhttp/var.ini');
-if ($_POST['csrf_token'] !== $var['csrf_token']) {
-    die("Invalid CSRF token");
-}
 
 /**
  * Escape value for INI file
@@ -190,30 +195,43 @@ function escapeIniValue($value) {
     return $value;
 }
 
-$cfg_file = "/boot/config/plugins/yourplugin/yourplugin.cfg";
+function save_plugin_cfg($plugin, $settings) {
+    $cfg_file = "/boot/config/plugins/$plugin/$plugin.cfg";
+
+    $config = "";
+    foreach ($settings as $key => $value) {
+        $key = preg_replace('/[^a-zA-Z0-9_]/', '', $key);
+        $config .= "$key=\"" . escapeIniValue($value) . "\"\n";
+    }
+
+    $dir = dirname($cfg_file);
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+
+    $temp_file = $cfg_file . '.tmp';
+    if (file_put_contents($temp_file, $config) !== false) {
+        return rename($temp_file, $cfg_file);
+    }
+
+    return false;
+}
+
+$var = parse_ini_file('/var/local/emhttp/var.ini');
+if ($_POST['csrf_token'] !== $var['csrf_token']) {
+    die("Invalid CSRF token");
+}
 
 // Sanitize and validate inputs
 $enabled = in_array($_POST['enabled'], ['yes', 'no']) ? $_POST['enabled'] : 'no';
 $interval = max(1, min(3600, intval($_POST['interval'])));  // 1-3600 range
 $path = trim($_POST['path']);
 
-// Build config
-$config = "";
-$config .= "enabled=\"" . escapeIniValue($enabled) . "\"\n";
-$config .= "interval=\"" . escapeIniValue($interval) . "\"\n";
-$config .= "path=\"" . escapeIniValue($path) . "\"\n";
-
-// Ensure directory exists
-$dir = dirname($cfg_file);
-if (!is_dir($dir)) {
-    mkdir($dir, 0755, true);
-}
-
-// Write atomically (write to temp, then rename)
-$temp_file = $cfg_file . '.tmp';
-if (file_put_contents($temp_file, $config) !== false) {
-    rename($temp_file, $cfg_file);
-}
+save_plugin_cfg("yourplugin", [
+    'enabled' => $enabled,
+    'interval' => $interval,
+    'path' => $path
+]);
 ?>
 ```
 
@@ -264,66 +282,40 @@ save_plugin_cfg("yourplugin", [
 ?>
 ```
 
-## Default File Creation
+## Default File Strategy
 
-### Creating Defaults on Install (PLG)
+Use two files with clear responsibilities:
 
-```xml
-<!-- In your .plg file -->
-<FILE Name="/boot/config/plugins/yourplugin/yourplugin.cfg">
-<INLINE>
+- `/usr/local/emhttp/plugins/yourplugin/default.cfg` for shipped defaults
+- `/boot/config/plugins/yourplugin/yourplugin.cfg` for user overrides
+
+`parse_plugin_cfg("yourplugin")` handles merging, so you do not need to rewrite defaults at runtime.
+
+### Shipping `default.cfg` in Your Package
+
+Install `default.cfg` as part of your plugin package so it is available in `/usr/local/emhttp/plugins/yourplugin/`.
+
+```ini
+# /usr/local/emhttp/plugins/yourplugin/default.cfg
 enabled="no"
 interval="60"
 path="/mnt/user/appdata"
 notify_level="normal"
-</INLINE>
-</FILE>
 ```
 
-{: .note }
-> This creates the file only if it doesn't exist. Existing files are preserved on plugin updates.
+### Writing Only User Changes
 
-### Creating Defaults via Script
-
-```xml
-<FILE Run="/bin/bash">
-<INLINE>
-CFG="/boot/config/plugins/yourplugin/yourplugin.cfg"
-if [ ! -f "$CFG" ]; then
-    mkdir -p /boot/config/plugins/yourplugin
-    cat > "$CFG" << 'EOF'
-enabled="no"
-interval="60"
-path="/mnt/user/appdata"
-EOF
-fi
-</INLINE>
-</FILE>
-```
-
-### Runtime Default Creation (PHP)
+When saving settings, write only values the user changed into `yourplugin.cfg`.
 
 ```php
 <?
-$cfg_file = "/boot/config/plugins/yourplugin/yourplugin.cfg";
-
-// Create default config if it doesn't exist
-if (!file_exists($cfg_file)) {
-    $defaults = <<<EOT
-enabled="no"
-interval="60"
-path="/mnt/user/appdata"
-notify_level="normal"
-EOT;
-    
-    $dir = dirname($cfg_file);
-    if (!is_dir($dir)) {
-        mkdir($dir, 0755, true);
-    }
-    file_put_contents($cfg_file, $defaults);
-}
-
 $cfg = parse_plugin_cfg("yourplugin");
+
+// Update only user-editable values
+$cfg['enabled'] = $_POST['enabled'];
+$cfg['interval'] = strval(max(1, min(3600, intval($_POST['interval']))));
+
+save_plugin_cfg("yourplugin", $cfg);
 ?>
 ```
 
@@ -446,14 +438,14 @@ $email_notify = $cfg['notifications']['email'];
 
 ## Best Practices
 
-1. **Always provide defaults** - Never assume a setting exists
+1. **Use `default.cfg` for defaults** - Let `parse_plugin_cfg()` merge defaults and user overrides
 2. **Validate before writing** - Sanitize all user input
 3. **Use atomic writes** - Write to temp file, then rename
 4. **Escape values properly** - Handle quotes and special characters
 5. **Version your config format** - Track schema changes for migrations
 6. **Backup before migration** - Preserve user settings when upgrading
 7. **Use consistent naming** - `plugin.cfg` matches plugin name
-8. **Document settings** - Comment your default configuration
+8. **Document settings** - Keep comments and rationale in `default.cfg`
 
 ## Related Topics
 
