@@ -38,3 +38,4 @@ build/
 
 # Gem locks (for different environments)
 Gemfile.lock
+plugin-docs.code-workspace
