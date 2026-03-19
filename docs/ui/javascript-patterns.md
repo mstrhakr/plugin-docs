@@ -628,7 +628,37 @@ $(window).on('beforeunload', function() {
 
 ### Plugin Update UI: Use Built-In Helpers
 
-For plugin update checks and status display, prefer Unraid's built-in Plugin Manager helpers instead of custom JavaScript tables and polling logic.
+For plugin update checks and status display, prefer Unraid's built-in helpers instead of custom JavaScript tables and polling logic.
+
+#### Recommended (Unraid 6.8+ / CA 2019.03.27+)
+
+Unraid 6.8.0+ includes `caPluginUpdateCheck()` in the base OS, so you can just call it directly from your `.page` file and it will handle the check and banner for you.
+
+```javascript
+$(function() {
+  if (typeof caPluginUpdateCheck === 'function') {
+    caPluginUpdateCheck('yourplugin.plg', {name: 'Your Plugin'});
+  }
+});
+```
+
+You can also specify a container element for the banner or use a callback to customize how you display update info:
+
+```javascript
+$(function() {
+  if (typeof caPluginUpdateCheck === 'function') {
+    caPluginUpdateCheck('yourplugin.plg', {element: '.pluginUpdate', name: 'Your Plugin'}, function(data) {
+      if (!data) return;
+      var result = JSON.parse(data);
+      $('#installedVersion').text(result.installedVersion);
+    });
+  }
+});
+```
+
+#### Legacy (pre‑6.8 / when CA is not available)
+
+If `caPluginUpdateCheck` is not available, you can fall back to the core Plugin Manager API:
 
 ```php
 <?
@@ -656,6 +686,11 @@ $.post('/plugins/dynamix.plugin.manager/scripts/PluginAPI.php', {
 ```
 
 This keeps behavior aligned with core Unraid update handling and avoids duplicating fragile check/update code paths.
+
+> **References:**
+>
+> - Forum post: [https://forums.unraid.net/topic/79010-ca-api-for-plugin-update-checks/#findComment-733420](https://forums.unraid.net/topic/79010-ca-api-for-plugin-update-checks/#findComment-733420)
+> - Tracked in issue: [https://github.com/mstrhakr/plugin-docs/issues/3](https://github.com/mstrhakr/plugin-docs/issues/3)
 
 ### Async Loading for Expensive Operations
 
