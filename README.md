@@ -11,7 +11,7 @@
 
 ---
 
-## 🌐 [**Read the Documentation →**](https://plugin-docs.mstrhakr.com/)
+## 🌐 [**Read the Documentation →**](https://plugin-docs.mstrhakr.com/docs/)
 
 ---
 
@@ -27,61 +27,68 @@ This is the **unofficial, community-driven** documentation for developing plugin
 
 New to Unraid® plugin development? Start here:
 
-1. **[Introduction to Plugins](docs/introduction.md)** - What are plugins and how do they work?
-2. **[Plugin File Structure](docs/plg-file.md)** - Anatomy of a `.plg` file
-3. **[Your First Plugin](docs/getting-started.md)** - Step-by-step tutorial
-4. **[Web UI Pages](docs/page-files.md)** - Creating `.page` files for the web GUI
+1. **[Introduction to Plugins](https://plugin-docs.mstrhakr.com/docs/introduction.html)** - What are plugins and how do they work?
+2. **[Plugin File Structure](https://plugin-docs.mstrhakr.com/docs/plg-file.html)** - Anatomy of a `.plg` file
+3. **[Your First Plugin](https://plugin-docs.mstrhakr.com/docs/getting-started.html)** - Step-by-step tutorial
+4. **[Web UI Pages](https://plugin-docs.mstrhakr.com/docs/page-files.html)** - Creating `.page` files for the web GUI
 
 ---
 
 ## 📚 Documentation Index
 
+### Getting Started
+
+| Topic | Description |
+|-------|-------------|
+| [Introduction](https://plugin-docs.mstrhakr.com/docs/introduction.html) | Overview of the Unraid® plugin system |
+| [Your First Plugin](https://plugin-docs.mstrhakr.com/docs/getting-started.html) | Step-by-step tutorial |
+| [Example Plugins](https://plugin-docs.mstrhakr.com/docs/examples.html) | Real-world plugin references |
+
 ### Core Concepts
 
 | Topic | Description |
 |-------|-------------|
-| [Introduction](docs/introduction.md) | Overview of the Unraid® plugin system |
-| [PLG File Reference](docs/plg-file.md) | Complete reference for `.plg` XML structure |
-| [Page Files](docs/page-files.md) | Creating web UI pages (`.page` files) |
-| [Plugin Lifecycle](docs/lifecycle.md) | Installation, updates, and removal |
-| [File System Layout](docs/filesystem.md) | Where files go and why |
+| [PLG File Reference](https://plugin-docs.mstrhakr.com/docs/plg-file.html) | `.plg` installer format & metadata |
+| [Page Files](https://plugin-docs.mstrhakr.com/docs/page-files.html) | Creating web UI pages (`.page` files) |
+| [File System Layout](https://plugin-docs.mstrhakr.com/docs/filesystem.html) | Where plugin files live |
+| [Event System](https://plugin-docs.mstrhakr.com/docs/events.html) | Responding to array and system events |
+| [Plugin Command](https://plugin-docs.mstrhakr.com/docs/plugin-command.html) | Using the `plugin` CLI tool |
 
-### Web UI Development
-
-| Topic | Description |
-|-------|-------------|
-| [Page Headers](docs/page-headers.md) | Menu, Title, Type, Icon, and more |
-| [Dynamix Markdown](docs/dynamix-markdown.md) | The form syntax used in Unraid® UI |
-| [PHP Integration](docs/php-integration.md) | Using PHP in your pages |
-| [JavaScript & AJAX](docs/javascript.md) | Client-side scripting |
-| [CSS & Theming](docs/theming.md) | Styling your plugin UI |
-
-### Events & System Integration
+### UI Development
 
 | Topic | Description |
 |-------|-------------|
-| [Event System](docs/events.md) | Responding to array start/stop, Docker, etc. |
-| [Configuration Files](docs/config-files.md) | Storing and reading plugin settings |
-| [Shell Scripts](docs/shell-scripts.md) | Background tasks and automation |
-| [Docker Integration](docs/docker-integration.md) | Working with Docker containers |
+| [UI Development](https://plugin-docs.mstrhakr.com/docs/ui/index.html) | Overview of UI-related docs |
+| [JavaScript Patterns](https://plugin-docs.mstrhakr.com/docs/ui/javascript-patterns.html) | Common jQuery patterns & AJAX |
+| [Form Controls](https://plugin-docs.mstrhakr.com/docs/ui/form-controls.html) | Standard input elements and styling |
+| [Tab Pages](https://plugin-docs.mstrhakr.com/docs/ui/tab-pages.html) | Multi-tab settings pages |
+| [Icons & Styling](https://plugin-docs.mstrhakr.com/docs/ui/icons-and-styling.html) | FontAwesome, themes, and CSS |
 
-### Packaging & Distribution
+### Advanced Topics
 
 | Topic | Description |
 |-------|-------------|
-| [Package Building](docs/packaging.md) | Creating `.txz` packages |
-| [Versioning](docs/versioning.md) | Version strategies and update checking |
-| [Community Applications](docs/community-apps.md) | Publishing to the CA App Store |
-| [Best Practices](docs/best-practices.md) | Tips from experienced developers |
+| [Advanced Topics](https://plugin-docs.mstrhakr.com/docs/advanced/index.html) | Advanced plugin development guidance |
+| [Docker Integration](https://plugin-docs.mstrhakr.com/docs/advanced/docker-integration.html) | Docker API & container management |
+| [Update Mechanisms](https://plugin-docs.mstrhakr.com/docs/advanced/update-mechanisms.html) | Version checks and auto-updates |
+| [Debugging Techniques](https://plugin-docs.mstrhakr.com/docs/advanced/debugging-techniques.html) | Logging, error handling, dev tools |
+| [Testing](https://plugin-docs.mstrhakr.com/docs/advanced/testing.html) | Testing strategies and tools |
+
+### Distribution
+
+| Topic | Description |
+|-------|-------------|
+| [Distribution & Publishing](https://plugin-docs.mstrhakr.com/docs/distribution/index.html) | How to ship and support your plugin |
+| [Community Applications](https://plugin-docs.mstrhakr.com/docs/distribution/community-applications.html) | Publishing to CA |
+| [Hosting](https://plugin-docs.mstrhakr.com/docs/distribution/hosting.html) | Hosting plugin files |
+| [Support](https://plugin-docs.mstrhakr.com/docs/distribution/support.html) | Supporting users |
 
 ### Reference
 
 | Topic | Description |
 |-------|-------------|
-| [Plugin Command](docs/plugin-command.md) | Using the `plugin` CLI tool |
-| [API Reference](docs/api-reference.md) | Available PHP functions and variables |
-| [Example Plugins](docs/examples.md) | Links to well-documented plugins |
-| [Troubleshooting](docs/troubleshooting.md) | Common issues and solutions |
+| [Plugin Command](https://plugin-docs.mstrhakr.com/docs/plugin-command.html) | Using the `plugin` CLI tool |
+| [Example Plugins](https://plugin-docs.mstrhakr.com/docs/examples.html) | Links to well-documented plugins |
 
 ---
 
@@ -153,7 +160,7 @@ Plugins can respond to system events by placing executable scripts in their `eve
 | `stopped` | Array has stopped |
 | `poll_attributes` | SMART data polled |
 
-See [Event System](docs/events.md) for full details.
+See [Event System](docs/events.html) for full details.
 
 ---
 
@@ -188,7 +195,7 @@ plugin version /var/log/plugins/myplugin.plg
 
 ## 🤝 Contributing
 
-<a href="https://github.com/mstrhakr/plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="48" align="right"></a>
+<a href="https://github.com/docs/mstrhakr/plugin-docs"><img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="48" align="right"></a>
 
 This documentation is a community effort! Contributions are welcome:
 
@@ -203,17 +210,20 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## 📜 Resources & Links
 
 ### Official Resources
+
 - [Unraid® Forums](https://forums.unraid.net/) - The primary community hub
 - [Unraid® Documentation](https://docs.unraid.net/) - Official docs
 - [Plugin Support Forum](https://forums.unraid.net/forum/77-plugin-support/)
 - [Programming Forum](https://forums.unraid.net/forum/57-programming/)
 
 ### Community Developer Resources
-- [Community Applications Plugin](https://github.com/Squidly271/community.applications) - The app store for plugins
-- [Dynamix Plugins](https://github.com/bergware/dynamix) - Reference implementations by @bonienl
+
+- [Community Applications Plugin](https://github.com/docs/Squidly271/community.applications) - The app store for plugins
+- [Dynamix Plugins](https://github.com/docs/bergware/dynamix) - Reference implementations by @bonienl
 - [Plugin Template Discussions](https://forums.unraid.net/topic/52623-plugin-system-documentation/)
 
 ### Historical References
+
 - [How does the plugin system work?](https://forums.unraid.net/topic/33322-how-does-the-plugin-system-work-documentation-added-wip/) - Original documentation (partially outdated)
 
 ---
