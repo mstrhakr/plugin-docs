@@ -555,6 +555,6 @@ The `: ` (colon-space at start of line) creates proper Dynamix field alignment. 
 
 ## Next Steps
 
-- Learn about [Page Headers](page-headers.md) for advanced menu options
-- See [Dynamix Markdown](dynamix-markdown.md) for form syntax details
-- Check [PHP Integration](php-integration.md) for backend development
+- Learn about [Page Headers](page-headers.html) for advanced menu options
+- See [Dynamix Markdown](dynamix-markdown.html) for form syntax details
+- Check [PHP Integration](php-integration.html) for backend development

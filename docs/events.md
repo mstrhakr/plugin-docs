@@ -424,6 +424,6 @@ done
 
 ## Next Steps
 
-- Learn about [Page Files](page-files.md) for creating the web UI
-- See [Shell Scripts](shell-scripts.md) for more scripting patterns
-- Check [Best Practices](best-practices.md) for additional tips
+- Learn about [Page Files](page-files.html) for creating the web UI
+- See [Shell Scripts](shell-scripts.html) for more scripting patterns
+- Check [Best Practices](best-practices.html) for additional tips

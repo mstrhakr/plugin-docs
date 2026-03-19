@@ -262,6 +262,6 @@ Before submitting, test that your plugin installs correctly:
 
 ## Related Topics
 
-- [PLG File Reference](../plg-file.md)
-- [Build and Packaging](../build-and-packaging.md)
-- [Plugin Lifecycle](../advanced/update-mechanisms.md)
+- [PLG File Reference](../plg-file.html)
+- [Build and Packaging](../build-and-packaging.html)
+- [Plugin Lifecycle](../advanced/update-mechanisms.html)

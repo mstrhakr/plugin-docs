@@ -362,6 +362,6 @@ sendNotification(
 
 ## Related Topics
 
-- [Event System](events.md)
-- [Cron Jobs](cron-jobs.md)
-- [rc.d Scripts](rc-d-scripts.md)
+- [Event System](events.html)
+- [Cron Jobs](cron-jobs.html)
+- [rc.d Scripts](rc-d-scripts.html)

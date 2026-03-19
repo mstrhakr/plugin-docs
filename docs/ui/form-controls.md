@@ -673,7 +673,7 @@ $cfg = array_merge($defaults, $cfg);
 
 ## Related Topics
 
-- [CSRF Tokens](../core/csrf-tokens.md)
-- [JavaScript Patterns](javascript-patterns.md)
-- [Icons and Styling](icons-and-styling.md)
-- [Plugin Settings Storage](../core/plugin-settings-storage.md)
+- [CSRF Tokens](../core/csrf-tokens.html)
+- [JavaScript Patterns](javascript-patterns.html)
+- [Icons and Styling](icons-and-styling.html)
+- [Plugin Settings Storage](../core/plugin-settings-storage.html)

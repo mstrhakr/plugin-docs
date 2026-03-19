@@ -439,6 +439,6 @@ exec 2>&1 | logger -t "yourplugin-debug"
 
 ## Related Topics
 
-- [Event System](../events.md)
-- [rc.d Scripts](../core/rc-d-scripts.md)
-- [Cron Jobs](../core/cron-jobs.md)
+- [Event System](../events.html)
+- [rc.d Scripts](../core/rc-d-scripts.html)
+- [Cron Jobs](../core/cron-jobs.html)

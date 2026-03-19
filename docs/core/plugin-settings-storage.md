@@ -145,7 +145,7 @@ if (!is_dir($path)) {
 
 ## Writing Configuration
 
-When handling form submissions or AJAX writes, validate the CSRF token before saving settings. See [CSRF Tokens](csrf-tokens.md) for the full pattern and background.
+When handling form submissions or AJAX writes, validate the CSRF token before saving settings. See [CSRF Tokens](csrf-tokens.html) for the full pattern and background.
 
 ### Basic Write Pattern
 
@@ -449,7 +449,7 @@ $email_notify = $cfg['notifications']['email'];
 
 ## Related Topics
 
-- [Input Validation](../security/input-validation.md)
-- [File System Layout](../filesystem.md)
-- [Form Controls](../ui/form-controls.md)
-- [PLG File Reference](../plg-file.md)
+- [Input Validation](../security/input-validation.html)
+- [File System Layout](../filesystem.html)
+- [Form Controls](../ui/form-controls.html)
+- [PLG File Reference](../plg-file.html)

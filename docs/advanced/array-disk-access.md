@@ -453,11 +453,11 @@ Use event scripts to respond to array state changes:
 | `unmounting_disk` | Before specific disk unmounts | Release handles |
 | `disk_added` | New disk added | Initialize disk |
 
-See [Event Types Reference](../reference/event-types-reference.md) for details.
+See [Event Types Reference](../reference/event-types-reference.html) for details.
 
 ## Related Topics
 
-- [Event System](../events.md)
-- [File System Layout](../filesystem.md)
-- [File Path Reference](../reference/file-path-reference.md)
-- [Var Array Reference](../reference/var-array-reference.md)
+- [Event System](../events.html)
+- [File System Layout](../filesystem.html)
+- [File Path Reference](../reference/file-path-reference.html)
+- [Var Array Reference](../reference/var-array-reference.html)

@@ -220,7 +220,7 @@ $network = parse_ini_file('/var/local/emhttp/network.ini', true);
 
 ### Common $var Properties
 
-See the complete [Var Array Reference](../reference/var-array-reference.md) for all properties.
+See the complete [Var Array Reference](../reference/var-array-reference.html) for all properties.
 
 ```php
 <?
@@ -431,10 +431,10 @@ $cfg = parse_plugin_cfg("yourplugin");
 
 ## Related Topics
 
-- [Plugin Settings Storage](plugin-settings-storage.md)
-- [File Path Reference](../reference/file-path-reference.md)
-- [Var Array Reference](../reference/var-array-reference.md)
-- [Form Controls](../ui/form-controls.md)
+- [Plugin Settings Storage](plugin-settings-storage.html)
+- [File Path Reference](../reference/file-path-reference.html)
+- [Var Array Reference](../reference/var-array-reference.html)
+- [Form Controls](../ui/form-controls.html)
 
 ## References
 

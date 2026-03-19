@@ -199,7 +199,7 @@ PHP 8.3.26 (cli) (built: Sep 30 2025 15:29:25) (NTS)
 
 ### 1. mdNumStripes vs md_num_stripes
 
-**Location:** [docs/reference/var-array-reference.md](../docs/reference/var-array-reference.md)
+**Location:** [docs/reference/var-array-reference.html](../docs/reference/var-array-reference.html)
 
 The documentation lists `mdNumStripes` but the actual property in `var.ini` is `md_num_stripes`:
 
@@ -213,7 +213,7 @@ md_num_stripes_status="default"
 
 ### 2. Docker Socket Conditional
 
-**Location:** [docs/reference/file-path-reference.md](../docs/reference/file-path-reference.md)
+**Location:** [docs/reference/file-path-reference.html](../docs/reference/file-path-reference.html)
 
 `/var/run/docker.sock` only exists when Docker is enabled and running. Documentation should note this is conditional.
 

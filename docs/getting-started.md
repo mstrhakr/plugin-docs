@@ -320,9 +320,9 @@ _(Label)_:
 
 Now that you have a working plugin:
 
-1. Read [PLG File Reference](plg-file.md) for advanced options
-2. Learn [Page Files](page-files.md) for complex UIs
-3. Explore [Events](events.md) for background automation
-4. Study [Example Plugins](examples.md) for real-world patterns
+1. Read [PLG File Reference](plg-file.html) for advanced options
+2. Learn [Page Files](page-files.html) for complex UIs
+3. Explore [Events](events.html) for background automation
+4. Study [Example Plugins](examples.html) for real-world patterns
 
 Congratulations on your first Unraid plugin! 🎉

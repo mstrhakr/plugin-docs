@@ -398,6 +398,6 @@ In your README, tell users where data is stored:
 
 ## Next Steps
 
-- Learn about [PLG File Structure](plg-file.md) for installation
-- See [Packaging](packaging.md) for creating `.txz` packages
-- Check [Configuration Files](config-files.md) for settings management
+- Learn about [PLG File Structure](plg-file.html) for installation
+- See [Packaging](packaging.html) for creating `.txz` packages
+- Check [Configuration Files](config-files.html) for settings management

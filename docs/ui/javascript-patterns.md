@@ -786,6 +786,6 @@ $('#searchInput').on('input', function() {
 
 ## Related Topics
 
-- [CSRF Tokens](../core/csrf-tokens.md)
-- [Form Controls](form-controls.md)
-- [nchan/WebSocket Integration](../core/nchan-websocket.md)
+- [CSRF Tokens](../core/csrf-tokens.html)
+- [Form Controls](form-controls.html)
+- [nchan/WebSocket Integration](../core/nchan-websocket.html)

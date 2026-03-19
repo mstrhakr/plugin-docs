@@ -148,11 +148,11 @@ flowchart TD
 
 This documentation will guide you through:
 
-1. **[PLG File Structure](plg-file.md)** - How to write the plugin installer
-2. **[Page Files](page-files.md)** - Creating the web UI
-3. **[Event System](events.md)** - Responding to system events
-4. **[Packaging](packaging.md)** - Building distribution packages
-5. **[Best Practices](best-practices.md)** - Tips from experienced developers
+1. **[PLG File Structure](plg-file.html)** - How to write the plugin installer
+2. **[Page Files](page-files.html)** - Creating the web UI
+3. **[Event System](events.html)** - Responding to system events
+4. **[Packaging](packaging.html)** - Building distribution packages
+5. **[Best Practices](best-practices.html)** - Tips from experienced developers
 
 ## Working Example: DocTest Validation Plugin
 
@@ -171,7 +171,7 @@ The DocTest plugin validates:
 
 ## Next Steps
 
-Ready to build your first plugin? Continue to [Your First Plugin](getting-started.md) for a hands-on tutorial.
+Ready to build your first plugin? Continue to [Your First Plugin](getting-started.html) for a hands-on tutorial.
 
 ## Learning Resources
 

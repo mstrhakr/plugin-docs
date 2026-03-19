@@ -354,6 +354,6 @@ $csrf_token = $var['csrf_token'];
 
 ## Related Topics
 
-- [Form Controls](../ui/form-controls.md)
-- [JavaScript Patterns](../ui/javascript-patterns.md)
-- [Input Validation](../security/input-validation.md)
+- [Form Controls](../ui/form-controls.html)
+- [JavaScript Patterns](../ui/javascript-patterns.html)
+- [Input Validation](../security/input-validation.html)

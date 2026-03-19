@@ -89,7 +89,7 @@ This documentation is open source! Found an error? Want to add content?
 
 - <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" class="github-icon-inline"> [View on GitHub](https://github.com/mstrhakr/plugin-docs)
 - <img src="assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="" class="github-icon-inline"> [Report an Issue](https://github.com/mstrhakr/plugin-docs/issues)
-- [Contributing Guide](CONTRIBUTING.md)
+- [Contributing Guide](CONTRIBUTING.html)
 
 ## Resources
 

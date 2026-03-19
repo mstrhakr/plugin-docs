@@ -259,6 +259,6 @@ Have a well-documented plugin? Consider:
 
 ## See Also
 
-- [Getting Started](getting-started.md) - Build your first plugin
-- [Best Practices](best-practices.md) - Tips from experienced developers
-- [PLG File Reference](plg-file.md) - Understanding the installer
+- [Getting Started](getting-started.html) - Build your first plugin
+- [Best Practices](best-practices.html) - Tips from experienced developers
+- [PLG File Reference](plg-file.html) - Understanding the installer

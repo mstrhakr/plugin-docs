@@ -389,10 +389,10 @@ VAR_FILE="/var/local/emhttp/var.ini"
 
 ## Related Topics
 
-- [File System Layout](../filesystem.md)
-- [Plugin Settings Storage](../core/plugin-settings-storage.md)
-- [PLG File Reference](../plg-file.md)
-- [Var Array Reference](var-array-reference.md)
+- [File System Layout](../filesystem.html)
+- [Plugin Settings Storage](../core/plugin-settings-storage.html)
+- [PLG File Reference](../plg-file.html)
+- [Var Array Reference](var-array-reference.html)
 
 ## Web Terminal URLs
 

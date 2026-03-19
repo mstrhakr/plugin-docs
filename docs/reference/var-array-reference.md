@@ -292,6 +292,6 @@ foreach ($shares as $name => $share) {
 
 ## Related Topics
 
-- [Dynamix Framework](../core/dynamix-framework.md)
-- [File Path Reference](file-path-reference.md)
-- [Array/Disk Access](../advanced/array-disk-access.md)
+- [Dynamix Framework](../core/dynamix-framework.html)
+- [File Path Reference](file-path-reference.html)
+- [Array/Disk Access](../advanced/array-disk-access.html)

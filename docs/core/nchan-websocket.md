@@ -463,9 +463,9 @@ curl -s -N "http://localhost/sub/yourplugin"
 
 ## Related Topics
 
-- [JavaScript Patterns](../ui/javascript-patterns.md)
-- [Dashboard Tiles](../ui/dashboard-tiles.md)
-- [Cron Jobs](cron-jobs.md) - For periodic status broadcasts
+- [JavaScript Patterns](../ui/javascript-patterns.html)
+- [Dashboard Tiles](../ui/dashboard-tiles.html)
+- [Cron Jobs](cron-jobs.html) - For periodic status broadcasts
 
 ## References
 
