@@ -14,6 +14,7 @@ Unraid's web UI relies heavily on jQuery for DOM manipulation and AJAX. This pag
 ## Available Libraries
 
 Unraid includes these JavaScript libraries by default:
+
 - jQuery
 - SweetAlert (swal)
 - TODO: List other available libraries
@@ -54,56 +55,6 @@ function saveSettings() {
         // Handle response
     });
 }
-```
-
-## SweetAlert Dialogs
-
-### Simple Alert
-
-The simplest form of SweetAlert takes three arguments: title, message, and type. Use this for quick notifications that don't require user input or confirmation.
-
-```javascript
-swal('Title', 'Message text', 'info');
-// Types: 'success', 'error', 'warning', 'info'
-```
-
-### Confirmation Dialog
-
-Use confirmation dialogs before destructive actions like deletion or irreversible changes. The callback receives `true` if the user confirmed, allowing you to proceed with the action only after explicit approval.
-
-```javascript
-swal({
-    title: 'Are you sure?',
-    text: 'This action cannot be undone.',
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, do it!'
-}, function(confirmed) {
-    if (confirmed) {
-        // User clicked confirm
-        performAction();
-    }
-});
-```
-
-### Input Dialog
-
-Input dialogs collect a single text value from the user. The callback receives `false` if cancelled, an empty string if submitted empty, or the actual input value. Use `swal.showInputError()` to display validation errors without closing the dialog.
-
-```javascript
-swal({
-    title: 'Enter value',
-    type: 'input',
-    showCancelButton: true,
-    inputPlaceholder: 'Enter something...'
-}, function(inputValue) {
-    if (inputValue === false) return; // Cancelled
-    if (inputValue === '') {
-        swal.showInputError('Please enter a value');
-        return false;
-    }
-    // Use inputValue
-});
 ```
 
 ## Dynamic Content Loading
@@ -624,6 +575,7 @@ See [Tab Pages - Adding Tabs to Existing Pages](tab-pages.md#adding-tabs-to-exis
 Even with scoped selectors in your own code, Unraid's core pages use unscoped selectors that will match your elements if you use common class names. The only reliable solution is to use plugin-specific class names.
 
 Classes to avoid (used by Docker tab with unscoped selectors):
+
 - `sortable` - Used for drag-to-reorder rows
 - `updatecolumn` - Update status column
 - `ct-name` - Container name cells
