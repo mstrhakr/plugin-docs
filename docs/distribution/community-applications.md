@@ -250,7 +250,7 @@ Before submitting, test that your plugin installs correctly:
 
 - [Community Applications Plugin](https://forums.unraid.net/topic/38582-plug-in-community-applications/)
 - [CA Templates Repository](https://github.com/Squidly271/plugin-repository)
-- [Unraid Plugin Support Forums](https://forums.unraid.net/forum/90-plugin-support/)
+- [Unraid Plugin Support Forums](https://forums.unraid.net/forum/61-plugin-support/)
 
 ## Example Complete Workflow
 
