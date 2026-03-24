@@ -3,7 +3,7 @@ layout: default
 title: PLG File Reference
 nav_order: 3
 ---
-
+<!-- markdownlint ignore MD022 -->
 # PLG File Reference
 
 {: .note }
@@ -75,14 +75,14 @@ The `<PLUGIN>` tag supports these attributes:
 ### Required Attributes
 
 | Attribute | Description |
-|-----------|-------------|
+| --------- | ----------- |
 | `name` | Unique plugin identifier. Must match the folder names used. No spaces or special characters. |
 | `version` | Version string for update comparison. LimeTech uses `YYYY.MM.DD` format. |
 
 ### Recommended Attributes
 
 | Attribute | Description |
-|-----------|-------------|
+| --------- | ----------- |
 | `author` | Displayed in Plugin Manager. Defaults to "anonymous" if omitted. |
 | `pluginURL` | URL to download latest version. Required for update checking. |
 | `support` | Link to support thread (usually Unraid forums). |
@@ -92,7 +92,7 @@ The `<PLUGIN>` tag supports these attributes:
 ### Optional Attributes
 
 | Attribute | Description |
-|-----------|-------------|
+| --------- | ----------- |
 | `launch` | Menu path to open after installation. Format: `MenuSection/PageTitle` |
 | `icon` | FontAwesome icon name (without `fa-` prefix) for Plugin Manager. |
 | `min` | Minimum Unraid version required (e.g., `"6.9.0"`). |
@@ -170,6 +170,7 @@ The `Run` attribute specifies a command to execute after the file is placed:
 ```
 
 Common `Run` values:
+
 - `upgradepkg --install-new` - Install Slackware package
 - `upgradepkg --install-new --reinstall` - Force reinstall even if same version
 - `/bin/bash` - Run as a shell script
@@ -251,11 +252,13 @@ iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA...
 The `Type="base64"` attribute tells the plugin system to decode the content before writing the file.
 
 **When to use base64 embedding:**
+
 - Small icons (< 10KB recommended)
 - Files that rarely change
 - Reducing external dependencies during install
 
 **Generate base64 content:**
+
 ```bash
 base64 -w 0 icon.png
 # Or with line wrapping (easier to read in PLG)
@@ -267,7 +270,7 @@ base64 icon.png
 The `Method` attribute controls when a FILE element is processed:
 
 | Method | When Processed |
-|--------|----------------|
+| ------ | -------------- |
 | (none) | During install only |
 | `install` | During install (explicit) |
 | `remove` | During plugin removal only |
@@ -411,6 +414,7 @@ echo ""
 ### 1. Use Consistent Naming
 
 The plugin name, folder names, and package name should all match:
+
 - Plugin name: `myplugin`
 - Flash folder: `/boot/config/plugins/myplugin/`
 - emhttp folder: `/usr/local/emhttp/plugins/myplugin/`
@@ -439,6 +443,7 @@ This ensures file integrity and helps with caching. Use SHA256 for new plugins:
 ```
 
 Generate checksums with:
+
 ```bash
 sha256sum file.txz   # SHA256 (recommended)
 md5sum file.txz      # MD5 (legacy)
@@ -464,11 +469,23 @@ If your plugin requires specific Unraid features:
 <PLUGIN ... min="6.9.0">
 ```
 
-### 6. Include All Required URLs
+### 6. Optional Community Applications requirements (CA)
+
+Community Applications supports additional plugin dependency hints that are read from plugin metadata (and are useful for app feed behavior):
+
+- `<Requires>` (optional) — other plugin names/IDs that are expected to exist before this plugin is useful.
+- `<RequiresFile>` (optional) — a filesystem path to a file to verify before enabling install/reinstall actions.
+  - Example: `<RequiresFile>/var/log/plugins/unassigned.devices.plg</RequiresFile>`
+  - If the file does not exist, the plugin may still be shown, but install/reinstall buttons are disabled until the dependency appears.
+  - `min`/`max` version controls in the PLG still take precedence when evaluating eligibility.
+
+> Source: Community Applications plugin template guidance from Squid (Unraid forum): https://forums.unraid.net/topic/42808-plugin-templates-for-ca-appstore/
+
+### 7. Include All Required URLs
 
 For updates to work, `pluginURL` must point to the raw PLG file:
 
-```
+```text
 https://raw.githubusercontent.com/user/repo/branch/plugin.plg
 ```
 
