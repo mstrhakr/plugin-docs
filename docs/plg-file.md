@@ -3,7 +3,6 @@ layout: default
 title: PLG File Reference
 nav_order: 3
 ---
-<!-- markdownlint ignore MD022 -->
 # PLG File Reference
 
 {: .note }
@@ -94,9 +93,17 @@ The `<PLUGIN>` tag supports these attributes:
 | Attribute | Description |
 | --------- | ----------- |
 | `launch` | Menu path to open after installation. Format: `MenuSection/PageTitle` |
-| `icon` | FontAwesome icon name (without `fa-` prefix) for Plugin Manager. |
+| `icon` | FontAwesome icon name (without `fa-` prefix) for Plugin Manager (Unraid 6.4+; 6.7+ supports `icon` on `<PLUGIN>` too). |
+| `support` | URL to support thread for the plugin (Unraid 6.6+; shown in Plugins page). |
+| `project` | Project home page (usually GitHub). |
+| `readme` | README URL or path for plugin details display. |
 | `min` | Minimum Unraid version required (e.g., `"6.9.0"`). |
 | `max` | Maximum Unraid version supported. |
+
+> ### Compatibility notes
+>
+> - `category` is deprecated starting around v6b11/v6b12 and should not be required for new plugins.
+> - `system="true"` is a plugin manager extension idea used to install into `/boot/plugins` (system plugins), instead of `/boot/config/plugins`.
 
 Clicking a plugin name in the Plugins page opens the details panel:
 
@@ -274,6 +281,23 @@ The `Method` attribute controls when a FILE element is processed:
 | (none) | During install only |
 | `install` | During install (explicit) |
 | `remove` | During plugin removal only |
+| `update` | During plugin update (v6) |
+
+### Update Method
+
+To support plugin upgrades cleanly, you can provide a file block specifically for update actions. Use `Method="update"` to remove stale files or pre-clean path before reinstall:
+
+```xml
+<FILE Run="/bin/bash" Method="update">
+<INLINE>
+# remove old unpacked content and avoid stale legacy leftovers
+rm -rf /usr/local/emhttp/plugins/&name;
+rm -rf /boot/config/plugins/&name;
+</INLINE>
+</FILE>
+```
+
+`Method="update"` is run only when plugin manager performs an update, not on first install.
 
 ### Install-Only Script
 
@@ -409,6 +433,70 @@ echo ""
 </PLUGIN>
 ```
 
+## Dynamix tabs and plugin menu behavior
+
+For Dynamix-based UIs, a plugin can expose tabs and settings entries as follows:
+
+- Parent page should be a menu container with `Tabs="true"`.
+- Child pages use `Menu="ParentName:1"`, `Menu="ParentName:2"` to control order.
+- Page icons appear as 16x16 in `/usr/local/emhttp/plugins/&name;/icons/<lowercase-title-without-spaces>.png`.
+- `Icon="XXX"` in the page header defines the page icon (48x48 or font-awesome token). For tabbed visuals, verify both `images` and `icons` entries.
+
+Example:
+
+```xml
+Menu="OtherSettings"
+Type="xmenu"
+Title="APC UPS"
+Icon="apcupsd.png"
+Tabs="true"
+---
+<?php
+// page content
+?>
+```
+
+Child tab page example:
+
+```xml
+Menu="APC UPS:1"
+Title="Status"
+---
+<?php
+// status content
+?>
+```
+
+git is used by the icon link on the main Plugins page:
+
+- Plugin manager uses the plugin name and `.page` file matching this name to provide click behavior.
+- If `.page` isn’t present or not matched, the icon may be non-clickable or pointer goes to a blank route.
+
+## Unraid event hook versions
+
+Unraid event handler paths may differ by versions:
+
+- older integration in v6 used `disks_mounted`, `unmounting_disks` for disk life cycle
+- 6.6+ and beyond prefer `started`, `stopping_svcs` for services startup/shutdown relative to Docker/VMs
+
+Place event scripts in `/etc/rc.d/` appropriately, and avoid depending on only one set when targeting both v5/v6.
+
+## Running background services from plugin install
+
+If a plugin starts long-running background processes during installation, the install UI may hang waiting for completion. Use techniques to detach processes safely:
+
+```xml
+<FILE Run="/bin/bash">
+<INLINE>
+nohup /usr/local/emhttp/plugins/&name;/my-daemon.sh &
+# or scheduling with at
+at -f /tmp/start_my_daemon.sh now
+</INLINE>
+</FILE>
+```
+
+The `at` method is often recommended for service startup at the end of plugin install so the install appears to finish cleanly.
+
 ## Best Practices
 
 ### 1. Use Consistent Naming
@@ -420,7 +508,18 @@ The plugin name, folder names, and package name should all match:
 - emhttp folder: `/usr/local/emhttp/plugins/myplugin/`
 - Package: `myplugin-package-VERSION.txz`
 
-### 2. Use Entities for Maintenance
+### 2. Manage shared dependencies carefully
+
+If your plugin installs shared dependencies like `perl`, `python`, or `java` packages into `/boot/packages`, avoid removing dependency files during `remove` unless you are sure no other plugin still needs them.
+
+- Prefer leaving shared packages in place by default and relying on plugin manager / user cleanup for flash space.
+- Provide documentation in the plugin README on how to reclaim package files if needed.
+
+### 3. Keep plugin registration clean
+
+`/var/log/plugins` contains plugin manager references to installed plugins (symlinks). Do not manipulate this directory directly — use installer scripts and plugin manager actions.
+
+### 4. Use Entities for Maintenance
 
 Define version, URLs, and paths as entities so you only update them in one place.
 
@@ -469,17 +568,40 @@ If your plugin requires specific Unraid features:
 <PLUGIN ... min="6.9.0">
 ```
 
-### 6. Optional Community Applications requirements (CA)
+### 6. Optional dependency hints (Community Applications)
 
-Community Applications supports additional plugin dependency hints that are read from plugin metadata (and are useful for app feed behavior):
+Community Applications supports optional metadata hints that can influence app feed visibility and install/reinstall eligibility:
 
-- `<Requires>` (optional) — other plugin names/IDs that are expected to exist before this plugin is useful.
-- `<RequiresFile>` (optional) — a filesystem path to a file to verify before enabling install/reinstall actions.
-  - Example: `<RequiresFile>/var/log/plugins/unassigned.devices.plg</RequiresFile>`
-  - If the file does not exist, the plugin may still be shown, but install/reinstall buttons are disabled until the dependency appears.
-  - `min`/`max` version controls in the PLG still take precedence when evaluating eligibility.
+- `<Requires>` (optional) — dependency hints (plugin names/IDs or textual requirements) used by CA to suggest prerequisites.
+- `<RequiresFile>` (optional) — a filesystem path checked by CA; if absent, install/reinstall buttons may be disabled for this entry.
 
-> Source: Community Applications plugin template guidance from Squid (Unraid forum): https://forums.unraid.net/topic/42808-plugin-templates-for-ca-appstore/
+For example, UI text in `<Requires>` can include Markdown and alternative requirements, which is useful for complex dependency scenarios:
+
+```xml
+<Requires>
+**Nvidia Driver plugin** (nVidia Support) *or*
+**Intel GPU TOP plugin** (Intel Support) *or*
+**AMD Driver** and **RadeonTop plugins** (AMD Support)
+</Requires>
+```
+
+A simple CA dependency example:
+
+```xml
+<Requires>Unassigned Devices</Requires>
+```
+
+or
+
+```xml
+<RequiresFile>/var/log/plugins/unassigned.devices.plg</RequiresFile>
+```
+
+- If the file does not exist, the CA item may still be shown, but install/reinstall actions can be disabled until the path appears.
+- `min`/`max` version attributes in the PLG still take precedence when evaluating overall eligibility.
+
+{: .note }
+> Source: Community Applications plugin template guidance from Squid (Unraid forum): [https://forums.unraid.net/topic/38619-docker-template-xml-schema/page/3/#comment-1015826](https://forums.unraid.net/topic/38619-docker-template-xml-schema/page/3/#comment-1015826)
 
 ### 7. Include All Required URLs
 
@@ -515,6 +637,7 @@ Error entries show the specific issue that occurred:
 ### Files Not Found After Reboot
 
 Files in `/usr/local/emhttp/` are in RAM. They must be:
+
 - Inside a `.txz` package that's installed, OR
 - Created by an install script that runs on every boot, OR
 - Cached on flash and copied via `<LOCAL>`
