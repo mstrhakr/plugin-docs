@@ -11,7 +11,7 @@
 
 ---
 
-## 🌐 [**Read the Documentation →**](https://plugin-docs.mstrhakr.com/docs/)
+## 🌐 [**Read the Docs →**](https://plugin-docs.mstrhakr.com/)
 
 ---
 
