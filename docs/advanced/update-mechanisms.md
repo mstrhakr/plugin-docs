@@ -20,7 +20,7 @@ Your PLG file's version is defined in the DOCTYPE:
 
 ```xml
 <!DOCTYPE PLUGIN [
-  <!ENTITY name      "yourplugin">
+  <!ENTITY name      "your.plugin">
   <!ENTITY author    "Your Name">
   <!ENTITY version   "2024.01.15">
   <!ENTITY pluginURL "https://raw.githubusercontent.com/you/repo/main/yourplugin.plg">
@@ -34,7 +34,7 @@ Your PLG file's version is defined in the DOCTYPE:
 Common versioning schemes:
 
 | Scheme | Example | Notes |
-|--------|---------|-------|
+| ------ | ------- | ----- |
 | Date-based | `2024.01.15` | Common for Unraid plugins |
 | SemVer | `1.2.3` | Major.Minor.Patch |
 | Hybrid | `2024.01.15a` | Date with suffix |
@@ -46,11 +46,13 @@ Unraid checks the `pluginURL` for updates. The remote PLG version is compared to
 ### Hosting PLG Files
 
 **GitHub Raw (most common):**
+
 ```xml
 <!ENTITY pluginURL "https://raw.githubusercontent.com/username/repo/main/yourplugin.plg">
 ```
 
 **GitHub Pages:**
+
 ```xml
 <!ENTITY pluginURL "https://username.github.io/repo/yourplugin.plg">
 ```
@@ -122,11 +124,22 @@ if ($newVersion) {
 ?>
 ```
 
+## CLI Plugin Commands
+
+Unraid provides a wrapper for plugin actions (mostly for automation or debugging):
+
+- `plugin install <url>` - install a plugin from a .plg URL
+- `plugin delete <name>` - remove an installed plugin
+- `plugin update <name>` - force update check + install new version
+- `plugin check <name>` - check remote version without installing
+
+These commands are useful for script-driven plugin maintenance and matched by `pluginURL` updates.
+
 ## Branch Strategies
 
 ### Stable Releases
 
-```
+```text
 main/master branch → pluginURL for stable releases
 ```
 
@@ -186,6 +199,7 @@ Always include checksums for security:
 ```
 
 Generate MD5:
+
 ```bash
 md5sum package.txz
 ```
