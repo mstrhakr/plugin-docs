@@ -8,7 +8,7 @@ nav_order: 7
 
 The `plugin` command is the CLI tool for managing Unraid plugins. It handles installation, updates, removal, and status checks.
 
-```
+```text
 Usage: plugin install PLUGIN-FILE [forced]
        plugin remove PLUGIN
        plugin check PLUGIN
@@ -43,6 +43,7 @@ plugin install /path/to/myplugin.plg forced
 ```
 
 **What happens:**
+
 1. Downloads the PLG file (if URL)
 2. Processes all `<FILE>` elements with `install` method
 3. Copies PLG to `/boot/config/plugins/`
@@ -69,6 +70,7 @@ plugin remove myplugin.plg
 ```
 
 **What happens:**
+
 1. Processes all `<FILE>` elements with `remove` method
 2. Deletes symlink from `/var/log/plugins/`
 3. Moves PLG to `/boot/config/plugins-removed/`
@@ -82,6 +84,7 @@ plugin check myplugin.plg
 ```
 
 **What happens:**
+
 1. Downloads PLG from `pluginURL` to `/tmp/plugins/`
 2. Extracts and outputs the version string
 3. Exits 0 if newer version available
@@ -115,6 +118,7 @@ plugin update myplugin.plg
 ```
 
 **What happens:**
+
 1. Looks for new PLG in `/tmp/plugins/`
 2. Runs install method of new version
 3. Replaces old PLG in `/boot/config/plugins/`
@@ -142,7 +146,7 @@ plugin pluginURL /var/log/plugins/myplugin.plg
 ## Directory Reference
 
 | Directory | Purpose |
-|-----------|---------|
+| --------- | ------- |
 | `/boot/config/plugins/` | Active plugin PLG files |
 | `/boot/config/plugins-error/` | Failed installations |
 | `/boot/config/plugins-removed/` | Uninstalled plugins |
@@ -203,6 +207,7 @@ plugin install myplugin.plg 2>&1 | tee /tmp/install.log
 ### Plugin Moved to plugins-error
 
 Installation failed. Check:
+
 1. MD5 checksum mismatches
 2. Download failures
 3. Script errors
@@ -266,7 +271,7 @@ echo "Author: $(plugin author $PLG)"
 <details markdown="block">
 <summary>Complete <code>plugin</code> command help output</summary>
 
-```
+```text
 Process plugin files.
 
 Usage: plugin install PLUGIN-FILE [forced]
