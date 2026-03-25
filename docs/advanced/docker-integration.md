@@ -18,7 +18,7 @@ Unraid uses specific Docker labels to integrate containers with the WebUI. Conta
 ### Standard Labels
 
 | Label | Description | Example |
-|-------|-------------|---------|
+| ----- | ----------- | ------- |
 | `net.unraid.docker.managed` | Indicates management source | `composeman`, `dockerman` |
 | `net.unraid.docker.icon` | URL to container icon | `https://example.com/icon.png` |
 | `net.unraid.docker.webui` | URL to container's web interface | `http://[IP]:[PORT:8080]/` |
@@ -188,7 +188,7 @@ Unraid® provides a built-in `openTerminal()` JavaScript function for opening co
 The global `openTerminal(tag, name, more)` function is defined in Unraid's core JavaScript (HeadInlineJS.php) and is available on all pages.
 
 | Parameter | Description | Values |
-|-----------|-------------|--------|
+| --------- | ----------- | ------ |
 | `tag` | Terminal type | `'docker'` for containers, `'ttyd'` or `'syslog'` for system |
 | `name` | Container name | Must match Docker container name exactly |
 | `more` | Shell or log flag | Shell command (e.g., `'bash'`, `'sh'`) or `'.log'` for logs |
@@ -356,11 +356,12 @@ if ($status === null) {
 
 Unraid stores update check results in a JSON file to avoid repeated registry queries:
 
-```
+```path
 /var/lib/docker/unraid-update-status.json
 ```
 
 Structure:
+
 ```json
 {
   "library/nginx:latest": {
@@ -401,6 +402,94 @@ if (isset($updateStatusData[$image])) {
 ?>
 ```
 
+## Docker Manager CLI Scripts (dynamix.docker.manager)
+
+Unraid's Docker Manager plugin exposes several command-line scripts under `/usr/local/emhttp/plugins/dynamix.docker.manager/scripts/`.
+Some of these are useful for automation and background jobs.
+
+- `/usr/local/emhttp/plugins/dynamix.docker.manager/scripts/docker` : wrapper around `docker` command
+- `/usr/local/emhttp/plugins/dynamix.docker.manager/scripts/dockerupdate` : plugin update/notification sweep
+- `/usr/local/emhttp/plugins/dynamix.docker.manager/scripts/update_container` : update a specific existing container from its template
+
+### Confirmed commands from Unraid community (Squid, Discord screenshot reference)
+
+Execute the Docker Manager update runner (check templates and status):
+
+```bash
+/usr/bin/php -q /usr/local/emhttp/plugins/dynamix.docker.manager/scripts/dockerupdate check
+```
+
+Update a specific installed Docker template/container (template name as shown in Docker Manager):
+
+```bash
+/usr/bin/php -q /usr/local/emhttp/plugins/dynamix.docker.manager/scripts/update_container "<container_name>"
+```
+
+- This is the same mechanism used by the WebUI to apply template updates while preserving runtime state.
+- Pass a `*`-delimited list to update multiple templates in one invocation.
+
+### Direct template-to-docker command helper (forum reference)
+
+A useful approach in this thread is to convert DockerMan XML templates directly into a `docker run` command using `xmlToCommand()`. This shows how to reproduce Docker Manager behavior from CLI by taking the saved container template and creating a runtime container with the same config.
+
+```php
+#!/usr/bin/php
+<?php
+$docroot = "/usr/local/emhttp";
+require_once "$docroot/plugins/dynamix.docker.manager/include/DockerClient.php";
+$var = parse_ini_file('/var/local/emhttp/var.ini');
+$cfg = parse_ini_file('/boot/config/docker.cfg');
+$driver = DockerUtil::driver();
+$custom = DockerUtil::custom();
+$subnet = DockerUtil::network($custom);
+$opts = xmlToCommand($argv[1]);
+$cmd = str_replace("create ","run -d ",$opts[0]);
+passthru($cmd);
+?>
+```
+
+- Example usage:
+  - `php /path/to/runxml.php /boot/config/plugins/dockerMan/templates-user/<your-template>.xml`
+  - The script resolves volume/env/network/label settings and starts the container in detached mode.
+
+- This concept is explicitly outlined in the Unraid forum post:
+  - [https://forums.unraid.net/topic/40016-start-docker-template-via-command-line/#findComment-1022006](https://forums.unraid.net/topic/40016-start-docker-template-via-command-line/#findComment-1022006)
+
+### Example: force an update to nginx-runner from a cron job
+
+```bash
+*/30 * * * * /usr/bin/php -q /usr/local/emhttp/plugins/dynamix.docker.manager/scripts/update_container "nginx" >> /var/log/docker_update.log 2>&1
+```
+
+### Notes
+
+- The script expects the container template name, not the raw Docker container ID.
+- Run as root or from `sudo` context on Unraid.
+- If your container is running, the script stops it, recreates it from the template, then restarts it (depending on previous state).
+
+### Related script
+
+- `/usr/local/emhttp/plugins/dynamix.docker.manager/scripts/docker_rm` : remove container by name (script invoked by Docker Manager UI)
+
+### Advanced automation
+
+From plugin PHP code, you can call these scripts with `exec()`/`shell_exec()` and read stdout exit codes for process control.
+
+```php
+exec("/usr/bin/php -q /usr/local/emhttp/plugins/dynamix.docker.manager/scripts/dockerupdate check 2>&1", $output, $retval);
+if ($retval !== 0) {
+    error_log("dockerupdate failed: " . implode("\n", $output));
+}
+```
+
+### Security
+
+These scripts run as root and are not protected by CSRF; do not expose them directly over HTTP without proper access control.
+
+### Caveat
+
+This behavior is taken from community discussion (Unraid forum/Discord) and confirmed by `dynamix.docker.manager` source code in `update_container`.
+
 ### Handling Pinned Images (SHA256 Digests)
 
 Some users pin images to specific versions using SHA256 digests in their compose files:
@@ -412,6 +501,7 @@ services:
 ```
 
 These pinned images should **not** be checked for updates because:
+
 - The user explicitly wants that exact version
 - Registry checks return the latest tag digest, not the pinned digest
 - Comparing would always show a false "update available"
@@ -461,12 +551,11 @@ if ($pinned) {
 ### Common Update Check Issues
 
 | Issue | Cause | Solution |
-|-------|-------|----------|
+| ----- | ----- | -------- |
 | Always shows "update available" after pull | Cached local SHA is stale | Clear `local` field before `reloadUpdateStatus()` |
 | Image not found in status file | Image name format mismatch | Use `DockerUtil::ensureImageTag()` to normalize |
 | Pinned image shows "not checked" | `@sha256:` suffix confuses the check | Detect pinned images and skip update check |
 | Official images not matching | Missing `library/` prefix | `ensureImageTag()` adds it automatically |
-```
 
 ## Unraid Docker Integration
 
@@ -474,7 +563,7 @@ if ($pinned) {
 
 Unraid stores Docker configuration in specific locations:
 
-```
+```paths
 /boot/config/docker.cfg          # Docker settings
 /var/lib/docker/                  # Docker data (if on array)
 /boot/config/plugins/dockerMan/   # Docker templates
@@ -688,7 +777,6 @@ function normalizeImageForUpdateCheck($image) {
 
 {: .note }
 > Before normalizing, check if the image is pinned using `isImagePinned()` (see [Update Checking](#handling-pinned-images-sha256-digests)). Pinned images should display their pinned status rather than being checked for updates.
-```
 
 ### General Guidelines
 
