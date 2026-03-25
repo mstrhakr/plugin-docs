@@ -1,6 +1,6 @@
 {
   "name": "Plugin Development Docs for Unraid®",
-  "short_name": "Unraid Plugin Docs",
+  "short_name": "Plugin Docs",
   "description": "Community-maintained documentation for building plugins for Unraid®",
   "start_url": "/",
   "display": "standalone",
