@@ -160,7 +160,7 @@ Plugins can respond to system events by placing executable scripts in their `eve
 | `stopped` | Array has stopped |
 | `poll_attributes` | SMART data polled |
 
-See [Event System](docs/events.md) for full details.
+See [Event System](https://plugin-docs.mstrhakr.com/docs/events.html) for full details.
 
 ---
 
