@@ -12,6 +12,13 @@ nav_order: 3
 
 The `.plg` file is the heart of every Unraid plugin. It's an XML document that tells the plugin system how to install, update, and remove your plugin.
 
+{: .warning }
+> Attribute case matters in practice. Use the documented attribute names exactly.
+>
+> - Top-level `<PLUGIN>` attributes such as `min` and `max` are lowercase.
+> - `<FILE>` attributes are mixed-case in the current plugin manager implementation, for example `Name`, `Run`, `Method`, `Mode`, `Type`, `Min`, and `Max`.
+> - In particular, `<FILE ... Max="6.12.99">` works, while lowercase `<FILE ... max="6.12.99">` may be ignored.
+
 ## Basic Structure
 
 ```xml
@@ -97,8 +104,8 @@ The `<PLUGIN>` tag supports these attributes:
 | `support` | URL to support thread for the plugin (Unraid 6.6+; shown in Plugins page). |
 | `project` | Project home page (usually GitHub). |
 | `readme` | README URL or path for plugin details display. |
-| `min` | Minimum Unraid version required (e.g., `"6.9.0"`). |
-| `max` | Maximum Unraid version supported. |
+| `min` | Minimum Unraid version required on the top-level `<PLUGIN>` tag (e.g., `"6.9.0"`). |
+| `max` | Maximum Unraid version supported on the top-level `<PLUGIN>` tag. |
 
 > ### Compatibility notes
 >
@@ -131,6 +138,13 @@ This is displayed in the Plugin Manager when viewing plugin details.
 
 `<FILE>` elements define files to download, create, or run scripts.
 
+The plugin manager processes `<FILE>` elements in document order.
+
+- A `<FILE>` block with `<URL>` downloads to the target `Name` path.
+- A later `<FILE>` block with `<LOCAL>` copies from an already-existing local path.
+- `<LOCAL>` is just a filesystem copy. It does not fetch a URL by itself.
+- If the destination file already exists, the plugin manager skips recreating it unless a supplied checksum fails, in which case the old file is removed and the block is retried.
+
 ### Download a File
 
 ```xml
@@ -143,6 +157,17 @@ This is displayed in the Plugin Manager when viewing plugin details.
 ### Integrity Verification
 
 Unraid supports both SHA256 and MD5 for file verification:
+
+Behavior in the current plugin manager implementation:
+
+- `SHA256` takes precedence over `MD5` when both are present on the same `<FILE>` block.
+- If the destination file already exists, the plugin manager checks `SHA256` or `MD5` before deciding whether to skip the block.
+- If the existing file hash matches, the block is skipped.
+- If the existing file hash does not match, the existing file is removed and the block is retried.
+- For `<FILE>` blocks with `<URL>`, the downloaded file is verified again after download, and installation aborts if the checksum is wrong.
+- For `<FILE>` blocks using `<LOCAL>` or `<INLINE>`, the checksum mainly controls whether an existing destination is reused or removed first. There is no second post-create checksum verification step for a newly created local or inline file.
+
+Use `SHA256` and `MD5` exactly as shown here. These element names are case-sensitive in practice.
 
 ```xml
 <!-- Preferred: SHA256 (more secure) -->
@@ -208,18 +233,18 @@ exit 0
 </FILE>
 ```
 
-### Version-Gated Sections with `min` and `max`
+### Version-Gated Sections with `Min` and `Max`
 
-Individual `<FILE>` sections support `min` and `max` attributes to conditionally execute or download based on OS version.
+Individual `<FILE>` sections support `Min` and `Max` attributes to conditionally execute or download based on OS version.
 
 ```xml
 <!-- Only processed on Unraid 7.0.0+ -->
-<FILE Name="/boot/config/plugins/myplugin/newer-only.txz" min="7.0.0">
+<FILE Name="/boot/config/plugins/myplugin/newer-only.txz" Min="7.0.0">
 <URL>https://example.com/newer-only.txz</URL>
 </FILE>
 
 <!-- Only processed on Unraid 6.12.x and below -->
-<FILE Run="/bin/bash" max="6.12.99">
+<FILE Run="/bin/bash" Max="6.12.99">
 <INLINE>
 echo "Legacy compatibility step"
 </INLINE>
@@ -243,6 +268,14 @@ The `<LOCAL>` element copies a previously downloaded file:
 ```
 
 This caches files on the USB flash so they don't need to be re-downloaded on each boot.
+
+Important details:
+
+- The source path referenced by `<LOCAL>` must already exist when that `<FILE>` block runs.
+- The destination file is skipped if it already exists, unless you supplied a checksum and the checksum mismatch causes the destination to be removed first.
+- If you add `SHA256` or `MD5` to a `<LOCAL>` block, it helps invalidate a stale destination file, but it does not add a second post-copy verification pass.
+- For simple static assets this pattern works well.
+- For more complex fallback flows, an explicit shell script that checks for a cached file, downloads it if missing, and then copies or extracts it can be easier to reason about than chaining multiple `<FILE>` blocks.
 
 ### Embedding Base64 Content
 
@@ -523,7 +556,7 @@ If your plugin installs shared dependencies like `perl`, `python`, or `java` pac
 
 Define version, URLs, and paths as entities so you only update them in one place.
 
-### 3. Always Include Integrity Checksums
+### 5. Always Include Integrity Checksums
 
 This ensures file integrity and helps with caching. Use SHA256 for new plugins:
 
@@ -548,7 +581,7 @@ sha256sum file.txz   # SHA256 (recommended)
 md5sum file.txz      # MD5 (legacy)
 ```
 
-### 4. Clean Up Old Versions
+### 6. Clean Up Old Versions
 
 In your pre-install script, remove old package versions:
 
@@ -598,7 +631,7 @@ or
 ```
 
 - If the file does not exist, the CA item may still be shown, but install/reinstall actions can be disabled until the path appears.
-- `min`/`max` version attributes in the PLG still take precedence when evaluating overall eligibility.
+- Top-level `min`/`max` attributes on `<PLUGIN>` still take precedence when evaluating overall eligibility.
 
 {: .note }
 > Source: Community Applications plugin template guidance from Squid (Unraid forum): [https://forums.unraid.net/topic/38619-docker-template-xml-schema/page/3/#comment-1015826](https://forums.unraid.net/topic/38619-docker-template-xml-schema/page/3/#comment-1015826)
