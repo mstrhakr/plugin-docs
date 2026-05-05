@@ -116,6 +116,7 @@ https://raw.githubusercontent.com/username/repo/main/images/icon.png
 ### 1. Prepare Your Plugin
 
 Ensure your plugin:
+
 - Works correctly on supported Unraid versions
 - Has a stable PLG file URL
 - Includes proper versioning
@@ -123,6 +124,7 @@ Ensure your plugin:
 ### 2. Create Support Thread
 
 Create a support thread on the [Unraid Forums](https://forums.unraid.net/forum/61-plugin-support/):
+
 - Choose an appropriate subforum
 - Include installation instructions
 - Document features and usage
@@ -130,29 +132,78 @@ Create a support thread on the [Unraid Forums](https://forums.unraid.net/forum/6
 
 ### 3. Create CA Template
 
-Host your template XML file in your repository or submit it to the CA templates repository.
+Host your template XML file and icon assets in your own public GitHub repository. This is the repository you will submit in the Asana form.
 
-### 4. Submit to CA
+- Use your own repo as the primary submission source.
+- Include one or more valid Unraid Docker or Plugin XML templates.
+- Include a `ca_profile.xml` file with a non-empty `<Profile>` section for author/support information.
+- Add an OSL-approved open source license for repository contents (templates, metadata, and docs).
+- Ensure the repository is public, active, and not archived or disabled.
 
-**Option A: CA Templates Repository (Recommended)**
+### 4. Submit to CA via Asana form
 
-<img src="../../assets/images/logos/GitHub%20Logos/GitHub_Invertocat_White.svg" alt="GitHub" height="32" style="vertical-align: middle; margin-right: 0.5rem;"> Fork and submit a pull request:
+The current CA intake process uses the Asana submission form. This is the step that actually sends your plugin and template details to the CA maintainers.
 
-1. Fork the [CA templates repository](https://github.com/Squidly271/plugin-repository)
-2. Add your template XML to the appropriate folder
-3. Submit a pull request
-4. Wait for review and approval
+- [Community Applications Asana submission form](https://form.asana.com/?k=qtIUrf5ydiXvXzPI57BiJw&d=714739274360802)
 
-**Option B: Self-Hosted Template**
+![CA Asana submission form](../../assets/images/screenshots/ca-asana-submission-form.png)
 
-Contact the CA maintainer via the forums with:
-- Your template XML
-- Link to your plugin
-- Link to your support thread
+The Asana form typically asks for:
+
+- Maintainer / author contact information
+- GitHub repository URL containing your XML template
+- Preferred repository name for CA listing
+- Confirmation of GitHub 2FA and repository visibility
+- Support thread URL and project XML requirements
+- Agreement to Community Applications policies
+- Optional comments or additional notes
+
+Submit the form after your own repository is ready and your support thread exists.
+
+The repository you submit should meet these requirements:
+
+- Public and active GitHub repo (not private, archived, or disabled)
+- Valid Unraid Docker or Plugin XML templates
+- `ca_profile.xml` with a non-empty `<Profile>` section
+- OSL-approved open source license for repository contents
+- Icon assets and metadata hosted in the repository or via stable URLs
+
+Helpful CA resources include:
+
+- Submission Help
+- Repository XML Format
+- Repository Information XML
+- XML Field Reference
+- Builder Guide
+- Starter Repository
+- Forum Support Thread
+- Contact Support
+
+This form is the current official submission path. The `ca.unraid.net/submit` preview is a separate repo-based workflow and should be considered secondary until it is fully live.
+
+#### New `ca.unraid.net/submit` preview
+
+A new repository submission UI is also available, but it is not yet officially live and only partially works. Use the Asana form for current submissions.
+
+![CA repository submission UI](../../assets/images/screenshots/ca-repository-submit.png)
+
+The preview interface shows a repository-based workflow with requirements such as:
+
+- Public GitHub repository with valid Unraid Docker or Plugin XML templates
+- A `ca_profile.xml` file with author/support information
+- An OSL-approved open source license for repository contents
+- A GitHub URL entry and review step before submit
+
+For reference, CA also documents the overall app process at:
+
+- [Unraid docs: Community Applications](https://docs.unraid.net/unraid-os/using-unraid-to/run-docker-containers/community-applications/)
+
+> Note: The `https://ca.unraid.net/submit` page is still in preview and should not be relied on for production submissions.
 
 ### 5. Await Approval
 
 The CA maintainer will review your submission:
+
 - Verify plugin works correctly
 - Check template accuracy
 - Ensure support thread exists
